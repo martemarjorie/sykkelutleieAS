@@ -3,6 +3,7 @@ import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { personService } from './services';
+import { Card, Row, Column, NavBar, Button, Form } from './widgets';
 
 import createHashHistory from 'history/createHashHistory';
 const history = createHashHistory(); // Use history.push(...) to programmatically change path, for instance after successfully saving a student
@@ -11,7 +12,7 @@ class Menu extends Component {
   render() {
     return (
       <div>
-        <NavLink to="/persons">Person</NavLink>
+        <NavLink to="/persons">Personer</NavLink>
       </div>
     );
   }
@@ -22,13 +23,16 @@ class PersonList extends Component {
 
   render() {
     return (
-      <ul>
+      <Card title="Personer">
         {this.persons.map(person => (
-          <li key={person.person_id}>
-            <NavLink to={'/persons/' + person.person_id + '/edit'}>{person.fornavn}</NavLink>
-          </li>
+          <Row>
+            <Column key={person.person_id}>
+              <NavLink to={'/persons/' + person.person_id + '/edit'}>{person.fornavn}</NavLink>
+            </Column>
+            <Column width={6}>test</Column>
+          </Row>
         ))}
-      </ul>
+      </Card>
     );
   }
 
@@ -49,7 +53,8 @@ class PersonEdit extends Component {
     return (
       <form>
         Fornavn: <input type="text" value={this.fornavn} onChange={event => (this.fornavn = event.target.value)} />
-        Etternavn: <input type="text" value={this.etternavn} onChange={event => (this.etternavn = event.target.value)} />
+        Etternavn:{' '}
+        <input type="text" value={this.etternavn} onChange={event => (this.etternavn = event.target.value)} />
         Tlf: <input type="number" value={this.tlf} onChange={event => (this.tlf = event.target.value)} />
         Epost: <input type="text" value={this.epost} onChange={event => (this.epost = event.target.value)} />
         <button type="button" onClick={this.save}>
@@ -69,9 +74,16 @@ class PersonEdit extends Component {
   }
 
   save() {
-    personService.updatePerson(this.props.match.params.person_id, this.fornavn, this.etternavn, this.tlf, this.epost, () => {
-      history.push('/persons');
-    });
+    personService.updatePerson(
+      this.props.match.params.person_id,
+      this.fornavn,
+      this.etternavn,
+      this.tlf,
+      this.epost,
+      () => {
+        history.push('/persons');
+      }
+    );
   }
 }
 
