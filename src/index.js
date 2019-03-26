@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
+<<<<<<< HEAD
 import { personService } from './services';
 import { Card, Row, Column, NavBar, Button, Form } from './widgets';
 
@@ -86,13 +87,40 @@ class PersonEdit extends Component {
     );
   }
 }
+=======
+
+import Menu from './Menu';
+
+import Home from './Home';
+
+import BestillingList from './Bestilling';
+
+import PersonList from './Person';
+import PersonEdit from './PersonEdit';
+
+import SykkelList from './Sykkel';
+
+import BestillingsOversikt from './BestillingOversikt';
+
+import createHashHistory from 'history/createHashHistory';
+const history = createHashHistory(); // Use history.push(...) to programmatically change path, for instance after successfully saving a student
+>>>>>>> parent of de118d8... Revert "Merge branch 'master' of https://github.com/martemarjorie/sykkelutleieAS"
 
 ReactDOM.render(
   <HashRouter>
     <div>
       <Menu />
+<<<<<<< HEAD
       <Route exact path="/persons" component={PersonList} />
       <Route path="/persons/:person_id/edit" component={PersonEdit} />
+=======
+      <Route exact path="/" component={Home} />
+      <Route exact path="/bestillinger" component={BestillingList} />
+      <Route exact path="/persons" component={PersonList} />
+      <Route path="/persons/:person_id/edit" component={PersonEdit} />
+      <Route exact path="/sykler" component={SykkelList} />
+      <Route exact path="/oversikt" component={BestillingsOversikt} />
+>>>>>>> parent of de118d8... Revert "Merge branch 'master' of https://github.com/martemarjorie/sykkelutleieAS"
     </div>
   </HashRouter>,
   document.getElementById('root')
