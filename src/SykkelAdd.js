@@ -49,14 +49,6 @@ export default class SykkelAdd extends Component {
                 <input type="text" value={this.dagspris} onChange={event => (this.dagspris = event.target.value)} />
               </tr>
               <tr>
-                Tilhører sted:{' '}
-                <input
-                  type="text"
-                  value={this.tilhorer_sted}
-                  onChange={event => (this.tilhorer_sted = event.target.value)}
-                />
-              </tr>
-              <tr>
                 Modell: <input type="text" value={this.modell} onChange={event => (this.modell = event.target.value)} />
               </tr>
               <tr>

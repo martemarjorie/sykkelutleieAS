@@ -49,14 +49,6 @@ export default class SykkelEdit extends Component {
                 <input type="text" value={this.dagspris} onChange={event => (this.dagspris = event.target.value)} />
               </tr>
               <tr>
-                Tilhører:{' '}
-                <input
-                  type="text"
-                  value={this.tilhorer_sted}
-                  onChange={event => (this.tilhorer_sted = event.target.value)}
-                />
-              </tr>
-              <tr>
                 Modell: <input type="text" value={this.modell} onChange={event => (this.modell = event.target.value)} />
               </tr>
               <tr>
@@ -88,7 +80,6 @@ export default class SykkelEdit extends Component {
       this.girsystem = sykkel.girsystem;
       this.timepris = sykkel.timepris;
       this.dagspris = sykkel.dagspris;
-      this.tilhorer_sted = sykkel.tilhorer_sted;
       this.modell = sykkel.modell;
     });
   }
@@ -102,7 +93,6 @@ export default class SykkelEdit extends Component {
       this.girsystem,
       this.timepris,
       this.dagspris,
-      this.tilhorer_sted,
       this.modell,
       () => {
         history.push('/sykler');
@@ -119,7 +109,6 @@ export default class SykkelEdit extends Component {
       this.girsystem,
       this.timepris,
       this.dagspris,
-      this.tilhorer_sted,
       this.modell,
       () => {
         history.push('/sykler');

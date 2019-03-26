@@ -17,22 +17,10 @@ export default class SykkelList extends Component {
               <NavLink to={'/sykler/' + sykkel.sykkel_id + '/edit'}>{sykkel.type_sykkel}</NavLink>
             </Column>
             <Column>
-              <NavLink to={'/sykler/' + sykkel.sykkel_id + '/edit'}>{sykkel.ramme}</NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/sykler/' + sykkel.sykkel_id + '/edit'}>{sykkel.hjul_storrelse}</NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/sykler/' + sykkel.sykkel_id + '/edit'}>{sykkel.girsystem}</NavLink>
-            </Column>
-            <Column>
               <NavLink to={'/sykler/' + sykkel.sykkel_id + '/edit'}>{sykkel.timepris}</NavLink>
             </Column>
             <Column>
               <NavLink to={'/sykler/' + sykkel.sykkel_id + '/edit'}>{sykkel.dagspris}</NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/sykler/' + sykkel.sykkel_id + '/edit'}>{sykkel.tilhorer_sted}</NavLink>
             </Column>
             <Column>
               <NavLink to={'/sykler/' + sykkel.sykkel_id + '/edit'}>{sykkel.modell}</NavLink>
