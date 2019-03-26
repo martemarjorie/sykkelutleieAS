@@ -15,7 +15,7 @@ export default class Home extends Component {
             <Button variant="primary">Go somewhere</Button>
           </Card.Body>
           <Card.Footer className="text-muted">Footer</Card.Footer>
-        </Card>;
+        </Card>
       </div>
     );
   }
