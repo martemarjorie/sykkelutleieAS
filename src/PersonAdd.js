@@ -5,7 +5,7 @@ import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { personService } from './services';
 import { Card, Row, Column, NavBar, Button, Form } from './widgets';
 
-export default class PersonEdit extends Component {
+export default class PersonAdd extends Component {
   fornavn = '';
   etternavn = '';
   tlf = '';
@@ -34,13 +34,8 @@ export default class PersonEdit extends Component {
               <tr>
                 <Row>
                   <Column left>
-                    <button type="button" onClick={this.save}>
-                      Lagre
-                    </button>
-                  </Column>
-                  <Column right>
-                    <button type="button" onClick={this.delete}>
-                      Slett
+                    <button type="button" onClick={this.add}>
+                      Legg til
                     </button>
                   </Column>
                 </Row>
@@ -52,17 +47,8 @@ export default class PersonEdit extends Component {
     );
   }
 
-  mounted() {
-    personService.getPerson(this.props.match.params.person_id, person => {
-      this.fornavn = person.fornavn;
-      this.etternavn = person.etternavn;
-      this.tlf = person.tlf;
-      this.epost = person.epost;
-    });
-  }
-
-  save() {
-    personService.updatePerson(
+  add() {
+    personService.addPerson(
       this.props.match.params.person_id,
       this.fornavn,
       this.etternavn,
@@ -72,11 +58,5 @@ export default class PersonEdit extends Component {
         history.push('/persons');
       }
     );
-  }
-
-  delete() {
-    personService.deletePerson(this.fornavn, this.etternavn, this.tlf, this.epost, () => {
-      history.push('/persons');
-    });
   }
 }
