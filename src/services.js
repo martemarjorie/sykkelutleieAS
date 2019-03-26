@@ -28,5 +28,12 @@ class PersonService {
       }
     );
   }
+  deletePerson(person_id, fornavn, etternavn, tlf, epost, success) {
+    connection.query('delete from person where person_id=?', [person_id], (error, results) => {
+      if (error) return console.error(error);
+
+      success();
+    });
+  }
 }
 export let personService = new PersonService();

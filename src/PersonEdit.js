@@ -33,9 +33,14 @@ export default class PersonEdit extends Component {
               </tr>
               <tr>
                 <Row>
-                  <Column right>
+                  <Column left>
                     <button type="button" onClick={this.save}>
-                      Save
+                      Lagre
+                    </button>
+                  </Column>
+                  <Column right>
+                    <button type="button" onClick={this.delete}>
+                      Slett
                     </button>
                   </Column>
                 </Row>
@@ -58,6 +63,19 @@ export default class PersonEdit extends Component {
 
   save() {
     personService.updatePerson(
+      this.props.match.params.person_id,
+      this.fornavn,
+      this.etternavn,
+      this.tlf,
+      this.epost,
+      () => {
+        history.push('/persons');
+      }
+    );
+  }
+
+  delete() {
+    personService.deletePerson(
       this.props.match.params.person_id,
       this.fornavn,
       this.etternavn,
