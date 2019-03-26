@@ -35,5 +35,17 @@ class PersonService {
       success();
     });
   }
+
+  addPerson(person_id, fornavn, etternavn, tlf, epost, success) {
+    connection.query(
+      'insert into person (person_id, fornavn, etternavn, tlf, epost) values (?, ?, ?, ?, ?)',
+      [person_id, fornavn, etternavn, tlf, epost],
+      (error, results) => {
+        if (error) return console.error(error);
+
+        success();
+      }
+    );
+  }
 }
 export let personService = new PersonService();
