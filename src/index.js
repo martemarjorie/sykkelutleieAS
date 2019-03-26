@@ -15,6 +15,8 @@ import PersonEdit from './PersonEdit';
 import PersonAdd from './PersonAdd';
 
 import SykkelList from './Sykkel';
+import SykkelEdit from './SykkelEdit';
+import SykkelAdd from './SykkelAdd';
 
 import BestillingsOversikt from './BestillingOversikt';
 
@@ -31,6 +33,8 @@ ReactDOM.render(
       <Route path="/persons/:person_id/edit" component={PersonEdit} />
       <Route path="/persons/add" component={PersonAdd} />
       <Route exact path="/sykler" component={SykkelList} />
+      <Route path="/sykler/:sykkel_id/edit" component={SykkelEdit} />
+      <Route path="/sykler/add" component={SykkelAdd} />
       <Route exact path="/oversikt" component={BestillingsOversikt} />
     </div>
   </HashRouter>,

@@ -1,5 +1,7 @@
 import { connection } from './mysql_connection';
 
+/****** PERSON *******/
+
 class PersonService {
   getPersons(success) {
     connection.query('select * from person', (error, results) => {
@@ -49,3 +51,89 @@ class PersonService {
   }
 }
 export let personService = new PersonService();
+
+/****** SYKKEL *******/
+
+class SykkelService {
+  getSykler(success) {
+    connection.query('select * from sykkel', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+
+  getSykkel(sykkel_id, success) {
+    connection.query('select * from sykkel where sykkel_id=?', [sykkel_id], (error, results) => {
+      if (error) return console.error(error);
+
+      success(results[0]);
+    });
+  }
+
+  updateSykkel(
+    sykkel_id,
+    type_sykkel,
+    ramme,
+    hjul_storrelse,
+    girsystem,
+    timepris,
+    dagspris,
+    tilhorer_sted,
+    modell,
+    success
+  ) {
+    connection.query(
+      'update person set type_sykkel=?, ramme=?, hjul_storrelse=?, girsystem=?, timepris=?, dagspris=?, tilhører_sted=?, modell=? where sykkel_id=?',
+      [type_sykkel, ramme, hjul_storrelse, girsystem, timepris, dagspris, tilhorer_sted, modell, sykkel_id],
+      (error, results) => {
+        if (error) return console.error(error);
+
+        success();
+      }
+    );
+  }
+
+  deleteSykkel(
+    sykkel_id,
+    type_sykkel,
+    ramme,
+    hjul_storrelse,
+    girsystem,
+    timepris,
+    dagspris,
+    tilhorer_sted,
+    modell,
+    success
+  ) {
+    connection.query('delete from sykkel where sykkel_id=?', [sykkel_id], (error, results) => {
+      if (error) return console.error(error);
+
+      success();
+    });
+  }
+
+  addSykkel(
+    sykkel_id,
+    type_sykkel,
+    ramme,
+    hjul_storrelse,
+    girsystem,
+    timepris,
+    dagspris,
+    tilhorer_sted,
+    modell,
+    success
+  ) {
+    connection.query(
+      'insert into sykkel (sykkel_id, type_sykkel, ramme, hjul_storrelse, girsystem, timepris, dagspris, tilhorer_sted, modell) values (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [sykkel_id, type_sykkel, ramme, hjul_storrelse, girsystem, timepris, dagspris, tilhorer_sted, modell],
+      (error, results) => {
+        if (error) return console.error(error);
+
+        success();
+      }
+    );
+  }
+}
+export let sykkelService = new SykkelService();
