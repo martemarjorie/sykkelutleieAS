@@ -27,6 +27,7 @@ export default class PersonList extends Component {
             </Column>
           </Row>
         ))}
+        <NavLink to={'/persons/add'}>Legg til</NavLink>
       </Card>
     );
   }

@@ -11,6 +11,7 @@ import BestillingList from './Bestilling';
 
 import PersonList from './Person';
 import PersonEdit from './PersonEdit';
+import PersonAdd from './PersonAdd';
 
 import SykkelList from './Sykkel';
 
@@ -27,6 +28,7 @@ ReactDOM.render(
       <Route exact path="/bestillinger" component={BestillingList} />
       <Route exact path="/persons" component={PersonList} />
       <Route path="/persons/:person_id/edit" component={PersonEdit} />
+      <Route path="/persons/add" component={PersonAdd} />
       <Route exact path="/sykler" component={SykkelList} />
       <Route exact path="/oversikt" component={BestillingsOversikt} />
     </div>
