@@ -13,33 +13,37 @@ export default class PersonEdit extends Component {
 
   render() {
     return (
-      <table>
-        <tbody>
-          <tr>
+      <form>
+        <table>
+          <tbody>
             <tr>
-              Fornavn:{' '}
-              <input type="text" value={this.fornavn} onChange={event => (this.fornavn = event.target.value)} />
+              <tr>
+                Fornavn:{' '}
+                <input type="text" value={this.fornavn} onChange={event => (this.fornavn = event.target.value)} />
+              </tr>
+              <tr>
+                Etternavn:{' '}
+                <input type="text" value={this.etternavn} onChange={event => (this.etternavn = event.target.value)} />
+              </tr>
+              <tr>
+                Tlf: <input type="number" value={this.tlf} onChange={event => (this.tlf = event.target.value)} />
+              </tr>
+              <tr>
+                Epost: <input type="text" value={this.epost} onChange={event => (this.epost = event.target.value)} />
+              </tr>
+              <tr>
+                <Row>
+                  <Column right>
+                    <button type="button" onClick={this.save}>
+                      Save
+                    </button>
+                  </Column>
+                </Row>
+              </tr>
             </tr>
-            <tr>
-              Etternavn:{' '}
-              <input type="text" value={this.etternavn} onChange={event => (this.etternavn = event.target.value)} />
-            </tr>
-            <tr>
-              Tlf: <input type="number" value={this.tlf} onChange={event => (this.tlf = event.target.value)} />
-            </tr>
-            <tr>
-              Epost: <input type="text" value={this.epost} onChange={event => (this.epost = event.target.value)} />
-            </tr>
-            <tr>
-              <Row>
-                <Column right>
-                  <Button.Danger onClick={this.delete}>Delete</Button.Danger>
-                </Column>
-              </Row>
-            </tr>
-          </tr>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </form>
     );
   }
 
@@ -52,15 +56,16 @@ export default class PersonEdit extends Component {
     });
   }
 
-  delete() {
-    personService.deletePerson(this.props.match.params.person_id, () => history.push('/persons'));
-  }
-
-  deletePerson(person_id, success) {
-    connection.query('delete from Persons where person_id = ?', [person_id], (error, results) => {
-      if (error) return console.error(error);
-
-      success();
-    });
+  save() {
+    personService.updatePerson(
+      this.props.match.params.person_id,
+      this.fornavn,
+      this.etternavn,
+      this.tlf,
+      this.epost,
+      () => {
+        history.push('/persons');
+      }
+    );
   }
 }

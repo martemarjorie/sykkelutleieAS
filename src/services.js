@@ -18,11 +18,15 @@ class PersonService {
   }
 
   updatePerson(person_id, fornavn, etternavn, tlf, epost, success) {
-    connection.query('update Persons set fornavn=?, etternavn=?, tlf=?, epost=? where person_id=?', [fornavn, etternavn, tlf, epost, person_id], (error, results) => {
-      if (error) return console.error(error);
+    connection.query(
+      'update person set fornavn=?, etternavn=?, tlf=?, epost=? where person_id=?',
+      [fornavn, etternavn, tlf, epost, person_id],
+      (error, results) => {
+        if (error) return console.error(error);
 
-      success();
-    });
+        success();
+      }
+    );
   }
 }
 export let personService = new PersonService();
