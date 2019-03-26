@@ -37,14 +37,14 @@ class PersonService {
     });
   }
 
-  addPerson(fornavn, etternavn, tlf, epost, success) {
+  addPerson(person_id, fornavn, etternavn, tlf, epost, success) {
     connection.query(
-      'insert into Person (fornavn, etternavn, tlf, epost) values (?, ?, ?, ?)',
-      [fornavn, etternavn, tlf, epost],
+      'insert into person (person_id, fornavn, etternavn, tlf, epost) values (?, ?, ?, ?, ?)',
+      [person_id, fornavn, etternavn, tlf, epost],
       (error, results) => {
-        if (error) return console.log(error);
+        if (error) return console.error(error);
 
-        success(results.insertId);
+        success();
       }
     );
   }

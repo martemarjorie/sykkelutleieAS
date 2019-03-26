@@ -75,8 +75,15 @@ export default class PersonEdit extends Component {
   }
 
   delete() {
-    personService.deletePerson(this.fornavn, this.etternavn, this.tlf, this.epost, () => {
-      history.push('/persons');
-    });
+    personService.deletePerson(
+      this.props.match.params.person_id,
+      this.fornavn,
+      this.etternavn,
+      this.tlf,
+      this.epost,
+      () => {
+        history.push('/persons');
+      }
+    );
   }
 }
