@@ -3,42 +3,33 @@ import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { personService } from './services';
-import { Card, Row, Column, NavBar, Button, Form } from './widgets';
+import { Card, Column, NavBar, Button, Form } from './widgets';
+import { Container, Col, Row } from 'react-bootstrap';
 
 export default class Menu extends Component {
   render() {
     return (
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <NavLink exact activeStyle={{ color: 'darkblue' }} to="/">
+      <div style={{height:"40px", backgroundColor:"lightblue", paddingTop:"11px"}}>
+      <Container>
+      <Row>
+        <Col><NavLink exact activeStyle={{ color: 'darkblue' }} to="/">
                 Hjem
-              </NavLink>
-            </td>
-            <td>
-              <NavLink exact activeStyle={{ color: 'darkblue' }} to="/bestillinger">
+              </NavLink></Col>
+        <Col><NavLink exact activeStyle={{ color: 'darkblue' }} to="/bestillinger">
                 Ny bestilling
-              </NavLink>
-            </td>
-            <td>
-              <NavLink exact activeStyle={{ color: 'darkblue' }} to="/persons">
+              </NavLink></Col>
+        <Col><NavLink exact activeStyle={{ color: 'darkblue' }} to="/persons">
                 Kunde
-              </NavLink>
-            </td>
-            <td>
-              <NavLink exact activeStyle={{ color: 'darkblue' }} to="/sykler">
+              </NavLink></Col>
+        <Col><NavLink exact activeStyle={{ color: 'darkblue' }} to="/sykler">
                 Sykkel
-              </NavLink>
-            </td>
-            <td>
-              <NavLink exact activeStyle={{ color: 'darkblue' }} to="/oversikt">
+              </NavLink></Col>
+        <Col><NavLink exact activeStyle={{ color: 'darkblue' }} to="/oversikt">
                 Bestillingsoversikt
-              </NavLink>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </NavLink></Col>
+      </Row>
+    </Container>
+    </div>
     );
   }
 }

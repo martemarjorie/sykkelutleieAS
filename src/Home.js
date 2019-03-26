@@ -9,7 +9,6 @@ export default class Home extends Component {
     return (
       <div>
         <Card className="text-center">
-          <Card.Header>Hjem</Card.Header>
           <Card.Body>
             <Card.Title>SykkelUtleie AS</Card.Title>
             <Card.Text>Klokkeslett eller klokke</Card.Text>
