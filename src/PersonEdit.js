@@ -32,9 +32,6 @@ export default class PersonEdit extends Component {
             </tr>
             <tr>
               <Row>
-                <Column>
-                  <Button.Light onClick={this.edit}>Edit</Button.Light>
-                </Column>
                 <Column right>
                   <Button.Danger onClick={this.delete}>Delete</Button.Danger>
                 </Column>
@@ -53,16 +50,6 @@ export default class PersonEdit extends Component {
       this.tlf = person.tlf;
       this.epost = person.epost;
     });
-  }
-
-  save() {
-    personService.updatePerson(this.person, () => {
-      history.push('/persons/' + this.props.match.params.person_id);
-    });
-  }
-
-  cancel() {
-    history.push('/persons/' + this.props.match.params.person_id);
   }
 
   delete() {
