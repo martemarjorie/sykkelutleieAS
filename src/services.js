@@ -84,7 +84,7 @@ class SykkelService {
     success
   ) {
     connection.query(
-      'update person set type_sykkel=?, ramme=?, hjul_storrelse=?, girsystem=?, timepris=?, dagspris=?, tilhører_sted=?, modell=? where sykkel_id=?',
+      'update sykkel set type_sykkel=?, ramme=?, hjul_storrelse=?, girsystem=?, timepris=?, dagspris=?, tilhører_sted=?, modell=? where sykkel_id=?',
       [type_sykkel, ramme, hjul_storrelse, girsystem, timepris, dagspris, tilhorer_sted, modell, sykkel_id],
       (error, results) => {
         if (error) return console.error(error);
