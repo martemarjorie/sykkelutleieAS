@@ -12,14 +12,22 @@ export default class PersonList extends Component {
     return (
       <Card title="Kundeliste">
         <Row>
-        <Column><h5>Fornavn</h5></Column>
-        <Column><h5>Etternavn</h5></Column>
-        <Column><h5>Telefon</h5></Column>
-        <Column><h5>E-post</h5></Column>
-      </Row>
+          <Column>
+            <h5>Fornavn</h5>
+          </Column>
+          <Column>
+            <h5>Etternavn</h5>
+          </Column>
+          <Column>
+            <h5>Telefon</h5>
+          </Column>
+          <Column>
+            <h5>E-post</h5>
+          </Column>
+        </Row>
         {this.persons.map(person => (
-          <Row>
-            <Column key={person.person_id}>
+          <Row key={person.person_id}>
+            <Column>
               <NavLink to={'/persons/' + person.person_id + '/edit'}>{person.fornavn}</NavLink>
             </Column>
             <Column>

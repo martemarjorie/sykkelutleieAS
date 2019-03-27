@@ -11,16 +11,23 @@ export default class SykkelList extends Component {
   render() {
     return (
       <Card title="Sykler">
-      <Row>
-        <Column><h5>Type</h5></Column>
-        <Column><h5>Timepris</h5></Column>
-        <Column><h5>Dagspris</h5></Column>
-        <Column><h5>Modell</h5></Column>
-      </Row>
+        <Row>
+          <Column>
+            <h5>Type</h5>
+          </Column>
+          <Column>
+            <h5>Timepris</h5>
+          </Column>
+          <Column>
+            <h5>Dagspris</h5>
+          </Column>
+          <Column>
+            <h5>Modell</h5>
+          </Column>
+        </Row>
         {this.sykler.map(sykkel => (
-          <Row>    
-            <Column key={sykkel.sykkel_id}> 
-            
+          <Row key={sykkel.sykkel_id}>
+            <Column>
               <NavLink to={'/sykler/' + sykkel.sykkel_id + '/edit'}>{sykkel.type_sykkel}</NavLink>
             </Column>
             <Column>
