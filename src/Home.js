@@ -9,12 +9,12 @@ export default class Home extends Component {
     return (
       <div>
         <Card className="text-center">
-          <Card.Body>
-            <Card.Title>SykkelUtleie AS</Card.Title>
+            <Card.Body>
+            <Card.Title style={{ fontSize: '2em' }} >SykkelUtleie AS</Card.Title>
             <Card.Text>Klokkeslett eller klokke</Card.Text>
             <Button variant="primary">Go somewhere</Button>
           </Card.Body>
-          <Card.Footer className="text-muted">Footer</Card.Footer>
+          <Card.Footer className="text-muted" style={{ backgroundColor: 'lightblue' }} >Footer</Card.Footer>
         </Card>
       </div>
     );
