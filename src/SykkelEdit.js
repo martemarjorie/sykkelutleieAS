@@ -10,6 +10,10 @@ export default class SykkelEdit extends Component {
   ramme = '';
   hjul_storrelse = '';
   girsystem = '';
+  timepris = '';
+  dagspris = '';
+  tilhorer_sted = '';
+  modell = '';
 
   render() {
     return (
@@ -28,36 +32,55 @@ export default class SykkelEdit extends Component {
                 </tr>
                 <p />
                 <tr>
-                  Ramme:<br />{' '}
-                  <input type="text" value={this.ramme} onChange={event => (this.ramme = event.target.value)} />
+                  Ramme: <br />
+                  <input type="number" value={this.ramme} onChange={event => (this.ramme = event.target.value)} />
                 </tr>
                 <p />
                 <tr>
-                  Hjulstrl: <br />
+                  Hjulstørrelse:
+                  <br />{' '}
                   <input
                     type="number"
                     value={this.hjul_storrelse}
-                    onChange={event => (this.Hjul_storrelse = event.target.value)}
+                    onChange={event => (this.hjul_storrelse = event.target.value)}
                   />
                 </tr>
                 <p />
                 <tr>
-                  Girsystem: <br />
-                  <input type="text" value={this.girsystem} onChange={event => (this.girsystem = event.target.value)} />
+                  Girsystem:
+                  <br />{' '}
+                  <input
+                    type="number"
+                    value={this.girsystem}
+                    onChange={event => (this.girsystem = event.target.value)}
+                  />
                 </tr>
                 <p />
                 <tr>
-                  Timepris: <br />
-                  <input type="text" value={this.timepris} onChange={event => (this.timepris = event.target.value)} />
+                  Timepris:
+                  <br />{' '}
+                  <input type="number" value={this.timepris} onChange={event => (this.timepris = event.target.value)} />
                 </tr>
                 <p />
                 <tr>
-                  Dagspris: <br />
-                  <input type="text" value={this.dagspris} onChange={event => (this.dagspris = event.target.value)} />
+                  Dagspris:
+                  <br />{' '}
+                  <input type="number" value={this.dagspris} onChange={event => (this.dagspris = event.target.value)} />
                 </tr>
                 <p />
                 <tr>
-                  Modell:<br />{' '}
+                  Tilhører:
+                  <br />{' '}
+                  <input
+                    type="text"
+                    value={this.tilhorer_sted}
+                    onChange={event => (this.tilhorer_sted = event.target.value)}
+                  />
+                </tr>
+                <p />
+                <tr>
+                  Modell:
+                  <br />{' '}
                   <input type="text" value={this.modell} onChange={event => (this.modell = event.target.value)} />
                 </tr>
                 <p />
@@ -67,7 +90,7 @@ export default class SykkelEdit extends Component {
                       <button
                         style={{ position: 'absolute', width: '80px', backgroundColor: 'peru', color: 'cornsilk' }}
                         type="button"
-                        onClick={(this.save, this.buttonClicked)}
+                        onClick={this.save} // this.buttonClicked
                       >
                         Lagre
                       </button>
@@ -82,7 +105,7 @@ export default class SykkelEdit extends Component {
                           marginLeft: '70px'
                         }}
                         type="button"
-                        onClick={(this.delete, this.buttonClicked)}
+                        onClick={this.delete} // this.buttonClicked
                       >
                         Slett
                       </button>
@@ -105,6 +128,7 @@ export default class SykkelEdit extends Component {
       this.girsystem = sykkel.girsystem;
       this.timepris = sykkel.timepris;
       this.dagspris = sykkel.dagspris;
+      this.tilhorer_sted = sykkel.tilhorer_sted;
       this.modell = sykkel.modell;
     });
   }
@@ -118,6 +142,7 @@ export default class SykkelEdit extends Component {
       this.girsystem,
       this.timepris,
       this.dagspris,
+      this.tilhorer_sted,
       this.modell,
       () => {
         history.push('/sykler');
@@ -134,14 +159,11 @@ export default class SykkelEdit extends Component {
       this.girsystem,
       this.timepris,
       this.dagspris,
+      this.tilhorer_sted,
       this.modell,
       () => {
         history.push('/sykler');
       }
     );
-  }
-  buttonClicked() {
-    this.props.history.push('/persons');
-    console.log('Save clicked');
   }
 }

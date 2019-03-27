@@ -10,68 +10,91 @@ export default class SykkelAdd extends Component {
   ramme = '';
   hjul_storrelse = '';
   girsystem = '';
+  timepris = '';
+  dagspris = '';
+  tilhorer_sted = '';
+  modell = '';
 
   render() {
     return (
-      <div style={{marginLeft:"44%",marginTop:"3%"}}>
-      <form>
-        <table>
-          <tbody>
-            <tr>
+      <div style={{ marginLeft: '44%', marginTop: '3%' }}>
+        <form>
+          <table>
+            <tbody>
               <tr>
-                Type:{' '} <br></br>
-                <input
-                  type="text"
-                  value={this.type_sykkel}
-                  onChange={event => (this.type_sykkel = event.target.value)}
-                />
+                <tr>
+                  Type: <br />
+                  <input
+                    type="text"
+                    value={this.type_sykkel}
+                    onChange={event => (this.type_sykkel = event.target.value)}
+                  />
+                </tr>
+                <br />
+                <tr>
+                  Ramme: <br />
+                  <input type="text" value={this.ramme} onChange={event => (this.ramme = event.target.value)} />
+                </tr>
+                <br />
+                <tr>
+                  Hjulstrl: <br />
+                  <input
+                    type="number"
+                    value={this.hjul_storrelse}
+                    onChange={event => (this.hjul_storrelse = event.target.value)}
+                  />
+                </tr>
+                <br />
+                <tr>
+                  Girsystem: <br />
+                  <input type="text" value={this.girsystem} onChange={event => (this.girsystem = event.target.value)} />
+                </tr>
+                <br />
+                <tr>
+                  Timepris: <br />
+                  <input type="text" value={this.timepris} onChange={event => (this.timepris = event.target.value)} />
+                </tr>
+                <br />
+                <tr>
+                  Dagspris: <br />
+                  <input type="text" value={this.dagspris} onChange={event => (this.dagspris = event.target.value)} />
+                </tr>
+                <br />
+                <tr>
+                  Tilhører:
+                  <br />{' '}
+                  <input
+                    type="text"
+                    value={this.tilhorer_sted}
+                    onChange={event => (this.tilhorer_sted = event.target.value)}
+                  />
+                </tr>
+                <br />
+                <tr>
+                  Modell:
+                  <br />{' '}
+                  <input type="text" value={this.modell} onChange={event => (this.modell = event.target.value)} />
+                </tr>
+                <br />
+                <tr>
+                  <Row>
+                    <Column left>
+                      <div>
+                        <button
+                          style={{ position: 'absolute', width: '182px', backgroundColor: 'peru' }}
+                          type="button"
+                          onClick={this.add}
+                        >
+                          Legg til
+                        </button>
+                      </div>
+                    </Column>
+                  </Row>
+                </tr>
               </tr>
-              <br></br>
-              <tr>
-                Ramme: <br></br><input type="text" value={this.ramme} onChange={event => (this.ramme = event.target.value)} />
-              </tr>
-              <br></br>
-              <tr>
-                Hjulstrl:{' '}<br></br>
-                <input
-                  type="number"
-                  value={this.hjul_storrelse}
-                  onChange={event => (this.hjul_storrelse = event.target.value)}
-                />
-              </tr>
-              <br></br>
-              <tr>
-                Girsystem:{' '}<br></br>
-                <input type="text" value={this.girsystem} onChange={event => (this.girsystem = event.target.value)} />
-              </tr>
-              <br></br>
-              <tr>
-                Timepris:{' '}<br></br>
-                <input type="text" value={this.timepris} onChange={event => (this.timepris = event.target.value)} />
-              </tr>
-              <br></br>
-              <tr>
-                Dagspris:{' '}<br></br>
-                <input type="text" value={this.dagspris} onChange={event => (this.dagspris = event.target.value)} />
-              </tr>
-              <br></br>
-              <tr>
-                Modell:<br></br> <input type="text" value={this.modell} onChange={event => (this.modell = event.target.value)} />
-              </tr>
-              <br></br>
-              <tr>
-                <Row>
-                  <Column left>
-                    <div ><button style={{position:"absolute", width:"182px", backgroundColor:"peru"}} type="button" onClick={this.add}>
-                      Legg til
-                    </button></div>
-                  </Column>
-                </Row>
-              </tr>
-            </tr>
-          </tbody>
-        </table>
-      </form>
+            </tbody>
+          </table>
+        </form>
       </div>
     );
   }
@@ -83,6 +106,10 @@ export default class SykkelAdd extends Component {
       this.ramme,
       this.hjul_storrelse,
       this.girsystem,
+      this.timepris,
+      this.dagspris,
+      this.tilhorer_sted,
+      this.modell,
       () => {
         history.push('/sykler');
       }

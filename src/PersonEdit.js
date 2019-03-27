@@ -29,13 +29,13 @@ export default class PersonEdit extends Component {
                 </tr>
                 <p />
                 <tr>
-                  Tlf:<br />{' '}
-                  <input type="number" value={this.tlf} onChange={event => (this.tlf = event.target.value)} />
+                  Tlf:
+                  <br /> <input type="number" value={this.tlf} onChange={event => (this.tlf = event.target.value)} />
                 </tr>
                 <p />
                 <tr>
-                  Epost:<br />{' '}
-                  <input type="text" value={this.epost} onChange={event => (this.epost = event.target.value)} />
+                  Epost:
+                  <br /> <input type="text" value={this.epost} onChange={event => (this.epost = event.target.value)} />
                 </tr>
                 <p />
                 <tr>
@@ -44,7 +44,7 @@ export default class PersonEdit extends Component {
                       <button
                         style={{ position: 'absolute', width: '80px', backgroundColor: 'peru', color: 'cornsilk' }}
                         type="button"
-                        onClick={(this.save, this.buttonClicked)}
+                        onClick={this.save} // this.buttonClicked
                       >
                         Lagre
                       </button>
@@ -59,7 +59,7 @@ export default class PersonEdit extends Component {
                           marginLeft: '70px'
                         }}
                         type="button"
-                        onClick={(this.delete, this.buttonClicked)}
+                        onClick={this.delete} // this.buttonClicked
                       >
                         Slett
                       </button>
@@ -109,8 +109,8 @@ export default class PersonEdit extends Component {
     );
   }
 
-  buttonClicked() {
-    this.props.history.push('/persons');
-    console.log('Save clicked');
-  }
+  //  buttonClicked() {
+  //    this.props.history.push('/persons');
+  //    console.log('Save clicked');
+  //  }
 }
