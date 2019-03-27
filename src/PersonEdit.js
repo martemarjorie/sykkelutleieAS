@@ -13,47 +13,49 @@ export default class PersonEdit extends Component {
 
   render() {
     return (
-      <div style={{display:"inline-block", marginLeft:"44%",marginTop:"3%"}}>
-      <form>
-        <table>
-          <tbody>
-            <tr>
+      <div style={{ display: 'inline-block', marginLeft: '44%', marginTop: '3%' }}>
+        <form>
+          <table>
+            <tbody>
               <tr>
-                Fornavn:{' '}<br></br>
-                <input type="text" value={this.fornavn} onChange={event => (this.fornavn = event.target.value)} />
+                <tr>
+                  Fornavn: <br />
+                  <input type="text" value={this.fornavn} onChange={event => (this.fornavn = event.target.value)} />
+                </tr>
+                <p />
+                <tr>
+                  Etternavn: <br />
+                  <input type="text" value={this.etternavn} onChange={event => (this.etternavn = event.target.value)} />
+                </tr>
+                <p />
+                <tr>
+                  Tlf:<br />{' '}
+                  <input type="number" value={this.tlf} onChange={event => (this.tlf = event.target.value)} />
+                </tr>
+                <p />
+                <tr>
+                  Epost:<br />{' '}
+                  <input type="text" value={this.epost} onChange={event => (this.epost = event.target.value)} />
+                </tr>
+                <p />
+                <tr>
+                  <Row>
+                    <Column left>
+                      <button type="button" onClick={(this.save(), this.buttonClicked)}>
+                        Lagre
+                      </button>
+                    </Column>
+                    <Column right>
+                      <button type="button" onClick={(this.delete(), this.buttonClicked)}>
+                        Slett
+                      </button>
+                    </Column>
+                  </Row>
+                </tr>
               </tr>
-              <p></p>
-              <tr>
-                Etternavn:{' '}<br></br>
-                <input type="text" value={this.etternavn} onChange={event => (this.etternavn = event.target.value)} />
-              </tr>
-              <p></p>
-              <tr>
-                Tlf:<br></br> <input type="number" value={this.tlf} onChange={event => (this.tlf = event.target.value)} />
-              </tr>
-              <p></p>
-              <tr>
-                Epost:<br></br> <input type="text" value={this.epost} onChange={event => (this.epost = event.target.value)} />
-              </tr>
-              <p></p>
-              <tr>
-                <Row>
-                  <Column left>
-                    <button type="button" onClick={this.save}>
-                      Lagre
-                    </button>
-                  </Column>
-                  <Column right>
-                    <button type="button" onClick={this.delete}>
-                      Slett
-                    </button>
-                  </Column>
-                </Row>
-              </tr>
-            </tr>
-          </tbody>
-        </table>
-      </form>
+            </tbody>
+          </table>
+        </form>
       </div>
     );
   }
@@ -91,5 +93,10 @@ export default class PersonEdit extends Component {
         history.push('/persons');
       }
     );
+  }
+
+  buttonClicked() {
+    this.props.history.push('/persons');
+    console.log('Save clicked');
   }
 }
