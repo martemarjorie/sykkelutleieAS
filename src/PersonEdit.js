@@ -41,12 +41,26 @@ export default class PersonEdit extends Component {
                 <tr>
                   <Row>
                     <Column left>
-                      <button style={{position:"absolute", width:"80px", backgroundColor:"peru", color:"cornsilk"}} type="button" onClick={(this.save(), this.buttonClicked)}>
+                      <button
+                        style={{ position: 'absolute', width: '80px', backgroundColor: 'peru', color: 'cornsilk' }}
+                        type="button"
+                        onClick={(this.save, this.buttonClicked)}
+                      >
                         Lagre
                       </button>
                     </Column>
                     <Column right>
-                      <button style={{position:"absolute", width:"80px", backgroundColor:"peru", color:"cornsilk", marginLeft:"70px"}} type="button" onClick={(this.delete(), this.buttonClicked)}>
+                      <button
+                        style={{
+                          position: 'absolute',
+                          width: '80px',
+                          backgroundColor: 'peru',
+                          color: 'cornsilk',
+                          marginLeft: '70px'
+                        }}
+                        type="button"
+                        onClick={(this.delete, this.buttonClicked)}
+                      >
                         Slett
                       </button>
                     </Column>
