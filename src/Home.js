@@ -4,6 +4,19 @@ import { NavLink, HashRouter, Route } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
+function CurrentDate() {
+  let d = new Date();
+  setInterval(){
+    let dato = d.getFullYear() + '-' + (d.getMonth()+1) +
+    '-' + d.getDate() +' '+ d.getHours()+':' +
+    d.getMinutes()+':'+ d.getSeconds();
+  }
+
+  return (
+    <p>{dato}</p>
+  );
+}
+
 export default class Home extends Component {
   render() {
     return (
@@ -11,10 +24,10 @@ export default class Home extends Component {
         <Card className="text-center">
             <Card.Body>
             <Card.Title style={{ fontSize: '2em' }} >SykkelUtleie AS</Card.Title>
-            <Card.Text>Klokkeslett eller klokke</Card.Text>
+            <CurrentDate />
             <Button variant="primary">Go somewhere</Button>
           </Card.Body>
-          <Card.Footer className="text-muted" style={{ backgroundColor: 'lightblue' }} >Footer</Card.Footer>
+          <Card.Footer style={{ backgroundColor: 'lightblue', position: 'fixed', bottom: '0', width: '100%'}} ></Card.Footer>
         </Card>
       </div>
     );
