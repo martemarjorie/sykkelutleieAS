@@ -13,28 +13,34 @@ export default class PersonAdd extends Component {
 
   render() {
     return (
+      <div style={{display:"inline-block", marginLeft:"44%",marginTop:"3%"}}>
       <form>
         <table>
           <tbody>
             <tr>
               <tr>
-                Fornavn:{' '}
+                Fornavn:{' '}<br></br>
                 <input type="text" value={this.fornavn} onChange={event => (this.fornavn = event.target.value)} />
               </tr>
+              <br></br>
               <tr>
-                Etternavn:{' '}
+                Etternavn:{' '}<br></br>
                 <input type="text" value={this.etternavn} onChange={event => (this.etternavn = event.target.value)} />
               </tr>
+              <br></br>
               <tr>
-                Tlf: <input type="number" value={this.tlf} onChange={event => (this.tlf = event.target.value)} />
+                Tlf:<br></br> <input type="number" value={this.tlf} onChange={event => (this.tlf = event.target.value)} />
               </tr>
+              <br></br>
               <tr>
-                Epost: <input type="text" value={this.epost} onChange={event => (this.epost = event.target.value)} />
+                Epost: <br></br>
+                <input type="text" value={this.epost} onChange={event => (this.epost = event.target.value)} />
               </tr>
+              <br></br>
               <tr>
                 <Row>
                   <Column left>
-                    <button type="button" onClick={this.add}>
+                    <button style={{position:"absolute", width:"182px", backgroundColor:"peru", color:"cornsilk"}} type="button" onClick={this.add}>
                       Legg til
                     </button>
                   </Column>
@@ -44,6 +50,7 @@ export default class PersonAdd extends Component {
           </tbody>
         </table>
       </form>
+      </div>
     );
   }
 

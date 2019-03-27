@@ -62,12 +62,12 @@ export default class SykkelEdit extends Component {
               <tr>
                 <Row>
                   <Column left>
-                    <button type="button" onClick={this.save}>
+                    <button style={{position:"absolute", width:"80px", backgroundColor:"peru", color:"cornsilk"}} type="button" onClick={this.save}>
                       Lagre
                     </button>
                   </Column>
                   <Column right>
-                    <button type="button" onClick={this.delete}>
+                    <button style={{position:"absolute", width:"80px", backgroundColor:"peru", color:"cornsilk", marginLeft:"70px"}} type="button" onClick={this.delete}>
                       Slett
                     </button>
                   </Column>
