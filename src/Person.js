@@ -11,7 +11,12 @@ export default class PersonList extends Component {
   render() {
     return (
       <Card title="Kundeliste">
-        Oversikt over alle registrerte kunder:
+        <Row>
+        <Column><h5>Fornavn</h5></Column>
+        <Column><h5>Etternavn</h5></Column>
+        <Column><h5>Telefon</h5></Column>
+        <Column><h5>E-post</h5></Column>
+      </Row>
         {this.persons.map(person => (
           <Row>
             <Column key={person.person_id}>

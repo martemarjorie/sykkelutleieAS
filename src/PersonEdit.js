@@ -13,24 +13,29 @@ export default class PersonEdit extends Component {
 
   render() {
     return (
+      <div style={{display:"inline-block", marginLeft:"44%",marginTop:"3%"}}>
       <form>
         <table>
           <tbody>
             <tr>
               <tr>
-                Fornavn:{' '}
+                Fornavn:{' '}<br></br>
                 <input type="text" value={this.fornavn} onChange={event => (this.fornavn = event.target.value)} />
               </tr>
+              <p></p>
               <tr>
-                Etternavn:{' '}
+                Etternavn:{' '}<br></br>
                 <input type="text" value={this.etternavn} onChange={event => (this.etternavn = event.target.value)} />
               </tr>
+              <p></p>
               <tr>
-                Tlf: <input type="number" value={this.tlf} onChange={event => (this.tlf = event.target.value)} />
+                Tlf:<br></br> <input type="number" value={this.tlf} onChange={event => (this.tlf = event.target.value)} />
               </tr>
+              <p></p>
               <tr>
-                Epost: <input type="text" value={this.epost} onChange={event => (this.epost = event.target.value)} />
+                Epost:<br></br> <input type="text" value={this.epost} onChange={event => (this.epost = event.target.value)} />
               </tr>
+              <p></p>
               <tr>
                 <Row>
                   <Column left>
@@ -49,6 +54,7 @@ export default class PersonEdit extends Component {
           </tbody>
         </table>
       </form>
+      </div>
     );
   }
 
