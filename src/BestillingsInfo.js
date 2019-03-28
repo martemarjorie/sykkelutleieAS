@@ -11,16 +11,45 @@ export default class BestillingsInfo extends Component {
   render() {
     return (
       <Card title="Bestillingsoversikt">
+        <Row>
+          <Column>
+            <h5>Fornavn</h5>
+          </Column>
+          <Column>
+            <h5>Telefon</h5>
+          </Column>
+          <Column>
+            <h5>Type</h5>
+          </Column>
+          <Column>
+            <h5>Modell</h5>
+          </Column>
+          <Column>
+            <h5>Utleveringssted</h5>
+          </Column>
+          <Column>
+            <h5>Innleveringssted</h5>
+          </Column>
+          <Column>
+            <h5>Utleveringsdato</h5>
+          </Column>
+          <Column>
+            <h5>Innleveringsdato</h5>
+          </Column>
+        </Row>
         {this.bestillingsinfoer.map(bestillingsinfo => (
           <Row key={bestillingsinfo.bestilling_id}>
             <Column>
-              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.bestilling_id + '/edit'}>
+              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.fornavn + '/edit'}>
                 {bestillingsinfo.fornavn}
               </NavLink>
             </Column>
             <Column>
+              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.tlf + '/edit'}>{bestillingsinfo.tlf}</NavLink>
+            </Column>
+            <Column>
               <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.type_sykkel + '/edit'}>
-                {bestillingsinfo.type_stkkel}
+                {bestillingsinfo.type_sykkel}
               </NavLink>
             </Column>
             <Column>
@@ -38,21 +67,21 @@ export default class BestillingsInfo extends Component {
             </Column>
             <Column>
               <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.utlev_tidspunkt + '/edit'}>
-                {bestillingsinfo.utlev_tidspunkt}
+                {bestillingsinfo.utlev_tidspunkt.getDate() +
+                  '.' +
+                  (bestillingsinfo.utlev_tidspunkt.getMonth() + 1) +
+                  '.' +
+                  bestillingsinfo.utlev_tidspunkt.getFullYear()}
               </NavLink>
             </Column>
             <Column>
-              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.innlev_sted + '/edit'}>
-                {bestillingsinfo.innlev_sted}
+              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.innlev_tidspunkt + '/edit'}>
+                {bestillingsinfo.innlev_tidspunkt.getDate() +
+                  '.' +
+                  (bestillingsinfo.innlev_tidspunkt.getMonth() + 1) +
+                  '.' +
+                  bestillingsinfo.innlev_tidspunkt.getFullYear()}
               </NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.fornavn + '/edit'}>
-                {bestillingsinfo.fornavn}
-              </NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.tlf + '/edit'}>{bestillingsinfo.tlf}</NavLink>
             </Column>
           </Row>
         ))}

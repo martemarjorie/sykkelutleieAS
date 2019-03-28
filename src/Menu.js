@@ -38,6 +38,11 @@ export default class Menu extends Component {
               </NavLink>
             </Col>
             <Col>
+              <NavLink style={{ color: 'black' }} exact activeStyle={{ color: 'peru' }} to="/utstyrer">
+                Utstyr
+              </NavLink>
+            </Col>
+            <Col>
               <NavLink style={{ color: 'black' }} exact activeStyle={{ color: 'peru' }} to="/transport">
                 Transport
               </NavLink>
