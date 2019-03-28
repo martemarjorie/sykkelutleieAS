@@ -10,26 +10,30 @@ export default class BestillingsInfo extends Component {
 
   render() {
     return (
-      <Card title="Kundeliste">
-        Oversikt over alle registrerte kunder:
+      <Card title="Bestillingsoversikt">
         {this.bestillingsinfoer.map(bestillingsinfo => (
-          <Row key={bestillingsinfo.person_id}>
+          <Row key={bestillingsinfo.bestilling_id}>
+            <Column>
+              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.bestilling_id + '/edit'}>
+                {bestillingsinfo.fornavn}
+              </NavLink>
+            </Column>
             <Column>
               <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.type_sykkel + '/edit'}>
-                {bestillingsinfo.type_sykkel}
+                {bestillingsinfo.type_stkkel}
               </NavLink>
             </Column>
             <Column>
               <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.modell + '/edit'}>{bestillingsinfo.modell}</NavLink>
             </Column>
             <Column>
-              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.utlev_tidspunkt + '/edit'}>
-                {bestillingsinfo.utlev_tidspunkt}
+              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.utlev_sted + '/edit'}>
+                {bestillingsinfo.utlev_sted}
               </NavLink>
             </Column>
             <Column>
-              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.innlev_tidspunkt + '/edit'}>
-                {bestillingsinfo.innlev_tidspunkt}
+              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.innlev_sted + '/edit'}>
+                {bestillingsinfo.innlev_sted}
               </NavLink>
             </Column>
             <Column>
@@ -41,21 +45,20 @@ export default class BestillingsInfo extends Component {
               <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.innlev_sted + '/edit'}>
                 {bestillingsinfo.innlev_sted}
               </NavLink>
-              <Column>
-                <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.fornavn + '/edit'}>
-                  {bestillingsinfo.fornavn}
-                </NavLink>
-              </Column>
-              <Column>
-                <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.tlf + '/edit'}>{bestillingsinfo.tlf}</NavLink>
-              </Column>
+            </Column>
+            <Column>
+              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.fornavn + '/edit'}>
+                {bestillingsinfo.fornavn}
+              </NavLink>
+            </Column>
+            <Column>
+              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.tlf + '/edit'}>{bestillingsinfo.tlf}</NavLink>
             </Column>
           </Row>
         ))}
       </Card>
     );
   }
-
   mounted() {
     bestillingService.getBestillingsinfoer(bestillingsinfoer => {
       this.bestillingsinfoer = bestillingsinfoer;

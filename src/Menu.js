@@ -9,27 +9,42 @@ import { Container, Col, Row } from 'react-bootstrap';
 export default class Menu extends Component {
   render() {
     return (
-      <div style={{height:"40px", backgroundColor:"lightblue", paddingTop:"11px"}}>
-      <Container>
-      <Row>
-        <Col><NavLink style={{color:"black"}} exact activeStyle={{ color: 'peru' }} to="/">
+      <div style={{ height: '40px', backgroundColor: 'lightblue', paddingTop: '11px' }}>
+        <Container>
+          <Row>
+            <Col>
+              <NavLink style={{ color: 'black' }} exact activeStyle={{ color: 'peru' }} to="/">
                 Hjem
-              </NavLink></Col>
-        <Col><NavLink style={{color:"black"}} exact activeStyle={{ color: 'peru' }} to="/bestillinger">
+              </NavLink>
+            </Col>
+            <Col>
+              <NavLink style={{ color: 'black' }} exact activeStyle={{ color: 'peru' }} to="/bestillinger">
                 Ny bestilling
-              </NavLink></Col>
-        <Col><NavLink style={{color:"black"}} exact activeStyle={{ color: 'peru' }} to="/persons">
+              </NavLink>
+            </Col>
+            <Col>
+              <NavLink style={{ color: 'black' }} exact activeStyle={{ color: 'peru' }} to="/persons">
                 Kunde
-              </NavLink></Col>
-        <Col><NavLink style={{color:"black"}} exact activeStyle={{ color: 'peru' }} to="/sykler">
+              </NavLink>
+            </Col>
+            <Col>
+              <NavLink style={{ color: 'black' }} exact activeStyle={{ color: 'peru' }} to="/sykler">
                 Sykkel
-              </NavLink></Col>
-        <Col><NavLink style={{color:"black"}} exact activeStyle={{ color: 'peru' }} to="/oversikt">
+              </NavLink>
+            </Col>
+            <Col>
+              <NavLink style={{ color: 'black' }} exact activeStyle={{ color: 'peru' }} to="/bestillingsinfoer">
                 Bestillingsoversikt
-              </NavLink></Col>
-      </Row>
-    </Container>
-    </div>
+              </NavLink>
+            </Col>
+            <Col>
+              <NavLink style={{ color: 'black' }} exact activeStyle={{ color: 'peru' }} to="/transport">
+                Transport
+              </NavLink>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     );
   }
 }

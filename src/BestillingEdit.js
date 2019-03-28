@@ -30,7 +30,8 @@ export default class BestillingEdit extends Component {
                 />
               </tr>
               <tr>
-                Modell: <input type="text" value={this.modell} onChange={event => (this.modell = event.target.value)} />
+                Modell:
+                <input type="text" value={this.modell} onChange={event => (this.modell = event.target.value)} />
               </tr>
               <tr>
                 Utleveringstidspunkt:{' '}
@@ -66,7 +67,8 @@ export default class BestillingEdit extends Component {
                   <input type="text" value={this.fornavn} onChange={event => (this.fornavn = event.target.value)} />
                 </tr>
                 <tr>
-                  Tlf: <input type="text" value={this.tlf} onChange={event => (this.tlf = event.target.value)} />
+                  Tlf:
+                  <input type="text" value={this.tlf} onChange={event => (this.tlf = event.target.value)} />
                 </tr>
                 <Row>
                   <Column left>
@@ -89,7 +91,7 @@ export default class BestillingEdit extends Component {
   }
 
   mounted() {
-    bestillingService.getBestillingsinfoer(this.props.match.params.person_bestilling.person_id, bestillingsinfo => {
+    bestillingService.getBestillingsinfoer(this.props.match.params.bestilling_id, bestillingsinfo => {
       this.type_sykkel = bestillingsinfo.type_sykkel;
       this.modell = bestillingsinfo.modell;
       this.utlev_tidspunkt = bestillingsinfo.utlev_tidspunkt;
@@ -103,7 +105,7 @@ export default class BestillingEdit extends Component {
 
   save() {
     bestillingService.updateBestillingsinfoer(
-      this.props.match.params.person_bestilling.person_id,
+      this.props.match.params.bestilling_id,
       this.type_sykkel,
       this.modell,
       this.utlev_tidspunkt,
@@ -120,7 +122,7 @@ export default class BestillingEdit extends Component {
 
   delete() {
     bestillingService.deleteBestillingsinfoer(
-      this.props.match.params.person_bestilling.person_id,
+      this.props.match.params.bestilling_id,
       this.type_sykkel,
       this.modell,
       this.utlev_tidspunkt,

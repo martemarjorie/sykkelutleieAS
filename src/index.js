@@ -3,6 +3,7 @@ import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 import Menu from './Menu';
 
@@ -21,6 +22,8 @@ import SykkelAdd from './SykkelAdd';
 import BestillingsInfo from './BestillingsInfo';
 import BestillingEdit from './BestillingEdit';
 
+import TransportList from './Transport';
+
 import createHashHistory from 'history/createHashHistory';
 const history = createHashHistory(); // Use history.push(...) to programmatically change path, for instance after successfully saving a student
 
@@ -37,7 +40,8 @@ ReactDOM.render(
       <Route path="/sykler/:sykkel_id/edit" component={SykkelEdit} />
       <Route path="/sykler/add" component={SykkelAdd} />
       <Route exact path="/bestillingsinfoer" component={BestillingsInfo} />
-      <Route exact path="/bestillingsinfoer/:person_id/edit" component={BestillingEdit} />
+      <Route path="/bestillingsinfoer/:bestilling_id/edit" component={BestillingEdit} />
+      <Route exact path="/transport" component={TransportList} />
     </div>
   </HashRouter>,
   document.getElementById('root')

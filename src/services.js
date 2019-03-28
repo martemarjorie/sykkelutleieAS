@@ -143,7 +143,7 @@ export let sykkelService = new SykkelService();
 class BestillingService {
   getBestillingsinfoer(success) {
     connection.query(
-      'select SELECT type_sykkel, modell, utlev_sted, innlev_sted, utlev_tidspunkt, innlev_tidspunkt FROM bestillingsinfo RIGHT JOIN person ON (bestillingsinfo.tlf = person.tlf) RIGHT JOIN person_bestilling ON (person.person_id = person_bestilling.person_id)',
+      'select bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf from bestillingsinfo',
       (error, results) => {
         if (error) return console.error(error);
 
@@ -152,10 +152,10 @@ class BestillingService {
     );
   }
 
-  getBestillingsinfoer(person_id, success) {
+  getBestillingsinfo(bestilling_id, success) {
     connection.query(
-      'select SELECT type_sykkel, modell, utlev_sted, innlev_sted, utlev_tidspunkt, innlev_tidspunkt FROM bestillingsinfo RIGHT JOIN person ON (bestillingsinfo.tlf = person.tlf) RIGHT JOIN person_bestilling ON (person.person_id = person_bestilling.person_id)',
-      [person_id],
+      'select bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf from bestillingsinfo where bestilling_id=?',
+      [bestilling_id],
       (error, results) => {
         if (error) return console.error(error);
 
@@ -164,20 +164,10 @@ class BestillingService {
     );
   }
 
-  updateBestillingsinfoer(
-    type_sykkel,
-    modell,
-    utlev_sted,
-    innlev_sted,
-    utlev_tidspunkt,
-    innlev_tidspunkt,
-    fornavn,
-    tlf,
-    success
-  ) {
+  updateBestillingsinfoer(bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf, success) {
     connection.query(
-      'update bestillingsinfo set type_sykkel=?, modell=?, utlev_sted=?, innlev_sted=?, utlev_tidspunkt=?, innlev_tidspunkt=?, fornavn=?, tlf=? where person_bestilling.perosn_id=?',
-      [type_sykkel, modell, utlev_sted, innlev_sted, utlev_tidspunkt, innlev_tidspunkt, fornavn, tlf],
+      'update bestillingsinfo set bestilling_id=?, type_sykkel=?, modell=?, utlev_sted=?, innlev_sted=?, fornavn=?, tlf=? where bestilling_id=?',
+      [bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf],
       (error, results) => {
         if (error) return console.error(error);
 
@@ -185,27 +175,12 @@ class BestillingService {
       }
     );
   }
+  deleteBestillingsinfoer(bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf, success) {
+    connection.query('delete * from bestillingsinfo where bestilling_id=?', [bestilling_id], (error, results) => {
+      if (error) return console.error(error);
 
-  deleteBestillingsinfoer(
-    type_sykkel,
-    modell,
-    utlev_sted,
-    innlev_sted,
-    utlev_tidspunkt,
-    innlev_tidspunkt,
-    fornavn,
-    tlf,
-    success
-  ) {
-    connection.query(
-      'delete type_sykkel, modell, utlev_sted, innlev_sted, utlev_tidspunkt, innlev_tidspunkt FROM bestillingsinfo RIGHT JOIN person ON (bestillingsinfo.tlf = person.tlf) RIGHT JOIN person_bestilling ON (person.person_id = person_bestilling.person_id)',
-      [person_id],
-      (error, results) => {
-        if (error) return console.error(error);
-
-        success();
-      }
-    );
+      success();
+    });
   }
 }
 export let bestillingService = new BestillingService();
