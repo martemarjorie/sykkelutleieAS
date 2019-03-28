@@ -19,6 +19,10 @@ import SykkelList from './Sykkel';
 import SykkelEdit from './SykkelEdit';
 import SykkelAdd from './SykkelAdd';
 
+import UtstyrList from './Utstyr';
+import UtstyrEdit from './UtstyrEdit';
+import UtstyrAdd from './UtstyrAdd';
+
 import BestillingsInfo from './BestillingsInfo';
 import BestillingEdit from './BestillingEdit';
 
@@ -39,6 +43,9 @@ ReactDOM.render(
       <Route exact path="/sykler" component={SykkelList} />
       <Route path="/sykler/:sykkel_id/edit" component={SykkelEdit} />
       <Route path="/sykler/add" component={SykkelAdd} />
+      <Route exact path="/utstyrer" component={UtstyrList} />
+      <Route path="/utstyrer:utstyr_id/edit" component={UtstyrEdit} />
+      <Route path="/utstyrer/add" component={UtstyrAdd} />
       <Route exact path="/bestillingsinfoer" component={BestillingsInfo} />
       <Route path="/bestillingsinfoer/:bestilling_id/edit" component={BestillingEdit} />
       <Route exact path="/transport" component={TransportList} />

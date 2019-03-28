@@ -143,7 +143,7 @@ export let sykkelService = new SykkelService();
 class BestillingService {
   getBestillingsinfoer(success) {
     connection.query(
-      'select bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf from bestillingsinfo',
+      'select bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, innlev_tidspunkt, utlev_tidspunkt, fornavn, tlf from bestillingsinfo',
       (error, results) => {
         if (error) return console.error(error);
 
@@ -184,3 +184,57 @@ class BestillingService {
   }
 }
 export let bestillingService = new BestillingService();
+
+/********** UTSTYR ************/
+
+class UtstyrService {
+  getUtstyrer(success) {
+    connection.query('select type_utstyr, beskrivelse, pris from utstyr', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+
+  getUtstyr(utstyr_id, success) {
+    connection.query('select * from bestillingsinfo where utstyr_id=?', [utstyr_id], (error, results) => {
+      if (error) return console.error(error);
+
+      success(results[0]);
+    });
+  }
+
+  deleteUtstyr(utstyr_id, type_utstyr, beskrivelse, pris, success) {
+    connection.query('delete from utstyr where utstyr_id=?', [utstyr_id], (error, results) => {
+      if (error) return console.error(error);
+
+      success();
+    });
+  }
+
+  updateUtstyr(utstyr_id, type_utstyr, beskrivelse, pris, success) {
+    connection.query(
+      'update utstyr set type_utstyr=?, beskrivelse=?, pris=? where utstyr_id=?',
+      [type_utstyr, beskrivelse, pris, utstyr_id],
+      (error, results) => {
+        if (error) return console.error(error);
+
+        success();
+      }
+    );
+  }
+
+  addUtstyr(utstyr_id, type_utstyr, beskrivelse, pris, success) {
+    connection.query(
+      'insert into utstyr (utstyr_id, type_utstyr, beskrivelse, pris) values (?, ?, ?, ?)',
+      [utstyr_id, type_utstyr, beskrivelse, pris],
+      (error, results) => {
+        if (error) return console.error(error);
+
+        success();
+      }
+    );
+  }
+}
+
+export let utstyrService = new UtstyrService();
