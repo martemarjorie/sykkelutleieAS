@@ -12,19 +12,19 @@ export default class Menu extends Component {
       <div style={{height:"40px", backgroundColor:"lightblue", paddingTop:"11px"}}>
       <Container>
       <Row>
-        <Col><NavLink exact activeStyle={{ color: 'darkblue' }} to="/">
+        <Col><NavLink style={{color:"black"}} exact activeStyle={{ color: 'peru' }} to="/">
                 Hjem
               </NavLink></Col>
-        <Col><NavLink exact activeStyle={{ color: 'darkblue' }} to="/bestillinger">
+        <Col><NavLink style={{color:"black"}} exact activeStyle={{ color: 'peru' }} to="/bestillinger">
                 Ny bestilling
               </NavLink></Col>
-        <Col><NavLink exact activeStyle={{ color: 'darkblue' }} to="/persons">
+        <Col><NavLink style={{color:"black"}} exact activeStyle={{ color: 'peru' }} to="/persons">
                 Kunde
               </NavLink></Col>
-        <Col><NavLink exact activeStyle={{ color: 'darkblue' }} to="/sykler">
+        <Col><NavLink style={{color:"black"}} exact activeStyle={{ color: 'peru' }} to="/sykler">
                 Sykkel
               </NavLink></Col>
-        <Col><NavLink exact activeStyle={{ color: 'darkblue' }} to="/oversikt">
+        <Col><NavLink style={{color:"black"}} exact activeStyle={{ color: 'peru' }} to="/oversikt">
                 Bestillingsoversikt
               </NavLink></Col>
       </Row>

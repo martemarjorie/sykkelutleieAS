@@ -10,73 +10,112 @@ export default class SykkelEdit extends Component {
   ramme = '';
   hjul_storrelse = '';
   girsystem = '';
+  timepris = '';
+  dagspris = '';
+  tilhorer_sted = '';
+  modell = '';
 
   render() {
     return (
-      <div style={{display:"inline-block", marginLeft:"44%",marginTop:"3%"}}>
-      <form>
-        <table>
-          <tbody>
-            <tr>
+      <div style={{ display: 'inline-block', marginLeft: '44%', marginTop: '3%' }}>
+        <form>
+          <table>
+            <tbody>
               <tr>
-                Type:{' '}<br></br>
-                <input
-                  type="text"
-                  value={this.type_sykkel}
-                  onChange={event => (this.type_sykkel = event.target.value)}
-                />
+                <tr>
+                  Type: <br />
+                  <input
+                    type="text"
+                    value={this.type_sykkel}
+                    onChange={event => (this.type_sykkel = event.target.value)}
+                  />
+                </tr>
+                <p />
+                <tr>
+                  Ramme: <br />
+                  <input type="number" value={this.ramme} onChange={event => (this.ramme = event.target.value)} />
+                </tr>
+                <p />
+                <tr>
+                  Hjulstørrelse:
+                  <br />{' '}
+                  <input
+                    type="number"
+                    value={this.hjul_storrelse}
+                    onChange={event => (this.hjul_storrelse = event.target.value)}
+                  />
+                </tr>
+                <p />
+                <tr>
+                  Girsystem:
+                  <br />{' '}
+                  <input
+                    type="number"
+                    value={this.girsystem}
+                    onChange={event => (this.girsystem = event.target.value)}
+                  />
+                </tr>
+                <p />
+                <tr>
+                  Timepris:
+                  <br />{' '}
+                  <input type="number" value={this.timepris} onChange={event => (this.timepris = event.target.value)} />
+                </tr>
+                <p />
+                <tr>
+                  Dagspris:
+                  <br />{' '}
+                  <input type="number" value={this.dagspris} onChange={event => (this.dagspris = event.target.value)} />
+                </tr>
+                <p />
+                <tr>
+                  Tilhører:
+                  <br />{' '}
+                  <input
+                    type="text"
+                    value={this.tilhorer_sted}
+                    onChange={event => (this.tilhorer_sted = event.target.value)}
+                  />
+                </tr>
+                <p />
+                <tr>
+                  Modell:
+                  <br />{' '}
+                  <input type="text" value={this.modell} onChange={event => (this.modell = event.target.value)} />
+                </tr>
+                <p />
+                <tr>
+                  <Row>
+                    <Column left>
+                      <button
+                        style={{ position: 'absolute', width: '80px', backgroundColor: 'peru', color: 'cornsilk' }}
+                        type="button"
+                        onClick={this.save} // this.buttonClicked
+                      >
+                        Lagre
+                      </button>
+                    </Column>
+                    <Column right>
+                      <button
+                        style={{
+                          position: 'absolute',
+                          width: '80px',
+                          backgroundColor: 'peru',
+                          color: 'cornsilk',
+                          marginLeft: '70px'
+                        }}
+                        type="button"
+                        onClick={this.delete} // this.buttonClicked
+                      >
+                        Slett
+                      </button>
+                    </Column>
+                  </Row>
+                </tr>
               </tr>
-              <p></p>
-              <tr>
-                Ramme:<br></br> <input type="text" value={this.ramme} onChange={event => (this.ramme = event.target.value)} />
-              </tr>
-              <p></p>
-              <tr>
-                Hjulstrl:{' '}<br></br>
-                <input
-                  type="number"
-                  value={this.hjul_storrelse}
-                  onChange={event => (this.Hjul_storrelse = event.target.value)}
-                />
-              </tr>
-              <p></p>
-              <tr>
-                Girsystem:{' '}<br></br>
-                <input type="text" value={this.girsystem} onChange={event => (this.girsystem = event.target.value)} />
-              </tr>
-              <p></p>
-              <tr>
-                Timepris:{' '}<br></br>
-                <input type="text" value={this.timepris} onChange={event => (this.timepris = event.target.value)} />
-              </tr>
-              <p></p>
-              <tr>
-                Dagspris:{' '}<br></br>
-                <input type="text" value={this.dagspris} onChange={event => (this.dagspris = event.target.value)} />
-              </tr>
-              <p></p>
-              <tr>
-                Modell:<br></br> <input type="text" value={this.modell} onChange={event => (this.modell = event.target.value)} />
-              </tr>
-              <p></p>
-              <tr>
-                <Row>
-                  <Column left>
-                    <button type="button" onClick={this.save}>
-                      Lagre
-                    </button>
-                  </Column>
-                  <Column right>
-                    <button type="button" onClick={this.delete}>
-                      Slett
-                    </button>
-                  </Column>
-                </Row>
-              </tr>
-            </tr>
-          </tbody>
-        </table>
-      </form>
+            </tbody>
+          </table>
+        </form>
       </div>
     );
   }
@@ -89,6 +128,7 @@ export default class SykkelEdit extends Component {
       this.girsystem = sykkel.girsystem;
       this.timepris = sykkel.timepris;
       this.dagspris = sykkel.dagspris;
+      this.tilhorer_sted = sykkel.tilhorer_sted;
       this.modell = sykkel.modell;
     });
   }
@@ -102,6 +142,7 @@ export default class SykkelEdit extends Component {
       this.girsystem,
       this.timepris,
       this.dagspris,
+      this.tilhorer_sted,
       this.modell,
       () => {
         history.push('/sykler');
@@ -118,6 +159,7 @@ export default class SykkelEdit extends Component {
       this.girsystem,
       this.timepris,
       this.dagspris,
+      this.tilhorer_sted,
       this.modell,
       () => {
         history.push('/sykler');

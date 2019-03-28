@@ -6,7 +6,6 @@ import Button from 'react-bootstrap/Button';
 
 function CurrentDate() {
   let d = new Date();
-  // Set interval
     let dato = d.getFullYear() + '-' + (d.getMonth()+1) +
     '-' + d.getDate() +' '+ d.getHours()+':' +
     d.getMinutes()+':'+ d.getSeconds();
