@@ -11,6 +11,7 @@ function CurrentDate() {
     '-' + d.getDate() +' '+ d.getHours()+':' +
     d.getMinutes()+':'+ d.getSeconds();
 
+
   return (
     <p>{dato}</p>
   );
@@ -24,7 +25,7 @@ export default class Home extends Component {
             <Card.Body>
             <Card.Title style={{ fontSize: '2em' }} >SykkelUtleie AS</Card.Title>
             <CurrentDate />
-            <Button variant="primary">Go somewhere</Button>
+            { /* <Button variant="primary">Go somewhere</Button> */ }
           </Card.Body>
           <Card.Footer style={{ backgroundColor: 'lightblue', position: 'fixed', bottom: '0', width: '100%'}} ></Card.Footer>
         </Card>
