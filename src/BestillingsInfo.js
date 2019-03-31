@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { bestillingService } from './services';
 import { Card, Row, Column, NavBar, Button, Form } from './widgets';
+import Table from 'react-bootstrap/Table';
 
 export default class BestillingsInfo extends Component {
   bestillingsinfoer = [];
@@ -11,80 +12,47 @@ export default class BestillingsInfo extends Component {
   render() {
     return (
       <Card title="Bestillingsoversikt">
-        <Row>
-          <Column>
-            <h5>Fornavn</h5>
-          </Column>
-          <Column>
-            <h5>Telefon</h5>
-          </Column>
-          <Column>
-            <h5>Type</h5>
-          </Column>
-          <Column>
-            <h5>Modell</h5>
-          </Column>
-          <Column>
-            <h5>Utleveringssted</h5>
-          </Column>
-          <Column>
-            <h5>Innleveringssted</h5>
-          </Column>
-          <Column>
-            <h5>Utleveringsdato</h5>
-          </Column>
-          <Column>
-            <h5>Innleveringsdato</h5>
-          </Column>
-        </Row>
-        {this.bestillingsinfoer.map(bestillingsinfo => (
-          <Row key={bestillingsinfo.bestilling_id}>
-            <Column>
-              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.fornavn + '/edit'}>
-                {bestillingsinfo.fornavn}
-              </NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.tlf + '/edit'}>{bestillingsinfo.tlf}</NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.type_sykkel + '/edit'}>
-                {bestillingsinfo.type_sykkel}
-              </NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.modell + '/edit'}>{bestillingsinfo.modell}</NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.utlev_sted + '/edit'}>
-                {bestillingsinfo.utlev_sted}
-              </NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.innlev_sted + '/edit'}>
-                {bestillingsinfo.innlev_sted}
-              </NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.utlev_tidspunkt + '/edit'}>
-                {bestillingsinfo.utlev_tidspunkt.getDate() +
-                  '.' +
-                  (bestillingsinfo.utlev_tidspunkt.getMonth() + 1) +
-                  '.' +
-                  bestillingsinfo.utlev_tidspunkt.getFullYear()}
-              </NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.innlev_tidspunkt + '/edit'}>
-                {bestillingsinfo.innlev_tidspunkt.getDate() +
-                  '.' +
-                  (bestillingsinfo.innlev_tidspunkt.getMonth() + 1) +
-                  '.' +
-                  bestillingsinfo.innlev_tidspunkt.getFullYear()}
-              </NavLink>
-            </Column>
-          </Row>
-        ))}
+        <Table responsive hover>
+          <thead>
+            <tr>
+              <th>Kunde</th>
+              <th>Tlf</th>
+              <th>Sykkeltype</th>
+              <th>Modell</th>
+              <th>Utlevering</th>
+              <th>Innlevering</th>
+              <th>Fra dato</th>
+              <th>Til dato</th>
+            </tr>
+          </thead>
+
+          {this.bestillingsinfoer.map(bestillingsinfo => (
+            <tbody>
+              <tr key={bestillingsinfo.bestilling_id}>
+                <td>{bestillingsinfo.fornavn}</td>
+                <td>{bestillingsinfo.tlf}</td>
+                <td>{bestillingsinfo.type_sykkel}</td>
+                <td>{bestillingsinfo.modell}</td>
+                <td>{bestillingsinfo.utlev_sted}</td>
+                <td>{bestillingsinfo.innlev_sted}</td>
+                <td>
+                  {('0' + bestillingsinfo.utlev_tidspunkt.getDate()).slice(-2) +
+                    '.' +
+                    ('0' + (bestillingsinfo.utlev_tidspunkt.getMonth() + 1)).slice(-2) +
+                    '.' +
+                    bestillingsinfo.utlev_tidspunkt.getFullYear()}
+                </td>
+                <td>
+                  {('0' + bestillingsinfo.innlev_tidspunkt.getDate()).slice(-2) +
+                    '.' +
+                    ('0' + (bestillingsinfo.innlev_tidspunkt.getMonth() + 1)).slice(-2) +
+                    '.' +
+                    bestillingsinfo.innlev_tidspunkt.getFullYear()}
+                </td>
+              </tr>
+            </tbody>
+          ))}
+        </Table>
       </Card>
     );
   }

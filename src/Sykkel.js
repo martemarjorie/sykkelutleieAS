@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { sykkelService } from './services';
 import { Card, Row, Column, NavBar, Button, Form } from './widgets';
+import Table from 'react-bootstrap/Table';
 
 export default class SykkelList extends Component {
   sykler = [];
@@ -11,37 +12,32 @@ export default class SykkelList extends Component {
   render() {
     return (
       <Card title="Sykler">
-        <Row>
-          <Column>
-            <h5>Type</h5>
-          </Column>
-          <Column>
-            <h5>Timepris</h5>
-          </Column>
-          <Column>
-            <h5>Dagspris</h5>
-          </Column>
-          <Column>
-            <h5>Modell</h5>
-          </Column>
-        </Row>
-        {this.sykler.map(sykkel => (
-          <Row key={sykkel.sykkel_id}>
-            <Column>
-              <NavLink to={'/sykler/' + sykkel.sykkel_id + '/edit'}>{sykkel.type_sykkel}</NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/sykler/' + sykkel.sykkel_id + '/edit'}>{sykkel.timepris}</NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/sykler/' + sykkel.sykkel_id + '/edit'}>{sykkel.dagspris}</NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/sykler/' + sykkel.sykkel_id + '/edit'}>{sykkel.modell}</NavLink>
-            </Column>
-          </Row>
-        ))}
-        <NavLink to={'/sykler/add'}>Legg til</NavLink>
+        <Table responsive hover>
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Timepris</th>
+              <th>Dagspris</th>
+              <th>Modell</th>
+              <th> </th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.sykler.map(sykkel => (
+              <tr key={sykkel.sykkel_id}>
+                <td>{sykkel.type_sykkel}</td>
+                <td>{sykkel.timepris}</td>
+                <td>{sykkel.dagspris}</td>
+                <td>{sykkel.modell}</td>
+                <td>
+                  <NavLink to={'/sykler/' + sykkel.sykkel_id + '/edit'}>Endre</NavLink>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+        <br />
+        <NavLink to={'/sykler/add'}>Legg til ny</NavLink>
       </Card>
     );
   }

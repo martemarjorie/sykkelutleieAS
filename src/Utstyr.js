@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { utstyrService } from './services';
 import { Card, Row, Column, NavBar, Button, Form } from './widgets';
+import Table from 'react-bootstrap/Table';
 
 export default class UtstyrList extends Component {
   utstyrer = [];
@@ -11,31 +12,30 @@ export default class UtstyrList extends Component {
   render() {
     return (
       <Card title="Utstyrsliste">
-        <Row>
-          <Column>
-            <h5>Type utstyr</h5>
-          </Column>
-          <Column>
-            <h5>Beskrivelse</h5>
-          </Column>
-          <Column>
-            <h5>Pris</h5>
-          </Column>
-        </Row>
-        {this.utstyrer.map(utstyr => (
-          <Row key={utstyr.utstyr_id}>
-            <Column>
-              <NavLink to={'/utstyrer/' + utstyr.type_utstyr + '/edit'}>{utstyr.type_utstyr}</NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/utstyrer/' + utstyr.beskrivelse + '/edit'}>{utstyr.beskrivelse}</NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/utstyrer/' + utstyr.pris + '/edit'}>{utstyr.pris}</NavLink>
-            </Column>
-          </Row>
-        ))}
-        <NavLink to={'/utstyrer/add'}>Legg til</NavLink>
+        <Table responsive hover>
+          <thead>
+            <tr>
+              <th>Type utstyr</th>
+              <th>Beskrivelse</th>
+              <th>Pris</th>
+              <th> </th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.utstyrer.map(utstyr => (
+              <tr key={utstyr.utstyr_id}>
+                <td>{utstyr.type_utstyr}</td>
+                <td>{utstyr.beskrivelse}</td>
+                <td>{utstyr.pris}</td>
+                <td>
+                  <NavLink to={'/utstyrer/' + utstyr.utstyr_id + '/edit'}>Endre</NavLink>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+        <br />
+        <NavLink to={'/utstyrer/add'}>Legg til ny</NavLink>
       </Card>
     );
   }

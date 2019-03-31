@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { personService } from './services';
 import { Card, Row, Column, NavBar, Button, Form } from './widgets';
+import Table from 'react-bootstrap/Table';
 
 export default class PersonList extends Component {
   persons = [];
@@ -11,36 +12,31 @@ export default class PersonList extends Component {
   render() {
     return (
       <Card title="Kundeliste">
-        <Row>
-          <Column>
-            <h5>Fornavn</h5>
-          </Column>
-          <Column>
-            <h5>Etternavn</h5>
-          </Column>
-          <Column>
-            <h5>Telefon</h5>
-          </Column>
-          <Column>
-            <h5>E-post</h5>
-          </Column>
-        </Row>
-        {this.persons.map(person => (
-          <Row key={person.person_id}>
-            <Column>
-              <NavLink to={'/persons/' + person.person_id + '/edit'}>{person.fornavn}</NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/persons/' + person.person_id + '/edit'}>{person.etternavn}</NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/persons/' + person.person_id + '/edit'}>{person.tlf}</NavLink>
-            </Column>
-            <Column>
-              <NavLink to={'/persons/' + person.person_id + '/edit'}>{person.epost}</NavLink>
-            </Column>
-          </Row>
-        ))}
+        <Table responsive hover>
+          <thead>
+            <tr>
+              <th>Fornavn</th>
+              <th>Etternavn</th>
+              <th>Tlf</th>
+              <th>Epost</th>
+              <th> </th>
+            </tr>
+          </thead>
+
+          {this.persons.map(person => (
+            <tbody>
+              <tr key={person.person_id}>
+                <td>{person.fornavn}</td>
+                <td>{person.etternavn}</td>
+                <td>{person.tlf}</td>
+                <td>{person.epost}</td>
+                <td>
+                  <NavLink to={'/persons/' + person.person_id + '/edit'}>Endre</NavLink>
+                </td>
+              </tr>
+            </tbody>
+          ))}
+        </Table>
         <NavLink to={'/persons/add'}>Legg til</NavLink>
       </Card>
     );
