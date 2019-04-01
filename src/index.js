@@ -44,7 +44,7 @@ ReactDOM.render(
       <Route path="/sykler/:sykkel_id/edit" component={SykkelEdit} />
       <Route path="/sykler/add" component={SykkelAdd} />
       <Route exact path="/utstyrer" component={UtstyrList} />
-      <Route path="/utstyrer:utstyr_id/edit" component={UtstyrEdit} />
+      <Route path="/utstyrer/:utstyr_id/edit" component={UtstyrEdit} />
       <Route path="/utstyrer/add" component={UtstyrAdd} />
       <Route exact path="/bestillingsinfoer" component={BestillingsInfo} />
       <Route path="/bestillingsinfoer/:bestilling_id/edit" component={BestillingEdit} />
