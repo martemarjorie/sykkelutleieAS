@@ -37,7 +37,12 @@ export default class UtstyrEdit extends Component {
                 <p />
                 <tr>
                   Pris:
-                  <br /> <input type="number" value={this.pris} onChange={event => (this.pris = event.target.value)} />
+                  <br />{' '}
+                  <input
+                  type="number"
+                  value={this.pris}
+                  onChange={event => (this.pris = event.target.value)}
+                  />
                 </tr>
                 <p />
                 <tr>
@@ -102,7 +107,8 @@ export default class UtstyrEdit extends Component {
   }
 
   delete() {
-    utstyrService.deleteUtstyr(this.props.match.params.utstyr_id,
+    utstyrService.deleteUtstyr(
+      this.props.match.params.utstyr_id,
       this.type_utstyr,
       this.beskrivelse,
       this.pris,

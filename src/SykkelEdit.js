@@ -33,7 +33,11 @@ export default class SykkelEdit extends Component {
                 <p />
                 <tr>
                   Ramme: <br />
-                  <input type="number" value={this.ramme} onChange={event => (this.ramme = event.target.value)} />
+                  <input
+                  type="number"
+                  value={this.ramme}
+                  onChange={event => (this.ramme = event.target.value)}
+                  />
                 </tr>
                 <p />
                 <tr>
@@ -59,13 +63,21 @@ export default class SykkelEdit extends Component {
                 <tr>
                   Timepris:
                   <br />{' '}
-                  <input type="number" value={this.timepris} onChange={event => (this.timepris = event.target.value)} />
+                  <input
+                  type="number"
+                  value={this.timepris}
+                  onChange={event => (this.timepris = event.target.value)}
+                  />
                 </tr>
                 <p />
                 <tr>
                   Dagspris:
                   <br />{' '}
-                  <input type="number" value={this.dagspris} onChange={event => (this.dagspris = event.target.value)} />
+                  <input
+                  type="number"
+                  value={this.dagspris}
+                  onChange={event => (this.dagspris = event.target.value)}
+                  />
                 </tr>
                 <p />
                 <tr>
@@ -81,14 +93,22 @@ export default class SykkelEdit extends Component {
                 <tr>
                   Modell:
                   <br />{' '}
-                  <input type="text" value={this.modell} onChange={event => (this.modell = event.target.value)} />
+                  <input
+                  type="text"
+                  value={this.modell}
+                  onChange={event => (this.modell = event.target.value)}
+                  />
                 </tr>
                 <p />
                 <tr>
                   <Row>
                     <Column left>
                       <button
-                        style={{ position: 'absolute', width: '80px', backgroundColor: 'peru', color: 'cornsilk' }}
+                        style={{ position:
+                          'absolute',
+                          width: '80px',
+                          backgroundColor: 'peru',
+                          color: 'cornsilk' }}
                         type="button"
                         onClick={this.save} // this.buttonClicked
                       >
