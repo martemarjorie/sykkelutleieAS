@@ -30,7 +30,7 @@ export default class UtstyrList extends Component {
                 <td>{utstyr.beskrivelse}</td>
                 <td>{utstyr.pris}</td>
                 <td>
-                  <NavLink to={'/utstyrer/' + 101 + '/edit'}>Endre</NavLink>
+                  <NavLink to={'/utstyrer/' + utstyr.utstyr_id + '/edit'}>Endre</NavLink>
                 </td>
               </tr>
             ))}
