@@ -19,8 +19,10 @@ export default class PersonList extends Component {
               <th>Etternavn</th>
               <th>Tlf</th>
               <th>Epost</th>
-              <th> </th>
-            </tr>
+              <th>
+              <NavLink to={'/persons/add'}>Legg til</NavLink>
+              </th>
+          </tr>
           </thead>
 
           {this.persons.map(person => (
@@ -37,7 +39,6 @@ export default class PersonList extends Component {
             </tbody>
           ))}
         </Table>
-        <NavLink to={'/persons/add'}>Legg til</NavLink>
       </Card>
     );
   }
