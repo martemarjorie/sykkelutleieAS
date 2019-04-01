@@ -24,7 +24,7 @@ class Clock extends React.Component {
   render() {
     return (
       <p>
-        Dato og klokken er {this.state.time}.
+        {this.state.time}.
       </p>
     );
   }
