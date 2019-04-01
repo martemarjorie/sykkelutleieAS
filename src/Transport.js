@@ -5,4 +5,8 @@ import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { personService } from './services';
 import { Card, Row, Column, NavBar, Button, Form } from './widgets';
 
-export default class TransportList extends Component {}
+export default class TransportList extends Component {
+  render() {
+    return <div>Test</div>;
+  }
+}
