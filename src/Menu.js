@@ -9,7 +9,7 @@ import { Container, Col, Row } from 'react-bootstrap';
 export default class Menu extends Component {
   render() {
     return (
-      <div style={{ height: '40px', backgroundColor: 'lightblue', paddingTop: '11px' }}>
+      <div style={{ height: '70px', backgroundColor: 'lightblue', paddingTop: '11px' }}>
         <Container>
           <Row>
             <Col>

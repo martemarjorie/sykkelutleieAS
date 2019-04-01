@@ -238,3 +238,25 @@ class UtstyrService {
 }
 
 export let utstyrService = new UtstyrService();
+
+/********** STEDER ************/
+
+class StedService {
+  getSteder(success) {
+    connection.query('select * from sted', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+
+  getSted(sted_navn, success) {
+    connection.query('select * from sted where sted_navn=?', [sted_navn], (error, results) => {
+      if (error) return console.error(error);
+
+      success(results[0]);
+    });
+  }
+}
+
+export let stedService = new StedService();
