@@ -189,7 +189,7 @@ export let bestillingService = new BestillingService();
 
 class UtstyrService {
   getUtstyrer(success) {
-    connection.query('select type_utstyr, beskrivelse, pris from utstyr', (error, results) => {
+    connection.query('select * from utstyr', (error, results) => {
       if (error) return console.error(error);
 
       success(results);
@@ -197,7 +197,7 @@ class UtstyrService {
   }
 
   getUtstyr(utstyr_id, success) {
-    connection.query('select * from bestillingsinfo where utstyr_id=?', [utstyr_id], (error, results) => {
+    connection.query('select * from utstyr where utstyr_id=?', [utstyr_id], (error, results) => {
       if (error) return console.error(error);
 
       success(results[0]);
