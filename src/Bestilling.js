@@ -17,6 +17,7 @@ export default class BestillingList extends Component {
   sykler = [];
   utstyrer = [];
   steder = [];
+  utsteder = [];
   persons = [];
   telefon = '';
   fornavn = '';
@@ -37,12 +38,17 @@ export default class BestillingList extends Component {
                 <Col>
                   <br />
                   Velg tlf nr:
+                  <br />
                   <select
                     id="kunder"
                     value={this.person_id}
                     onChange={e => (this.person_id = e.target.value)}
                     title="Velg kunde"
+                    required
                   >
+                    <option value="" disabled selected>
+                      ---
+                    </option>
                     {this.persons.map(person => (
                       <option key={person.person_id} value={this.persons.indexOf(person)}>
                         {person.tlf} - {person.fornavn}
@@ -58,10 +64,10 @@ export default class BestillingList extends Component {
               <Row>
                 <Col>
                   Fra:
-                  <input type="date" id="fradato" />
+                  <input type="date" id="fradato" required />
                   <br />
                   Til:
-                  <input type="date" id="tildato" />
+                  <input type="date" id="tildato" required />
                   <br />
                   <Button onClick={this.velgDato}>Velg</Button>
                 </Col>
@@ -76,7 +82,11 @@ export default class BestillingList extends Component {
                     value={this.sykkel_id}
                     onChange={e => (this.sykkel_id = e.target.value)}
                     title="Velg sykkel"
+                    required
                   >
+                    <option value="" disabled selected>
+                      ---
+                    </option>
                     {this.sykler.map(sykkel => (
                       <option key={sykkel.sykkel_id} value={this.sykler.indexOf(sykkel)}>
                         {sykkel.type_sykkel + ' ' + sykkel.modell}
@@ -95,6 +105,9 @@ export default class BestillingList extends Component {
                 <Col>
                   Velg utstyr:
                   <select id="utstyrValg" value={this.utstyr_id} onChange={e => (this.utstyr_id = e.target.value)}>
+                    <option value="" disabled selected>
+                      ---
+                    </option>
                     {this.utstyrer.map(utstyr => (
                       <option key={utstyr.utstyr_id} value={this.utstyrer.indexOf(utstyr)}>
                         {utstyr.type_utstyr + ' ' + utstyr.beskrivelse}
@@ -111,8 +124,31 @@ export default class BestillingList extends Component {
               <br />
               <Row>
                 <Col>
+                  Utleveringssted:
+                  <br />
+                  <select id="velgUtSted" title="Velg utleveringssted" required>
+                    <option value="" disabled selected>
+                      ---
+                    </option>
+                    <option id="Haugastøl">Haugastøl</option>
+                    <option id="Finse">Finse</option>
+                  </select>
+                  <br />
+                  <Button type="button" onClick={this.velgUtSted}>
+                    Velg
+                  </Button>
+                </Col>
+              </Row>
+              <br />
+              <br />
+              <Row>
+                <Col>
                   Innleveringssted:
-                  <select id="velgSted" title="Velg innleveringssted">
+                  <br />
+                  <select id="velgSted" title="Velg innleveringssted" required>
+                    <option value="" disabled selected>
+                      ---
+                    </option>
                     {this.steder.map(sted => (
                       <option key={sted.sted_navn}>{sted.sted_navn}</option>
                     ))}
@@ -125,7 +161,7 @@ export default class BestillingList extends Component {
               </Row>
             </Col>
             <Col>
-              <h2>Bestillingsoversikt</h2>
+              <h2>Kvittering</h2>
               <span id="viskunde">Kunden som er valgt:</span>
               <br />
               <br />
@@ -138,10 +174,15 @@ export default class BestillingList extends Component {
               <span id="visutstyr">Utstyr:</span>
               <br />
               <br />
+              <span id="visutsted">Utleveringssted:</span>
+              <br />
+              <br />
               <span id="visinnsted">Innleveringssted:</span>
               <br />
               <br />
-              <Button type="button">Bestill</Button>
+              <Button type="button" onClick={this.bestill}>
+                Bestill
+              </Button>
             </Col>
           </Row>
         </Container>
@@ -182,10 +223,22 @@ export default class BestillingList extends Component {
     console.log(this.valgtUtstyrer);
   }
 
+  velgUtSted() {
+    let Haugastøl = document.getElementById('Haugastøl').value;
+    let Finse = document.getElementById('Finse').value;
+    if (Haugastøl) {
+      document.getElementById('visutsted').innerHTML += '<br>' + Haugastøl;
+    } else {
+      document.getElementById('visutsted').innerHTML += '<br>' + Finse;
+    }
+  }
+
   leggTilSted() {
     let sted = document.getElementById('velgSted').value;
     document.getElementById('visinnsted').innerHTML += '<br>' + sted;
   }
+
+  bestill() {}
 
   mounted() {
     sykkelService.getSykler(sykler => {
@@ -203,10 +256,5 @@ export default class BestillingList extends Component {
         });
       });
     });
-  }
-
-  bruk() {
-    console.log(this.telefon);
-    this.fornavn = fornavn;
   }
 }
