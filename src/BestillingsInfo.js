@@ -3,7 +3,8 @@ import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { bestillingService } from './services';
-import { Card, Row, Column, NavBar, Button, Form } from './widgets';
+// import { Card, Row, Column, NavBar, Button, Form } from './widgets';
+import { Card, Row, Column, NavBar, Button } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 
 export default class BestillingsInfo extends Component {
@@ -11,7 +12,8 @@ export default class BestillingsInfo extends Component {
 
   render() {
     return (
-      <Card title="Bestillingsoversikt">
+      <Card>
+      <Card.Title>Bestillingsoversikt</Card.Title>
         <Table responsive hover>
           <thead>
             <tr>
@@ -23,6 +25,7 @@ export default class BestillingsInfo extends Component {
               <th>Innlevering</th>
               <th>Fra dato</th>
               <th>Til dato</th>
+              <th></th>
             </tr>
           </thead>
 
@@ -48,6 +51,9 @@ export default class BestillingsInfo extends Component {
                     ('0' + (bestillingsinfo.innlev_tidspunkt.getMonth() + 1)).slice(-2) +
                     '.' +
                     bestillingsinfo.innlev_tidspunkt.getFullYear()}
+                </td>
+                <td>
+                  <NavLink to={'/bestilling/' + bestillingsinfo.bestilling_id + '/edit'}>Endre</NavLink>
                 </td>
               </tr>
             </tbody>

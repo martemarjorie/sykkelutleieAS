@@ -3,8 +3,10 @@ import { Component } from 'react-simplified';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Clock from './Clock';
 
-function CurrentDate() {
+{ /*
+  function CurrentDate() {
   let d = new Date();
     let dato = d.getFullYear() + '-' + (d.getMonth()+1) +
     '-' + d.getDate() +' '+ d.getHours()+':' +
@@ -15,18 +17,22 @@ function CurrentDate() {
     <p>{dato}</p>
   );
 }
+*/ }
 
 export default class Home extends Component {
   render() {
     return (
       <div>
         <Card className="text-center">
+          <Card.Img src="http://www.residence-merk.com/img/biking/mtb/15.jpg" alt="OH NO!" />
+          <Card.ImgOverlay>
             <Card.Body>
             <Card.Title style={{ fontSize: '2em' }} >SykkelUtleie AS</Card.Title>
-            <CurrentDate />
+            <Clock />
             { /* <Button variant="primary">Go somewhere</Button> */ }
           </Card.Body>
           <Card.Footer style={{ backgroundColor: 'lightblue', position: 'fixed', bottom: '0', width: '100%'}} ></Card.Footer>
+          </Card.ImgOverlay>
         </Card>
       </div>
     );

@@ -18,7 +18,9 @@ export default class UtstyrList extends Component {
               <th>Type utstyr</th>
               <th>Beskrivelse</th>
               <th>Pris</th>
-              <th> </th>
+              <th>
+                <NavLink to={'/utstyrer/add'}>Legg til ny</NavLink>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -35,7 +37,6 @@ export default class UtstyrList extends Component {
           </tbody>
         </Table>
         <br />
-        <NavLink to={'/utstyrer/add'}>Legg til ny</NavLink>
       </Card>
     );
   }

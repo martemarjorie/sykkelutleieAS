@@ -5,7 +5,7 @@ import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { utstyrService } from './services';
 import { Card, Row, Column, NavBar, Button, Form } from './widgets';
 
-export default class PersonEdit extends Component {
+export default class UtstyrEdit extends Component {
   type_utstyr = '';
   beskrivelse = '';
   pris = '';
@@ -37,7 +37,12 @@ export default class PersonEdit extends Component {
                 <p />
                 <tr>
                   Pris:
-                  <br /> <input type="number" value={this.pris} onChange={event => (this.pris = event.target.value)} />
+                  <br />{' '}
+                  <input
+                  type="number"
+                  value={this.pris}
+                  onChange={event => (this.pris = event.target.value)}
+                  />
                 </tr>
                 <p />
                 <tr>
@@ -90,15 +95,27 @@ export default class PersonEdit extends Component {
   }
 
   save() {
-    utstyrService.updateUtstyr(this.props.match.params.utstyr_id, this.type_utstyr, this.beskrivelse, this.pris, () => {
-      history.push('/utstyrer');
-    });
+    utstyrService.updateUtstyr(
+      this.props.match.params.utstyr_id,
+      this.type_utstyr,
+      this.beskrivelse,
+      this.pris,
+      () => {
+        history.push('/utstyrer');
+      }
+    );
   }
 
   delete() {
-    utstyrService.deleteUtstyr(this.props.match.params.utstyr_id, this.type_utstyr, this.beskrivelse, this.pris, () => {
-      history.push('/utstyrer');
-    });
+    utstyrService.deleteUtstyr(
+      this.props.match.params.utstyr_id,
+      this.type_utstyr,
+      this.beskrivelse,
+      this.pris,
+      () => {
+        history.push('/utstyrer');
+      }
+    );
   }
 
   //  buttonClicked() {

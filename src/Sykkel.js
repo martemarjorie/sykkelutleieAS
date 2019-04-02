@@ -19,7 +19,9 @@ export default class SykkelList extends Component {
               <th>Timepris</th>
               <th>Dagspris</th>
               <th>Modell</th>
-              <th> </th>
+              <th>
+                <NavLink to={'/sykler/add'}>Legg til ny</NavLink>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -37,7 +39,6 @@ export default class SykkelList extends Component {
           </tbody>
         </Table>
         <br />
-        <NavLink to={'/sykler/add'}>Legg til ny</NavLink>
       </Card>
     );
   }

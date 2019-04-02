@@ -20,7 +20,7 @@ export default class PersonList extends Component {
               <th>Tlf</th>
               <th>Epost</th>
               <th>
-              <NavLink to={'/persons/add'}>Legg til</NavLink>
+                <NavLink to={'/persons/add'}>Legg til</NavLink>
               </th>
           </tr>
           </thead>
