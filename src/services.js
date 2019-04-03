@@ -49,6 +49,18 @@ class PersonService {
       }
     );
   }
+
+  searchPerson(input, success) {
+    connection.query(
+      'select fornavn, etternavn, tlf, epost from person where fornavn like ? or etternavn like ? or tlf like ? or epost like ?',
+       [input + '%', input + '%', input + '%', input + '%'],
+       (error, results) => {
+        if (error) return console.error(error);
+
+        success(results);
+      }
+    );
+  }
 }
 export let personService = new PersonService();
 
@@ -132,6 +144,17 @@ class SykkelService {
         if (error) return console.error(error);
 
         success();
+      }
+    );
+  }
+  searchSykkel(input, success) {
+    connection.query(
+      'select type_sykkel, timepris, dagspris, modell from sykkel where type_sykkel like ? or timepris like ? or dagspris like ? or modell like ?',
+       [input + '%', input + '%', input + '%', input + '%'],
+       (error, results) => {
+        if (error) return console.error(error);
+
+        success(results);
       }
     );
   }
@@ -257,6 +280,17 @@ class UtstyrService {
         if (error) return console.error(error);
 
         success();
+      }
+    );
+  }
+  searchUtstyr(input, success) {
+    connection.query(
+      'select type_utstyr, beskrivelse, pris from utstyr where type_utstyr like ? or beskrivelse like ? or pris like ?',
+       [input + '%', input + '%', input + '%'],
+       (error, results) => {
+        if (error) return console.error(error);
+
+        success(results);
       }
     );
   }
