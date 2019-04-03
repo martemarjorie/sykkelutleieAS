@@ -12,6 +12,7 @@ export default class PersonList extends Component {
   render() {
     return (
       <Card title="Kundeliste">
+      <input type="text" id="sok" onChange={this.sokKunde}/>
         <Table responsive hover>
           <thead>
             <tr>
@@ -43,6 +44,15 @@ export default class PersonList extends Component {
     );
   }
 
+  sokKunde() {
+    if (document.getElementById("sok").value.length === 0) {
+    personService.getPersons(persons => {
+      this.persons = persons;
+    });
+  } else {personService.searchPerson(document.getElementById("sok").value, persons => {
+    this.persons = persons;
+  }); }
+  }
   mounted() {
     personService.getPersons(persons => {
       this.persons = persons;
