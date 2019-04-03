@@ -77,6 +77,7 @@ export default class BestillingList extends Component {
               <Row>
                 <Col>
                   Velg sykler:
+                  <br />
                   <select
                     id="sykkelValg"
                     value={this.sykkel_id}
@@ -104,6 +105,7 @@ export default class BestillingList extends Component {
               <Row>
                 <Col>
                   Velg utstyr:
+                  <br />
                   <select id="utstyrValg" value={this.utstyr_id} onChange={e => (this.utstyr_id = e.target.value)}>
                     <option value="" disabled selected>
                       ---

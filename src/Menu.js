@@ -39,6 +39,11 @@ export default class Menu extends Component {
             </NavLink>
           </Nav.Link>
           <Nav.Link>
+            <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/bestillingsinfoer">
+              Bestillingsoversikt
+            </NavLink>
+          </Nav.Link>
+          <Nav.Link>
             <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/transport">
               Transport
             </NavLink>
