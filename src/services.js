@@ -187,24 +187,49 @@ class BestillingService {
     );
   }
 
-  updateBestillingsinfo(bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf, success) {
+  updateBestillingsinfo(
+    bestilling_id,
+    type_sykkel,
+    modell,
+    utlev_tidspunkt,
+    innlev_tidspunkt,
+    utlev_sted,
+    innlev_sted,
+    fornavn,
+    tlf,
+    success
+  ) {
     connection.query(
-      'update bestillingsinfo set bestilling_id=?, type_sykkel=?, modell=?, utlev_sted=?, innlev_sted=?, fornavn=?, tlf=? where bestilling_id=?',
-      [bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf],
+      'update bestilling set bestilling_id=?, utlev_tidspunkt=?, innlev_tidspunkt=?, utlev_sted=?, innlev_sted=? where bestilling_id=?',
+      [bestilling_id, utlev_tidspunkt, innlev_tidspunkt, utlev_sted, innlev_sted],
       (error, results) => {
         if (error) return console.error(error);
 
         success();
       }
     );
-  }
-  deleteBestillingsinfo(bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf, success) {
-    connection.query('delete * from bestillingsinfo where bestilling_id=?', [bestilling_id], (error, results) => {
+    connection.query(
+      'update sykkel set type_sykkel=?, modell=? where sykkel_id=?',
+      [type_sykkel, modell],
+      (error, results) => {
+        if (error) return console.error(error);
+
+        success();
+      }
+    );
+    connection.query('update person set fornavn=?, tlf=?', [fornavn, tlf], (error, results) => {
       if (error) return console.error(error);
 
       success();
     });
   }
+  /*  deleteBestillingsinfo(bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf, success) {
+    connection.query('delete * from bestillingsinfo where bestilling_id=?', [bestilling_id], (error, results) => {
+      if (error) return console.error(error);
+
+      success();
+    });
+  } */
 }
 export let bestillingService = new BestillingService();
 

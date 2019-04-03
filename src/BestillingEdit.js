@@ -79,11 +79,7 @@ export default class BestillingEdit extends Component {
                 <tr>
                   Fornavn:
                   <br />{' '}
-                  <input
-                    type="text"
-                    value={this.innlev_tidspunkt}
-                    onChange={event => (this.innlev_tidspunkt = event.target.value)}
-                  />
+                  <input type="text" value={this.fornavn} onChange={event => (this.fornavn = event.target.value)} />
                 </tr>
                 <p />
                 <tr>
@@ -128,7 +124,7 @@ export default class BestillingEdit extends Component {
   }
 
   mounted() {
-    bestillingService.getBestillingsinfoer(this.props.match.params.bestilling_id, bestillingsinfo => {
+    bestillingService.getBestillingsinfo(this.props.match.params.bestilling_id, bestillingsinfo => {
       this.type_sykkel = bestillingsinfo.type_sykkel;
       this.modell = bestillingsinfo.modell;
       this.utlev_tidspunkt = bestillingsinfo.utlev_tidspunkt;
