@@ -13,7 +13,7 @@ export default class BestillingsInfo extends Component {
   render() {
     return (
       <Card>
-      <Card.Title>Bestillingsoversikt</Card.Title>
+        <Card.Title>Bestillingsoversikt</Card.Title>
         <Table responsive hover>
           <thead>
             <tr>
@@ -25,7 +25,7 @@ export default class BestillingsInfo extends Component {
               <th>Innlevering</th>
               <th>Fra dato</th>
               <th>Til dato</th>
-              <th></th>
+              <th />
             </tr>
           </thead>
 
@@ -53,7 +53,7 @@ export default class BestillingsInfo extends Component {
                     bestillingsinfo.innlev_tidspunkt.getFullYear()}
                 </td>
                 <td>
-                  <NavLink to={'/bestilling/' + bestillingsinfo.bestilling_id + '/edit'}>Endre</NavLink>
+                  <NavLink to={'/bestillingsinfoer/' + bestillingsinfo.bestilling_id + '/edit'}>Endre</NavLink>
                 </td>
               </tr>
             </tbody>

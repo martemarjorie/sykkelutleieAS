@@ -164,7 +164,7 @@ class BestillingService {
     );
   }
 
-  updateBestillingsinfoer(bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf, success) {
+  updateBestillingsinfo(bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf, success) {
     connection.query(
       'update bestillingsinfo set bestilling_id=?, type_sykkel=?, modell=?, utlev_sted=?, innlev_sted=?, fornavn=?, tlf=? where bestilling_id=?',
       [bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf],
@@ -175,7 +175,7 @@ class BestillingService {
       }
     );
   }
-  deleteBestillingsinfoer(bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf, success) {
+  deleteBestillingsinfo(bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf, success) {
     connection.query('delete * from bestillingsinfo where bestilling_id=?', [bestilling_id], (error, results) => {
       if (error) return console.error(error);
 
@@ -260,3 +260,52 @@ class StedService {
 }
 
 export let stedService = new StedService();
+
+/********** FRAKT ************/
+
+class FraktService {
+  getFrakter(success) {
+    connection.query(
+      'SELECT type_sykkel, modell, fra_sted, til_sted, frakt_dato, status FROM frakt INNER JOIN frakt_sykkel ON (frakt.frakt_id = frakt_sykkel.frakt_id) INNER JOIN sykkel ON (frakt_sykkel.sykkel_id = sykkel.sykkel_id)',
+      (error, results) => {
+        if (error) return console.error(error);
+
+        success(results);
+      }
+    );
+  }
+
+  getFrakt(frakt_id, success) {
+    connection.query(
+      'SELECT type_sykkel, modell, fra_sted, til_sted, frakt_dato, status FROM frakt INNER JOIN frakt_sykkel ON (frakt.frakt_id = frakt_sykkel.frakt_id) INNER JOIN sykkel ON (frakt_sykkel.sykkel_id = sykkel.sykkel_id WHERE frakt_id=?',
+      [frakt_id],
+      (error,
+      results => {
+        if (error) return console.log(error);
+
+        success(results[0]);
+      })
+    );
+  }
+
+  updateFrakt(frakt_id, type_sykkel, modell, fra_sted, til_sted, frakt_dato, status, success) {
+    connection.query(
+      'update frakt set frakt_id=?, type_sykkel=?, modell=?, fra_sted=?, til_sted=?, frakt_dato=?, status=? where frakt_id=?',
+      [frakt_id, type_sykkel, modell, fra_sted, til_sted, frakt_dato, status],
+      (error, results) => {
+        if (error) return console.error(error);
+
+        success();
+      }
+    );
+  }
+
+  deleteFrakt(frakt_id, type_sykkel, modell, fra_sted, til_sted, frakt_dato, status, success) {
+    connection.query('delete * from frakt where frakt_id=?', [frakt_id], (error, results) => {
+      if (error) return console.error(error);
+
+      success();
+    });
+  }
+}
+export let fraktService = new FraktService();

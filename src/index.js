@@ -26,7 +26,8 @@ import UtstyrAdd from './UtstyrAdd';
 import BestillingsInfo from './BestillingsInfo';
 import BestillingEdit from './BestillingEdit';
 
-import TransportList from './Transport';
+import FraktList from './Frakt';
+import FraktEdit from './FraktEdit';
 
 import createHashHistory from 'history/createHashHistory';
 const history = createHashHistory(); // Use history.push(...) to programmatically change path, for instance after successfully saving a student
@@ -48,7 +49,8 @@ ReactDOM.render(
       <Route path="/utstyrer/add" component={UtstyrAdd} />
       <Route exact path="/bestillingsinfoer" component={BestillingsInfo} />
       <Route path="/bestillingsinfoer/:bestilling_id/edit" component={BestillingEdit} />
-      <Route exact path="/transport" component={TransportList} />
+      <Route exact path="/frakter" component={FraktList} />
+      <Route path="/frakter/:frakt_id/edit" component={FraktEdit} />
     </div>
   </HashRouter>,
   document.getElementById('root')

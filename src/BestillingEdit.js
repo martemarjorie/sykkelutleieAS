@@ -17,76 +17,113 @@ export default class BestillingEdit extends Component {
 
   render() {
     return (
-      <form>
-        <table>
-          <tbody>
-            <tr>
-              <tr>
-                Type:{' '}
-                <input
-                  type="text"
-                  value={this.type_sykkel}
-                  onChange={event => (this.type_sykkel = event.target.value)}
-                />
-              </tr>
-              <tr>
-                Modell:
-                <input type="text" value={this.modell} onChange={event => (this.modell = event.target.value)} />
-              </tr>
-              <tr>
-                Utleveringstidspunkt:{' '}
-                <input
-                  type="number"
-                  value={this.utlev_tidspunkt}
-                  onChange={event => (this.utlev_tidspunkt = event.target.value)}
-                />
-              </tr>
-              <tr>
-                Innleveringstidspunkt:{' '}
-                <input
-                  type="text"
-                  value={this.innlev_tidspunkt}
-                  onChange={event => (this.innlev_tidspunkt = event.target.value)}
-                />
-              </tr>
-              <tr>
-                Utleveringssted:{' '}
-                <input type="text" value={this.utlev_sted} onChange={event => (this.utlev_sted = event.target.value)} />
-              </tr>
+      <div style={{ display: 'inline-block', marginLeft: '44%', marginTop: '3%' }}>
+        <form>
+          <table>
+            <tbody>
               <tr>
                 <tr>
-                  Innleveringssted:{' '}
+                  Type sykkel: <br />
+                  <input
+                    type="text"
+                    value={this.type_sykkel}
+                    onChange={event => (this.type_sykkel = event.target.value)}
+                  />
+                </tr>
+                <p />
+                <tr>
+                  Modell: <br />
+                  <input type="text" value={this.modell} onChange={event => (this.modell = event.target.value)} />
+                </tr>
+                <p />
+                <tr>
+                  Utleveringstidspunkt:
+                  <br />{' '}
+                  <input
+                    type="number"
+                    value={this.utlev_tidspunkt}
+                    onChange={event => (this.utlev_tidspunkt = event.target.value)}
+                  />
+                </tr>
+                <p />
+                <tr>
+                  Innleveringstidspunkt:
+                  <br />{' '}
+                  <input
+                    type="text"
+                    value={this.innlev_tidspunkt}
+                    onChange={event => (this.innlev_tidspunkt = event.target.value)}
+                  />
+                </tr>
+                <p />
+                <tr>
+                  Utleveringssted:
+                  <br />{' '}
+                  <input
+                    type="text"
+                    value={this.utlev_sted}
+                    onChange={event => (this.utlev_sted = event.target.value)}
+                  />
+                </tr>
+                <p />
+                <tr>
+                  Innleveringssted:
+                  <br />{' '}
                   <input
                     type="text"
                     value={this.innlev_sted}
                     onChange={event => (this.innlev_sted = event.target.value)}
                   />
                 </tr>
+                <p />
                 <tr>
-                  Fornavn:{' '}
-                  <input type="text" value={this.fornavn} onChange={event => (this.fornavn = event.target.value)} />
+                  Fornavn:
+                  <br />{' '}
+                  <input
+                    type="text"
+                    value={this.innlev_tidspunkt}
+                    onChange={event => (this.innlev_tidspunkt = event.target.value)}
+                  />
                 </tr>
+                <p />
                 <tr>
                   Tlf:
-                  <input type="text" value={this.tlf} onChange={event => (this.tlf = event.target.value)} />
+                  <br /> <input type="text" value={this.tlf} onChange={event => (this.tlf = event.target.value)} />
                 </tr>
-                <Row>
-                  <Column left>
-                    <button type="button" onClick={this.save}>
-                      Lagre
-                    </button>
-                  </Column>
-                  <Column right>
-                    <button type="button" onClick={this.delete}>
-                      Slett
-                    </button>
-                  </Column>
-                </Row>
+                <p />
+                <tr>
+                  <Row>
+                    <Column left>
+                      <button
+                        style={{ position: 'absolute', width: '80px', backgroundColor: 'peru', color: 'cornsilk' }}
+                        type="button"
+                        onClick={this.save} // this.buttonClicked
+                      >
+                        Lagre
+                      </button>
+                    </Column>
+                    <Column right>
+                      <button
+                        style={{
+                          position: 'absolute',
+                          width: '80px',
+                          backgroundColor: 'peru',
+                          color: 'cornsilk',
+                          marginLeft: '70px'
+                        }}
+                        type="button"
+                        onClick={this.delete} // this.buttonClicked
+                      >
+                        Slett
+                      </button>
+                    </Column>
+                  </Row>
+                </tr>
               </tr>
-            </tr>
-          </tbody>
-        </table>
-      </form>
+            </tbody>
+          </table>
+        </form>
+      </div>
     );
   }
 
@@ -104,7 +141,7 @@ export default class BestillingEdit extends Component {
   }
 
   save() {
-    bestillingService.updateBestillingsinfoer(
+    bestillingService.updateBestillingsinfo(
       this.props.match.params.bestilling_id,
       this.type_sykkel,
       this.modell,
@@ -121,7 +158,7 @@ export default class BestillingEdit extends Component {
   }
 
   delete() {
-    bestillingService.deleteBestillingsinfoer(
+    bestillingService.deleteBestillingsinfo(
       this.props.match.params.bestilling_id,
       this.type_sykkel,
       this.modell,
@@ -137,3 +174,10 @@ export default class BestillingEdit extends Component {
     );
   }
 }
+
+/////////////////////////////////////////////
+/////////////////////////////////////////////
+/////////////////////////////////////////////
+/////////////////////////////////////////////
+/////////////////////////////////////////////
+/////////////////////////////////////////////
