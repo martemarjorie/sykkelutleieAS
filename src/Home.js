@@ -5,22 +5,6 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Clock from './Clock';
 
-{
-  /*
-  function CurrentDate() {
-  let d = new Date();
-    let dato = d.getFullYear() + '-' + (d.getMonth()+1) +
-    '-' + d.getDate() +' '+ d.getHours()+':' +
-    d.getMinutes()+':'+ d.getSeconds();
-
-
-  return (
-    <p>{dato}</p>
-  );
-}
-*/
-}
-
 export default class Home extends Component {
   render() {
     return (
