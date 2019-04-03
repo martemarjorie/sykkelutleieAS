@@ -194,7 +194,7 @@ class BestillingService {
         success();
       }
     );
-    connection.query('update person set fornavn=?, tlf=?', [fornavn, tlf], (error, results) => {
+    connection.query('update person set fornavn=?, tlf=? where person_id=?', [fornavn, tlf], (error, results) => {
       if (error) return console.error(error);
 
       success();
