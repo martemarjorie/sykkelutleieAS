@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
-import { personService } from './services';
 import { Container, Col, Row } from 'react-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -19,7 +18,7 @@ export default class Menu extends Component {
             </NavLink>
           </Nav.Link>
           <Nav.Link>
-            <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/bestillinger">
+            <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/nybestilling">
               Ny bestilling
             </NavLink>
           </Nav.Link>
@@ -39,10 +38,17 @@ export default class Menu extends Component {
             </NavLink>
           </Nav.Link>
           <Nav.Link>
-            <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/bestillingsinfoer">
+            <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/bestillinger">
               Bestillingsoversikt
             </NavLink>
           </Nav.Link>
+
+          <Nav.Link>
+            <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/reperasjon">
+              Reperasjoner
+            </NavLink>
+          </Nav.Link>
+
           <Nav.Link>
             <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/transport">
               Transport

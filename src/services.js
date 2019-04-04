@@ -1,5 +1,23 @@
 import { connection } from './mysql_connection';
 
+/******* NY BESTILLING *******/
+
+class BestillingService {
+  addBestilling(bestilling_id, person_id, utlev_tidspunkt, innlev_tidspunkt, utlev_sted, innlev_sted, success) {
+    connection.query(
+      'insert into bestilling (bestilling_id, person_id,  utlev_tidspunkt, innlev_tidspunkt, utlev_sted, innlev_sted) values (?, ?, ?, ?, ?, ?)',
+      [bestilling_id, person_id, utlev_tidspunkt, innlev_tidspunkt, utlev_sted, innlev_sted],
+      (error, results) => {
+        if (error) return console.error(error);
+
+        success();
+      }
+    );
+  }
+}
+
+export let bestillingService = new BestillingService();
+
 /****** PERSON *******/
 
 class PersonService {
@@ -138,12 +156,12 @@ class SykkelService {
 }
 export let sykkelService = new SykkelService();
 
-/***** BESTILLING *****/
+/***** BESTILLINGER ****/
 
-class BestillingService {
-  getBestillingsinfoer(success) {
+class BestillingerService {
+  getBestillinger(success) {
     connection.query(
-      'select bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, innlev_tidspunkt, utlev_tidspunkt, fornavn, tlf from bestillingsinfo',
+      'select bestilling.bestilling_id,bestilling.person_id, fornavn, tlf, type_sykkel, modell, utlev_sted, innlev_sted, utlev_tidspunkt, innlev_tidspunkt from bestilling, person, sykkel, leid_sykkel where person.person_id = bestilling.person_id and sykkel.sykkel_id = leid_sykkel.sykkel_id and bestilling.bestilling_id = leid_sykkel.bestilling_id',
       (error, results) => {
         if (error) return console.error(error);
 
@@ -152,22 +170,10 @@ class BestillingService {
     );
   }
 
-  getBestillingsinfo(bestilling_id, success) {
+  updateBestillinger(bestilling_id, utlev_tidspunkt, innlev_tidspunkt, success) {
     connection.query(
-      'select bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf from bestillingsinfo where bestilling_id=?',
-      [bestilling_id],
-      (error, results) => {
-        if (error) return console.error(error);
-
-        success(results[0]);
-      }
-    );
-  }
-
-  updateBestillingsinfoer(bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf, success) {
-    connection.query(
-      'update bestillingsinfo set bestilling_id=?, type_sykkel=?, modell=?, utlev_sted=?, innlev_sted=?, fornavn=?, tlf=? where bestilling_id=?',
-      [bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf],
+      'update bestilling set utlev_tidspunkt=?, innlev_tidspunkt=? where bestilling_id=?',
+      [utlev_tidspunkt, innlev_tidspunkt, bestilling_id],
       (error, results) => {
         if (error) return console.error(error);
 
@@ -175,15 +181,8 @@ class BestillingService {
       }
     );
   }
-  deleteBestillingsinfoer(bestilling_id, type_sykkel, modell, utlev_sted, innlev_sted, fornavn, tlf, success) {
-    connection.query('delete * from bestillingsinfo where bestilling_id=?', [bestilling_id], (error, results) => {
-      if (error) return console.error(error);
-
-      success();
-    });
-  }
 }
-export let bestillingService = new BestillingService();
+export let bestillingerService = new BestillingerService();
 
 /********** UTSTYR ************/
 
@@ -260,3 +259,25 @@ class StedService {
 }
 
 export let stedService = new StedService();
+
+/********** REPERASJON ************/
+
+class RepService {
+  getReps(success) {
+    connection.query('select * from reperasjon', (error, results) => {
+      if (error) return console.error(error);
+
+      success(results);
+    });
+  }
+
+  getRep(reperasjons_id, success) {
+    connection.query('select * from reperasjon where reperasjons_id=?', [reperasjons_id], (error, results) => {
+      if (error) return console.error(error);
+
+      success(results[0]);
+    });
+  }
+}
+
+export let repService = new RepService();
