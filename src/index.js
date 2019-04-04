@@ -9,7 +9,7 @@ import Menu from './Menu';
 
 import Home from './Home';
 
-import BestillingList from './Bestilling';
+import NyBestilling from './Nybestilling';
 
 import PersonList from './Person';
 import PersonEdit from './PersonEdit';
@@ -23,10 +23,12 @@ import UtstyrList from './Utstyr';
 import UtstyrEdit from './UtstyrEdit';
 import UtstyrAdd from './UtstyrAdd';
 
-import BestillingsInfo from './BestillingsInfo';
-import BestillingEdit from './BestillingEdit';
+import BestillingsList from './BestillingsInfo';
+import BestillingerEdit from './BestillingEdit';
 
 import TransportList from './Transport';
+
+import RepList from './reperasjon';
 
 import createHashHistory from 'history/createHashHistory';
 const history = createHashHistory(); // Use history.push(...) to programmatically change path, for instance after successfully saving a student
@@ -36,7 +38,7 @@ ReactDOM.render(
     <div>
       <Menu />
       <Route exact path="/" component={Home} />
-      <Route exact path="/bestillinger" component={BestillingList} />
+      <Route exact path="/nybestilling" component={NyBestilling} />
       <Route exact path="/persons" component={PersonList} />
       <Route path="/persons/:person_id/edit" component={PersonEdit} />
       <Route path="/persons/add" component={PersonAdd} />
@@ -46,9 +48,10 @@ ReactDOM.render(
       <Route exact path="/utstyrer" component={UtstyrList} />
       <Route path="/utstyrer/:utstyr_id/edit" component={UtstyrEdit} />
       <Route path="/utstyrer/add" component={UtstyrAdd} />
-      <Route exact path="/bestillingsinfoer" component={BestillingsInfo} />
-      <Route path="/bestillingsinfoer/:bestilling_id/edit" component={BestillingEdit} />
+      <Route exact path="/bestillinger" component={BestillingsList} />
+      <Route path="/bestillinger/:bestilling_id/edit" component={BestillingerEdit} />
       <Route exact path="/transport" component={TransportList} />
+      <Route exact path="/reperasjon" component={RepList} />
     </div>
   </HashRouter>,
   document.getElementById('root')
