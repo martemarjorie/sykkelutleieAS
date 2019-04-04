@@ -12,7 +12,7 @@ export default class PersonList extends Component {
   render() {
     return (
       <Card title="Kundeliste">
-      <input type="text" id="sok" onChange={this.sokKunde}/>
+      <input type="text" id="sok" onChange={this.sokKunde} placeholder="Søk etter kunde"/>
         <Table responsive hover>
           <thead>
             <tr>

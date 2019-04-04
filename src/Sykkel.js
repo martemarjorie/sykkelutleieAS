@@ -12,7 +12,7 @@ export default class SykkelList extends Component {
   render() {
     return (
       <Card title="Sykler">
-      <input type="text" id="sok" onChange={this.sokSykkel}/>
+      <input type="text" id="sok" onChange={this.sokSykkel} placeholder="Søk etter sykkel"/>
         <Table responsive hover>
           <thead>
             <tr>

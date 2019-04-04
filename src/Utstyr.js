@@ -12,7 +12,7 @@ export default class UtstyrList extends Component {
   render() {
     return (
       <Card title="Utstyrsliste">
-      <input type="text" id="sok" onChange={this.sokUtstyr}/>
+      <input type="text" id="sok" onChange={this.sokUtstyr} placeholder="Søk etter utstyr"/>
         <Table responsive hover>
           <thead>
             <tr>
