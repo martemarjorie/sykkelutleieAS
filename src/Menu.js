@@ -44,14 +44,14 @@ export default class Menu extends Component {
           </Nav.Link>
 
           <Nav.Link>
-            <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/reperasjon">
+            <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/reps">
               Reperasjoner
             </NavLink>
           </Nav.Link>
 
           <Nav.Link>
-            <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/transport">
-              Transport
+            <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/frakter">
+              Frakt
             </NavLink>
           </Nav.Link>
         </Nav>

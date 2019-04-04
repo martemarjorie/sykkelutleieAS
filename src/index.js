@@ -51,8 +51,9 @@ ReactDOM.render(
       <Route path="/utstyrer/add" component={UtstyrAdd} />
       <Route exact path="/bestillinger" component={BestillingsList} />
       <Route path="/bestillinger/:bestilling_id/edit" component={BestillingerEdit} />
-      <Route exact path="/transport" component={TransportList} />
-      <Route exact path="/reperasjon" component={RepList} />
+      <Route exact path="/frakter" component={FraktList} />
+      <Route path="/frakter/:frakt_id/edit" component={FraktEdit} />
+      <Route exact path="/reps" component={RepList} />
     </div>
   </HashRouter>,
   document.getElementById('root')
