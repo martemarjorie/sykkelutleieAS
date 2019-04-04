@@ -12,6 +12,7 @@ export default class SykkelList extends Component {
   render() {
     return (
       <Card title="Sykler">
+      <input type="text" id="sok" onChange={this.sokSykkel} placeholder="Søk etter sykkel"/>
         <Table responsive hover>
           <thead>
             <tr>
@@ -43,6 +44,15 @@ export default class SykkelList extends Component {
     );
   }
 
+  sokSykkel() {
+    if (document.getElementById("sok").value.length === 0) {
+    sykkelService.getSykkel(sykler => {
+      this.sykler = sykler;
+    });
+  } else {sykkelService.searchSykkel(document.getElementById("sok").value, sykler => {
+    this.sykler = sykler;
+  }); }
+  }
   mounted() {
     sykkelService.getSykler(sykler => {
       this.sykler = sykler;

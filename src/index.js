@@ -26,7 +26,8 @@ import UtstyrAdd from './UtstyrAdd';
 import BestillingsList from './BestillingsInfo';
 import BestillingerEdit from './BestillingEdit';
 
-import TransportList from './Transport';
+import FraktList from './Frakt';
+import FraktEdit from './FraktEdit';
 
 import RepList from './reperasjon';
 

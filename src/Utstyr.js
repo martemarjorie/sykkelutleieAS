@@ -12,6 +12,7 @@ export default class UtstyrList extends Component {
   render() {
     return (
       <Card title="Utstyrsliste">
+      <input type="text" id="sok" onChange={this.sokUtstyr} placeholder="Søk etter utstyr"/>
         <Table responsive hover>
           <thead>
             <tr>
@@ -39,6 +40,16 @@ export default class UtstyrList extends Component {
         <br />
       </Card>
     );
+  }
+
+  sokUtstyr() {
+    if (document.getElementById("sok").value.length === 0) {
+    utstyrService.getUtstyr(utstyrer => {
+      this.utstyrer = utstyrer;
+    });
+  } else {utstyrService.searchUtstyr(document.getElementById("sok").value, utstyrer => {
+    this.utstyrer = utstyrer;
+  }); }
   }
 
   mounted() {
