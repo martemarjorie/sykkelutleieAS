@@ -3,8 +3,9 @@ import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { personService } from './services';
-import { Card, Row, Column, NavBar, Button, Form } from './widgets';
+import { Card, Row, Column, NavBar, Form } from './widgets';
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 
 export default class PersonList extends Component {
   persons = [];
@@ -12,7 +13,9 @@ export default class PersonList extends Component {
   render() {
     return (
       <Card title="Kundeliste">
-      <input type="text" id="sok" onChange={this.sokKunde} placeholder="Søk etter kunde"/>
+        <input type="text" id="sok" onChange={this.sokKunde} placeholder="Søk..." />
+        <br />
+        <br />
         <Table responsive hover>
           <thead>
             <tr>
@@ -23,7 +26,7 @@ export default class PersonList extends Component {
               <th>
                 <NavLink to={'/persons/add'}>Legg til</NavLink>
               </th>
-          </tr>
+            </tr>
           </thead>
 
           {this.persons.map(person => (
@@ -34,6 +37,7 @@ export default class PersonList extends Component {
                 <td>{person.tlf}</td>
                 <td>{person.epost}</td>
                 <td>
+                  <Button>Endre</Button>
                   <NavLink to={'/persons/' + person.person_id + '/edit'}>Endre</NavLink>
                 </td>
               </tr>
@@ -45,13 +49,15 @@ export default class PersonList extends Component {
   }
 
   sokKunde() {
-    if (document.getElementById("sok").value.length === 0) {
-    personService.getPersons(persons => {
-      this.persons = persons;
-    });
-  } else {personService.searchPerson(document.getElementById("sok").value, persons => {
-    this.persons = persons;
-  }); }
+    if (document.getElementById('sok').value.length === 0) {
+      personService.getPersons(persons => {
+        this.persons = persons;
+      });
+    } else {
+      personService.searchPerson(document.getElementById('sok').value, persons => {
+        this.persons = persons;
+      });
+    }
   }
   mounted() {
     personService.getPersons(persons => {

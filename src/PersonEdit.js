@@ -3,7 +3,10 @@ import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { personService } from './services';
-import { Card, Row, Column, NavBar, Button, Form } from './widgets';
+import { Card, Row, Column, NavBar } from './widgets';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 
 export default class PersonEdit extends Component {
   fornavn = '';
@@ -13,64 +16,56 @@ export default class PersonEdit extends Component {
 
   render() {
     return (
-      <div style={{ display: 'inline-block', marginLeft: '44%', marginTop: '3%' }}>
-        <form>
-          <table>
-            <tbody>
-              <tr>
-                <tr>
-                  Fornavn: <br />
-                  <input type="text" value={this.fornavn} onChange={event => (this.fornavn = event.target.value)} />
-                </tr>
-                <p />
-                <tr>
-                  Etternavn: <br />
-                  <input type="text" value={this.etternavn} onChange={event => (this.etternavn = event.target.value)} />
-                </tr>
-                <p />
-                <tr>
-                  Tlf:
-                  <br /> <input type="number" value={this.tlf} onChange={event => (this.tlf = event.target.value)} />
-                </tr>
-                <p />
-                <tr>
-                  Epost:
-                  <br /> <input type="text" value={this.epost} onChange={event => (this.epost = event.target.value)} />
-                </tr>
-                <p />
-                <tr>
-                  <Row>
-                    <Column left>
-                      <button
-                        style={{ position: 'absolute', width: '80px', backgroundColor: 'peru', color: 'cornsilk' }}
-                        type="button"
-                        onClick={this.save} // this.buttonClicked
-                      >
-                        Lagre
-                      </button>
-                    </Column>
-                    <Column right>
-                      <button
-                        style={{
-                          position: 'absolute',
-                          width: '80px',
-                          backgroundColor: 'peru',
-                          color: 'cornsilk',
-                          marginLeft: '70px'
-                        }}
-                        type="button"
-                        onClick={this.delete} // this.buttonClicked
-                      >
-                        Slett
-                      </button>
-                    </Column>
-                  </Row>
-                </tr>
-              </tr>
-            </tbody>
-          </table>
-        </form>
-      </div>
+      <Container style={{ width: '50%', marginTop: '3%' }}>
+        <Card title="Endre kunde">
+          <Form>
+            <Form.Group>
+              <Form.Label>Fornavn</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows="1"
+                value={this.fornavn}
+                onChange={event => (this.fornavn = event.target.value)}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Etternavn</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows="1"
+                value={this.etternavn}
+                onChange={event => (this.etternavn = event.target.value)}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Tlf</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows="1"
+                value={this.tlf}
+                onChange={event => (this.tlf = event.target.value)}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Epost</Form.Label>
+              <Form.Control
+                type="email"
+                rows="1"
+                value={this.epost}
+                onChange={event => (this.epost = event.target.value)}
+              />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            </Form.Group>
+          </Form>
+          <Button type="button" variant="primary" onClick={this.save}>
+            Lagre
+          </Button>
+
+          <Button type="button" variant="danger" onClick={this.delete}>
+            Slett
+          </Button>
+        </Card>
+      </Container>
     );
   }
 

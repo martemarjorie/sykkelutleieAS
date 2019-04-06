@@ -3,8 +3,9 @@ import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { sykkelService } from './services';
-import { Card, Row, Column, NavBar, Button, Form } from './widgets';
+import { Card, Row, Column, NavBar, Form } from './widgets';
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 
 export default class SykkelList extends Component {
   sykler = [];
@@ -12,7 +13,9 @@ export default class SykkelList extends Component {
   render() {
     return (
       <Card title="Sykler">
-      <input type="text" id="sok" onChange={this.sokSykkel} placeholder="Søk etter sykkel"/>
+        <input type="text" id="sok" onChange={this.sokSykkel} placeholder="Søk..." />
+        <br />
+        <br />
         <Table responsive hover>
           <thead>
             <tr>
@@ -20,6 +23,8 @@ export default class SykkelList extends Component {
               <th>Timepris</th>
               <th>Dagspris</th>
               <th>Modell</th>
+              <th>Tilhørighet</th>
+
               <th>
                 <NavLink to={'/sykler/add'}>Legg til ny</NavLink>
               </th>
@@ -32,7 +37,9 @@ export default class SykkelList extends Component {
                 <td>{sykkel.timepris}</td>
                 <td>{sykkel.dagspris}</td>
                 <td>{sykkel.modell}</td>
+                <td>{sykkel.tilhorer_sted}</td>
                 <td>
+                  <Button>Endre</Button>
                   <NavLink to={'/sykler/' + sykkel.sykkel_id + '/edit'}>Endre</NavLink>
                 </td>
               </tr>
@@ -45,13 +52,15 @@ export default class SykkelList extends Component {
   }
 
   sokSykkel() {
-    if (document.getElementById("sok").value.length === 0) {
-    sykkelService.getSykkel(sykler => {
-      this.sykler = sykler;
-    });
-  } else {sykkelService.searchSykkel(document.getElementById("sok").value, sykler => {
-    this.sykler = sykler;
-  }); }
+    if (document.getElementById('sok').value.length === 0) {
+      sykkelService.getSykkel(sykler => {
+        this.sykler = sykler;
+      });
+    } else {
+      sykkelService.searchSykkel(document.getElementById('sok').value, sykler => {
+        this.sykler = sykler;
+      });
+    }
   }
   mounted() {
     sykkelService.getSykler(sykler => {

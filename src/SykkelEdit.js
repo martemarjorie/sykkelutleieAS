@@ -2,141 +2,119 @@ import * as React from 'react';
 import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
-import { sykkelService } from './services';
-import { Card, Row, Column, NavBar, Button, Form } from './widgets';
+import { sykkelService, stedService } from './services';
+import { Card, Row, Column, NavBar } from './widgets';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 
 export default class SykkelEdit extends Component {
-  type_sykkel = '';
+  sykkeltyper = ['Tandem', 'Racer', 'Downhill', 'Barnesykkel']; //Begrenser valgene til disse
   ramme = '';
   hjul_storrelse = '';
   girsystem = '';
   timepris = '';
   dagspris = '';
+  steder = []; //Hentes fra database
   tilhorer_sted = '';
   modell = '';
+  type_sykkel = '';
 
   render() {
     return (
-      <div style={{ display: 'inline-block', marginLeft: '44%', marginTop: '3%' }}>
-        <form>
-          <table>
-            <tbody>
-              <tr>
-                <tr>
-                  Type: <br />
-                  <input
-                    type="text"
-                    value={this.type_sykkel}
-                    onChange={event => (this.type_sykkel = event.target.value)}
-                  />
-                </tr>
-                <p />
-                <tr>
-                  Ramme: <br />
-                  <input
-                  type="number"
-                  value={this.ramme}
-                  onChange={event => (this.ramme = event.target.value)}
-                  />
-                </tr>
-                <p />
-                <tr>
-                  Hjulstørrelse:
-                  <br />{' '}
-                  <input
-                    type="number"
-                    value={this.hjul_storrelse}
-                    onChange={event => (this.hjul_storrelse = event.target.value)}
-                  />
-                </tr>
-                <p />
-                <tr>
-                  Girsystem:
-                  <br />{' '}
-                  <input
-                    type="number"
-                    value={this.girsystem}
-                    onChange={event => (this.girsystem = event.target.value)}
-                  />
-                </tr>
-                <p />
-                <tr>
-                  Timepris:
-                  <br />{' '}
-                  <input
-                  type="number"
-                  value={this.timepris}
-                  onChange={event => (this.timepris = event.target.value)}
-                  />
-                </tr>
-                <p />
-                <tr>
-                  Dagspris:
-                  <br />{' '}
-                  <input
-                  type="number"
-                  value={this.dagspris}
-                  onChange={event => (this.dagspris = event.target.value)}
-                  />
-                </tr>
-                <p />
-                <tr>
-                  Tilhører:
-                  <br />{' '}
-                  <input
-                    type="text"
-                    value={this.tilhorer_sted}
-                    onChange={event => (this.tilhorer_sted = event.target.value)}
-                  />
-                </tr>
-                <p />
-                <tr>
-                  Modell:
-                  <br />{' '}
-                  <input
-                  type="text"
-                  value={this.modell}
-                  onChange={event => (this.modell = event.target.value)}
-                  />
-                </tr>
-                <p />
-                <tr>
-                  <Row>
-                    <Column left>
-                      <button
-                        style={{ position:
-                          'absolute',
-                          width: '80px',
-                          backgroundColor: 'peru',
-                          color: 'cornsilk' }}
-                        type="button"
-                        onClick={this.save} // this.buttonClicked
-                      >
-                        Lagre
-                      </button>
-                    </Column>
-                    <Column right>
-                      <button
-                        style={{
-                          position: 'absolute',
-                          width: '80px',
-                          backgroundColor: 'peru',
-                          color: 'cornsilk',
-                          marginLeft: '70px'
-                        }}
-                        type="button"
-                        onClick={this.delete} // this.buttonClicked
-                      >
-                        Slett
-                      </button>
-                    </Column>
-                  </Row>
-                </tr>
-              </tr>
-            </tbody>
-          </table>
-        </form>
-      </div>
+      <Container style={{ width: '50%', marginTop: '3%' }}>
+        <Card title="Endre sykkel">
+          <Form>
+            <Form.Group>
+              <Form.Label>Type</Form.Label>
+              <Form.Control
+                as="select"
+                value={this.type_sykkel}
+                selected
+                onChange={e => (this.type_sykkel = e.target.value)}
+              >
+                <option value={this.sykkeltyper[0]}>{this.sykkeltyper[0]}</option>
+                <option value={this.sykkeltyper[1]}>{this.sykkeltyper[1]}</option>
+                <option value={this.sykkeltyper[2]}>{this.sykkeltyper[2]}</option>
+                <option value={this.sykkeltyper[3]}>{this.sykkeltyper[3]}</option>
+              </Form.Control>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Modell</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows="1"
+                value={this.modell}
+                onChange={event => (this.modell = event.target.value)}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Ramme</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows="1"
+                value={this.ramme}
+                onChange={event => (this.ramme = event.target.value)}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Hjulstørrelse</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows="1"
+                value={this.hjul_storrelse}
+                onChange={event => (this.hjul_storrelse = event.target.value)}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Girsystem</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows="1"
+                value={this.girsystem}
+                onChange={event => (this.girsystem = event.target.value)}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Timepris</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows="1"
+                value={this.timepris}
+                onChange={event => (this.timepris = event.target.value)}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Dagspris</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows="1"
+                value={this.dagspris}
+                onChange={event => (this.dagspris = event.target.value)}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Tilhører sted</Form.Label>
+              <Form.Control
+                as="select"
+                selected
+                value={this.tilhorer_sted}
+                onChange={e => (this.tilhorer_sted = e.target.value)}
+              >
+                <option defaulValue={this.tilhorer_sted} />
+                {this.steder.map(sted => <option value={sted.sted_navn}>{sted.sted_navn}</option>)}
+              </Form.Control>
+            </Form.Group>
+          </Form>
+          <Button type="button" variant="primary" onClick={this.save}>
+            Lagre
+          </Button>
+
+          <Button type="button" variant="danger" onClick={this.delete}>
+            Slett
+          </Button>
+        </Card>
+      </Container>
     );
   }
 
@@ -151,6 +129,10 @@ export default class SykkelEdit extends Component {
       this.tilhorer_sted = sykkel.tilhorer_sted;
       this.modell = sykkel.modell;
     });
+
+    stedService.getSteder(steder => {
+      this.steder = steder;
+    });
   }
 
   save() {
@@ -164,6 +146,7 @@ export default class SykkelEdit extends Component {
       this.dagspris,
       this.tilhorer_sted,
       this.modell,
+
       () => {
         history.push('/sykler');
       }
@@ -173,13 +156,13 @@ export default class SykkelEdit extends Component {
   delete() {
     sykkelService.deleteSykkel(
       this.props.match.params.sykkel_id,
-      this.type_sykkel,
+      this.t,
       this.ramme,
       this.hjul_storrelse,
       this.girsystem,
       this.timepris,
       this.dagspris,
-      this.tilhorer_sted,
+      this.sted_navn,
       this.modell,
       () => {
         history.push('/sykler');
