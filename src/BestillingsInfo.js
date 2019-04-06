@@ -3,8 +3,8 @@ import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { bestillingerService } from './services';
-// import { Card, Row, Column, NavBar, Button, Form } from './widgets';
-import { Card, Row, Column, NavBar, Button } from 'react-bootstrap';
+import { Card, Row, Column, NavBar, Button, Form } from './widgets';
+
 import Table from 'react-bootstrap/Table';
 
 export default class BestillingsList extends Component {
@@ -12,8 +12,10 @@ export default class BestillingsList extends Component {
 
   render() {
     return (
-      <Card>
-        <Card.Title>Bestillingsoversikt</Card.Title>
+      <Card title="Bestillingsoversikt">
+        <input type="text" id="sok" onChange={this.sokBestilling} placeholder="Søk..." />
+        <br />
+        <br />
         <Table responsive hover>
           <thead>
             <tr>
@@ -22,6 +24,7 @@ export default class BestillingsList extends Component {
               <th>Tlf</th>
               <th>Type</th>
               <th>Modell</th>
+              <th>Utstyr</th>
               <th>Fra dato</th>
               <th>Til dato</th>
               <th>Utlevering</th>
@@ -38,6 +41,7 @@ export default class BestillingsList extends Component {
                 <td>{bestilling.tlf}</td>
                 <td>{bestilling.type_sykkel}</td>
                 <td>{bestilling.modell}</td>
+                <td>{bestilling.type_utstyr}</td>
                 <td>
                   {('0' + bestilling.utlev_tidspunkt.getDate()).slice(-2) +
                     '.' +
@@ -64,9 +68,22 @@ export default class BestillingsList extends Component {
       </Card>
     );
   }
+
   mounted() {
     bestillingerService.getBestillinger(bestillinger => {
       this.bestillinger = bestillinger;
     });
+  }
+
+  sokBestilling() {
+    if (document.getElementById('sok').value.length === 0) {
+      bestillingerService.getBestillinger(bestillinger => {
+        this.bestillinger = bestillinger;
+      });
+    } else {
+      bestillingerService.searchBestilling(document.getElementById('sok').value, bestillinger => {
+        this.bestillinger = bestillinger;
+      });
+    }
   }
 }

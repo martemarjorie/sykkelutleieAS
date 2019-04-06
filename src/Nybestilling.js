@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
-import { personService, sykkelService, stedService, bestillingService } from './services';
+import { personService, sykkelService, stedService, utstyrService, bestillingService } from './services';
+import { Card } from './widgets';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -16,12 +17,14 @@ export default class NyBestiling extends Component {
   persons = [];
   bestillinger = [];
   steder = [];
+  utstyrer = [];
 
-  utsted = ['-Ingen utlevering valgt-', 'Haugastøl', 'Finse'];
+  utsted = ['Haugastøl', 'Finse'];
 
   // Form values
   valgt_kunde = '';
   valgt_sykkel = '';
+  valgt_utstyr = '';
 
   fradato = '';
   tildato = '';
@@ -29,9 +32,12 @@ export default class NyBestiling extends Component {
   utleveringssted = '';
   innleveringssted = '';
 
+  errors_to_user = {};
+  status_message = '';
+
   render() {
     return (
-      <Container>
+      <Card title="Opprett bestilling">
         <Form>
           <Form.Group controlId="kunde">
             <Form.Label>Velg kunde</Form.Label>
@@ -69,6 +75,24 @@ export default class NyBestiling extends Component {
               ))}
             </Form.Control>
           </Form.Group>
+          <Form.Group controlId="sykkel">
+            <Form.Label>Velg utstyr</Form.Label>
+            <Form.Control
+              as="select"
+              value={this.utstyr_id}
+              onChange={e => (this.utstyr_id = e.target.value)}
+              title="Velg utstyr"
+            >
+              <option value="no-val" selected disabled hidden>
+                -Ingen utstyr valgt-
+              </option>
+              {this.utstyrer.map(utstyr => (
+                <option value={utstyr.utstyr_id}>
+                  {utstyr.type_utstyr}, {utstyr.beskrivelse}
+                </option>
+              ))}
+            </Form.Control>
+          </Form.Group>
           <Form.Row>
             <Form.Group as={Col}>
               <Form.Label>Fra dato</Form.Label>
@@ -86,9 +110,9 @@ export default class NyBestiling extends Component {
               value={this.utleveringssted}
               onChange={e => (this.utleveringssted = e.target.value)}
             >
+              <option value="">– Ingen utlevering valgt –</option>
               <option value={this.utsted[0]}>{this.utsted[0]}</option>
               <option value={this.utsted[1]}>{this.utsted[1]}</option>
-              <option value={this.utsted[1]}>{this.utsted[2]}</option>
             </Form.Control>
           </Form.Group>
           <Form.Group controlId="innsted">
@@ -98,17 +122,24 @@ export default class NyBestiling extends Component {
               value={this.innleveringssted}
               onChange={e => (this.innleveringssted = e.target.value)}
             >
-              <option value="no-val" selected disabled hidden>
+              <option value="no-val" selected disabeled hidden>
                 -Ingen innlevering valgt-
               </option>
               {this.steder.map(sted => <option value={sted.sted_navn}>{sted.sted_navn}</option>)}
             </Form.Control>
           </Form.Group>
         </Form>
+        <div>
+          {Object.keys(this.errors_to_user).map(input_key => (
+            <div>Du har ikke valgt {input_key + this.errors_to_user[input_key]}</div>
+          ))}
+        </div>
+        <br />
+
         <Button type="Button" onClick={this.SendBestilling}>
           Send bestilling
         </Button>
-      </Container>
+      </Card>
     );
   }
 
@@ -121,6 +152,10 @@ export default class NyBestiling extends Component {
 
         stedService.getSteder(steder => {
           this.steder = steder;
+
+          utstyrService.getUtstyrer(utstyrer => {
+            this.utstyrer = utstyrer;
+          });
         });
       });
     });
@@ -129,19 +164,64 @@ export default class NyBestiling extends Component {
   SendBestilling() {
     let utlev_tidspunkt = this.fradato;
     let innlev_tidspunkt = this.tildato;
-    let utlev_sted = this.utsted;
-    let innlev_sted = this.innleveringssted;
+
+    // Creating an object where an identifier for each intput field is
+    // assocated with the value provided by the user (if any).
+    let inputs = {
+      kunde: this.person_id,
+      sykkel: this.sykkel_id,
+      'en dato for utlevering': utlev_tidspunkt,
+      'en dato for innlevering': innlev_tidspunkt,
+      'et utleveringssted': this.utleveringssted,
+      'et innleveringssted': this.innleveringssted
+    };
+
+    // Validating user inputs
+    let validation_errors = this.validate_inputs(inputs);
+
+    // If validate_inputs detected any errors the length of validation_errors
+    // keys will be greater than zero. This means validation failed.
+    if (Object.keys(validation_errors).length > 0) {
+      console.log(validation_errors);
+      this.errors_to_user = validation_errors; // This object is used in the React component above to show the erros to the user
+      this.status_message = 'Failed';
+      return;
+    }
 
     bestillingService.addBestilling(
-      this.props.match.params.bestilling_id,
       this.person_id,
-      this.utlev_tidspunkt,
-      this.innlev_tidspunkt,
-      this.utlev_sted,
-      this.innlev_sted,
+      utlev_tidspunkt,
+      innlev_tidspunkt,
+      this.utleveringssted,
+      this.innleveringssted,
+      this.sykkel_id,
+      this.utstyr_id,
       () => {
-        history.push('/bestillinger');
+        window.history.push('/bestillinger');
       }
     );
+  }
+  validate_inputs(inputs) {
+    /*
+    Inputs is an object containing key value pairs, where the key is an
+    identifier for the input field, and the value is the value selected by
+    the user.
+    The keys of the inputs object is iterated over, and for each key we
+    check that the associated value is not an empty string, not null and
+    not undefined. If all of these criteria are met, an error message
+    is not recored in the validation_errors object.
+    Once all keys have been iterated over the validation_errors object is
+    returned. This can then be used to give feedback to the user in the GUI.
+    */
+    console.log(inputs);
+    let validation_errors = {};
+    for (let input_key in inputs) {
+      let input = inputs[input_key];
+      if (input === '' || input === null || typeof input === 'undefined') {
+        validation_errors[input_key] = ' ';
+      }
+    }
+
+    return validation_errors;
   }
 }
