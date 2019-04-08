@@ -3,7 +3,16 @@ import { connection } from './mysql_connection';
 /******* NY BESTILLING *******/
 
 class BestillingService {
-  addBestilling(person_id, utlev_tidspunkt, innlev_tidspunkt, utlev_sted, innlev_sted, sykkel_id, utstyr_id, success) {
+  addBestilling(
+    person_id,
+    utlev_tidspunkt,
+    innlev_tidspunkt,
+    utlev_sted,
+    innlev_sted,
+    sykkel_ids,
+    utstyr_ids,
+    success
+  ) {
     console.log(
       'Argumenter til addBestilling: ',
       person_id,
@@ -11,8 +20,8 @@ class BestillingService {
       innlev_tidspunkt,
       utlev_sted,
       innlev_sted,
-      sykkel_id,
-      utstyr_id
+      sykkel_ids,
+      utstyr_ids
     );
 
     connection.query(
@@ -21,21 +30,27 @@ class BestillingService {
       (error, results) => {
         if (error) return console.error(error);
         console.log(results);
-        connection.query(
-          'insert into leid_sykkel (bestilling_id, sykkel_id) values (?, ?)',
-          [results.insertId, sykkel_id],
-          (error, result) => {
-            if (error) return console.error('Error in the second query, error was: ' + error.message);
-            connection.query(
-              'insert into leid_utstyr (bestilling_id, utstyr_id) values (?, ?)',
-              [results.insertId, utstyr_id],
-              (error, result) => {
-                if (error) return console.error('Error in the third query, error was: ' + error.message);
-                success();
-              }
-            );
-          }
-        );
+
+        for (let utstyr_id of utstyr_ids) {
+          connection.query(
+            'insert into leid_utstyr (bestilling_id, utstyr_id) values (?, ?)',
+            [results.insertId, utstyr_id],
+            (error, result) => {
+              if (error) return console.error('Error in the third query, error was: ' + error.message);
+            }
+          );
+        }
+
+        for (let sykkel_id of sykkel_ids) {
+          connection.query(
+            'insert into leid_sykkel (bestilling_id, sykkel_id) values (?, ?)',
+            [results.insertId, sykkel_id],
+            (error, result) => {
+              if (error) return console.error('Error in the second query, error was: ' + error.message);
+            }
+          );
+        }
+        success();
       }
     );
   }
@@ -209,7 +224,7 @@ export let sykkelService = new SykkelService();
 class BestillingerService {
   getBestillinger(success) {
     connection.query(
-      'select b.bestilling_id, b.person_id, fornavn, tlf, type_sykkel, modell, type_utstyr, utlev_tidspunkt, innlev_tidspunkt, utlev_sted, innlev_sted from bestilling b left join person p on p.person_id = b.person_id left join leid_sykkel ls on ls.bestilling_id = b.bestilling_id left join leid_utstyr lu on lu.bestilling_id = b.bestilling_id left join sykkel s on ls.sykkel_id = s.sykkel_id left join utstyr u on lu.utstyr_id = u.utstyr_id order by utlev_tidspunkt',
+      'select b.bestilling_id, b.person_id, fornavn, tlf, type_sykkel, modell, type_utstyr, beskrivelse, utlev_tidspunkt, innlev_tidspunkt, utlev_sted, innlev_sted from bestilling b left join person p on p.person_id = b.person_id left join leid_sykkel ls on ls.bestilling_id = b.bestilling_id left join leid_utstyr lu on lu.bestilling_id = b.bestilling_id left join sykkel s on ls.sykkel_id = s.sykkel_id left join utstyr u on lu.utstyr_id = u.utstyr_id order by utlev_tidspunkt',
       (error, results) => {
         if (error) return console.error(error);
 
@@ -393,26 +408,12 @@ class FraktService {
     );
   }
 
-  getFrakt(frakt_id, success) {
-    connection.query(
-      'select * from frakt f, frakt_sykkel fs, sykkel s where f.frakt_id = fs.frakt_id and fs.sykkel_id = s.sykkel_id',
-      ([frakt_id],
-      error,
-      results => {
-        if (error) return console.log(error);
-
-        success(results[0]);
-      })
-    );
-  }
-
-  updateFrakt(fra_sted, til_sted, frakt_dato, status, success) {
+  updateFrakt(frakt_id, fra_sted, til_sted, frakt_dato, status, success) {
     connection.query(
       'update frakt set fra_sted=?, til_sted=?, frakt_dato=?, status=? where frakt_id=?',
-      [fra_sted, til_sted, frakt_dato, status],
+      [fra_sted, til_sted, frakt_dato, status, frakt_id],
       (error, results) => {
         if (error) return console.error(error);
-        console.log(results);
 
         success();
       }

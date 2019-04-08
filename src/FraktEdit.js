@@ -50,7 +50,8 @@ export default class FraktEdit extends Component {
             </Form.Group>
             <Form.Group>
               <Form.Label>Status</Form.Label>
-              <Form.Control as="select" value={this.status} selected onChange={e => (this.status = e.target.value)}>
+              <Form.Control as="select" value={this.status} onChange={e => (this.status = e.target.value)}>
+                <option value="" />
                 <option value={this.statuser[0]}>{this.statuser[0]}</option>
                 <option value={this.statuser[1]}>{this.statuser[1]}</option>
               </Form.Control>
@@ -65,6 +66,10 @@ export default class FraktEdit extends Component {
           </Button>
         </Card>
       </Container>
+
+      /*<Form.Control as="select" value={this.status} selected onChange={e => (this.status = e.target.value)}>
+        <option value={this.statuser[0]}>{this.statuser[0]}</option>
+        <option value={this.statuser[1]}>{this.statuser[1]}</option>*/
     );
   }
 
@@ -74,7 +79,7 @@ export default class FraktEdit extends Component {
       this.modell = frakt.modell;
       this.fra_sted = frakt.fra_sted;
       this.til_sted = frakt.til_sted;
-      this.fra_dato = frakt.fra_dato;
+      this.frakt_dato = frakt.frakt_dato;
       this.status = frakt.status;
     });
 
@@ -88,7 +93,7 @@ export default class FraktEdit extends Component {
       this.props.match.params.frakt_id,
       this.fra_sted,
       this.til_sted,
-      this.fra_dato,
+      this.frakt_dato,
       this.status,
       () => {
         history.push('/frakter');
@@ -103,7 +108,7 @@ export default class FraktEdit extends Component {
       this.modell,
       this.fra_sted,
       this.til_sted,
-      this.fra_dato,
+      this.frakt_dato,
       this.status,
       () => {
         history.push('/frakter');

@@ -14,7 +14,7 @@ export default class BestillingsList extends Component {
   render() {
     return (
       <Card>
-      <Card.Title>Bestillingsoversikt</Card.Title>
+        <Card.Title>Bestillingsoversikt</Card.Title>
         <input type="text" id="sok" onChange={this.sokBestilling} placeholder="Søk..." />
         <br />
         <br />
@@ -86,7 +86,7 @@ export default class BestillingsList extends Component {
       });
     }
   }
-  
+
   mounted() {
     bestillingerService.getBestillinger(bestillinger => {
       this.bestillinger = bestillinger;

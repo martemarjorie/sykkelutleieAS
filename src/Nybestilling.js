@@ -19,6 +19,9 @@ export default class NyBestiling extends Component {
   steder = [];
   utstyrer = [];
 
+  sykkel_ids = [];
+  utstyr_ids = [];
+
   utsted = ['Haugastøl', 'Finse'];
 
   // Form values
@@ -42,6 +45,12 @@ export default class NyBestiling extends Component {
           <Col>
             <Card title="Opprett bestilling">
               <Form>
+                <br />
+                <NavLink to={'/persons/add'}>
+                  <Button>Registrer ny kunde</Button>
+                </NavLink>
+                <br />
+                <br />
                 <Form.Group controlId="kunde">
                   <Form.Label>Velg kunde</Form.Label>
                   <Form.Control
@@ -60,17 +69,16 @@ export default class NyBestiling extends Component {
                     ))}
                   </Form.Control>
                 </Form.Group>
-                <NavLink to={'/persons/add'}>
-                  <Button>Opprett kunde</Button>
-                </NavLink>
-                <br />
-                <br />
+
                 <Form.Group controlId="sykkel">
                   <Form.Label>Velg sykkel</Form.Label>
                   <Form.Control
                     as="select"
-                    value={this.sykkel_id}
-                    onChange={e => (this.sykkel_id = e.target.value)}
+                    multiple
+                    value={this.sykkel_ids}
+                    onChange={e => {
+                      this.sykkel_ids = Array.from(e.target.selectedOptions).map(option => option.value);
+                    }}
                     title="Velg sykkel"
                   >
                     <option value="no-val" selected disabled hidden>
@@ -88,12 +96,15 @@ export default class NyBestiling extends Component {
                   <Form.Label>Velg utstyr</Form.Label>
                   <Form.Control
                     as="select"
-                    value={this.utstyr_id}
-                    onChange={e => (this.utstyr_id = e.target.value)}
+                    multiple
+                    value={this.utstyr_ids}
+                    onChange={e => {
+                      this.utstyr_ids = Array.from(e.target.selectedOptions).map(option => option.value);
+                    }}
                     title="Velg utstyr"
                   >
                     <option value="no-val" selected disabled hidden>
-                      -Ingen utstyr valgt-
+                      -Ingen valgt utstyr-
                     </option>
                     {this.utstyrer.map(utstyr => (
                       <option value={utstyr.utstyr_id}>
@@ -137,20 +148,21 @@ export default class NyBestiling extends Component {
                     <option value="no-val" selected disabeled hidden>
                       -Ingen innlevering valgt-
                     </option>
-                    {this.steder.map(sted => (
-                      <option value={sted.sted_navn}>{sted.sted_navn}</option>
-                    ))}
+                    {this.steder.map(sted => <option value={sted.sted_navn}>{sted.sted_navn}</option>)}
                   </Form.Control>
                 </Form.Group>
               </Form>
               <div>
                 {Object.keys(this.errors_to_user).map(input_key => (
-                  <div style={{color:"red", fontSize:"1.2em"}}>Du har ikke valgt {input_key + this.errors_to_user[input_key]}</div>
+                  <div style={{ color: 'red', fontSize: '1.2em' }}>
+                    Du har ikke valgt {input_key + this.errors_to_user[input_key]}
+                  </div>
                 ))}
               </div>
               <br />
             </Card>
           </Col>
+
           <Col>
             <Card title="Kvittering">
               <span id="viskunde">Kunden som er valgt:</span>
@@ -208,7 +220,7 @@ export default class NyBestiling extends Component {
     let utlev_tidspunkt = this.fradato;
     let innlev_tidspunkt = this.tildato;
 
-    if (utlev_tidspunkt > innlev_tidspunkt) {
+    /*if (utlev_tidspunkt > innlev_tidspunkt) {
       alert('Utleveringstidspunktet er tidligere enn ' + 'innleveringstidspunktet, velg på nytt.');
       return;
     } else {
@@ -219,13 +231,13 @@ export default class NyBestiling extends Component {
         return;
       } else {
       }
-    }
+    }*/
 
     // Creating an object where an identifier for each intput field is
     // assocated with the value provided by the user (if any).
     let inputs = {
       kunde: this.person_id,
-      sykkel: this.sykkel_id,
+      sykkel: this.sykkel_ids,
       'en dato for utlevering': utlev_tidspunkt,
       'en dato for innlevering': innlev_tidspunkt,
       'et utleveringssted': this.utleveringssted,
@@ -250,12 +262,13 @@ export default class NyBestiling extends Component {
       innlev_tidspunkt,
       this.utleveringssted,
       this.innleveringssted,
-      this.sykkel_id,
-      this.utstyr_id,
+      this.sykkel_ids,
+      this.utstyr_ids,
       () => {
         window.history.push('/bestillinger');
       }
     );
+    this.props.history.replace('/nybestilling/');
   }
   validate_inputs(inputs) {
     /*
