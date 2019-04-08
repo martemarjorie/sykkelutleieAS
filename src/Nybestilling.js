@@ -162,8 +162,29 @@ export default class NyBestiling extends Component {
   }
 
   SendBestilling() {
+    let idag = new Date();
+
+    let dagsDato = idag.getDate()+'-'+(idag.getMonth()+1)+'-'
+    +idag.getFullYear();
+
     let utlev_tidspunkt = this.fradato;
     let innlev_tidspunkt = this.tildato;
+
+    if(
+      utlev_tidspunkt > innlev_tidspunkt
+    ){
+
+      alert("Utleveringstidspunktet er tidligere enn"
+      + "innleveringstidspunktet, velg på nytt.");
+      return;
+    } else {
+      if(innlev_tidspunkt < dagsDato){
+        alert("Innleveringstidspunktet du har valgt"
+        + " er tidligere enn dagens dato ("
+      + dagsDato + "), velg på nytt.");
+        return;
+      } else{}
+    }
 
     // Creating an object where an identifier for each intput field is
     // assocated with the value provided by the user (if any).
