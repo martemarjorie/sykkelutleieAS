@@ -57,11 +57,11 @@ export default class PersonEdit extends Component {
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
           </Form>
-          <Button type="button" variant="primary" onClick={this.save}>
+          <Button type="submit" variant="primary" onClick={this.save}>
             Lagre
           </Button>
 
-          <Button type="button" variant="danger" onClick={this.delete}>
+          <Button type="submit" variant="danger" onClick={this.delete}>
             Slett
           </Button>
         </Card>

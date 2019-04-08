@@ -3,61 +3,61 @@ import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { utstyrService } from './services';
-import { Card, Row, Column, NavBar, Button, Form } from './widgets';
+import { Card, Row, Column, NavBar } from './widgets';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 
 export default class PersonAdd extends Component {
+  utstyrtyper = ['Gel sete', 'Henger', 'Hjelm', 'Sykkelveske'];
   type_utstyr = '';
   beskrivelse = '';
   pris = '';
 
   render() {
     return (
-      <div style={{ display: 'inline-block', marginLeft: '44%', marginTop: '3%' }}>
-        <form>
-          <table>
-            <tbody>
-              <tr>
-                <tr>
-                  Type utstyr: <br />
-                  <input
-                    type="text"
-                    value={this.type_utstyr}
-                    onChange={event => (this.type_utstyr = event.target.value)}
-                  />
-                </tr>
-                <br />
-                <tr>
-                  Beskrivelse: <br />
-                  <input
-                    type="text"
-                    value={this.beskrivelse}
-                    onChange={event => (this.beskrivelse = event.target.value)}
-                  />
-                </tr>
-                <br />
-                <tr>
-                  Pris:
-                  <br /> <input type="number" value={this.pris} onChange={event => (this.pris = event.target.value)} />
-                </tr>
-                <br />
-                <tr>
-                  <Row>
-                    <Column left>
-                      <button
-                        style={{ position: 'absolute', width: '182px', backgroundColor: 'peru', color: 'cornsilk' }}
-                        type="button"
-                        onClick={this.add}
-                      >
-                        Legg til
-                      </button>
-                    </Column>
-                  </Row>
-                </tr>
-              </tr>
-            </tbody>
-          </table>
-        </form>
-      </div>
+      <Container style={{ width: '50%', marginTop: '3%' }}>
+        <Card title="Endre sykkel">
+          <Form>
+            <Form.Group>
+              <Form.Label>Type</Form.Label>
+              <Form.Control
+                as="select"
+                value={this.type_utstyr}
+                selected
+                onChange={e => (this.type_utstyr = e.target.value)}
+              >
+                <option value="" />
+                <option value={this.utstyrtyper[0]}>{this.utstyrtyper[0]}</option>
+                <option value={this.utstyrtyper[1]}>{this.utstyrtyper[1]}</option>
+                <option value={this.utstyrtyper[2]}>{this.utstyrtyper[2]}</option>
+                <option value={this.utstyrtyper[3]}>{this.utstyrtyper[3]}</option>
+              </Form.Control>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Beskrivelse</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows="1"
+                value={this.beskrivelse}
+                onChange={event => (this.beskrivelse = event.target.value)}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Dagspris</Form.Label>
+              <Form.Control
+                type="number"
+                rows="1"
+                value={this.pris}
+                onChange={event => (this.pris = event.target.value)}
+              />
+            </Form.Group>
+          </Form>
+          <Button type="button" variant="primary" onClick={this.add}>
+            Legg til
+          </Button>
+        </Card>
+      </Container>
     );
   }
 
