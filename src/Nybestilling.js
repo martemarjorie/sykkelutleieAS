@@ -145,7 +145,7 @@ export default class NyBestiling extends Component {
               </Form>
               <div>
                 {Object.keys(this.errors_to_user).map(input_key => (
-                  <div>Du har ikke valgt {input_key + this.errors_to_user[input_key]}</div>
+                  <div style={{color:"red", fontSize:"1.2em"}}>Du har ikke valgt {input_key + this.errors_to_user[input_key]}</div>
                 ))}
               </div>
               <br />
