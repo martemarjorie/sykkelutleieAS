@@ -76,16 +76,13 @@ export default class UtstyrEdit extends Component {
     utstyrService.updateUtstyr(this.props.match.params.utstyr_id, this.type_utstyr, this.beskrivelse, this.pris, () => {
       history.push('/utstyrer');
     });
+    this.props.history.replace('/utstyrer/');
   }
 
   delete() {
     utstyrService.deleteUtstyr(this.props.match.params.utstyr_id, this.type_utstyr, this.beskrivelse, this.pris, () => {
       history.push('/utstyrer');
     });
+    this.props.history.replace('/utstyrer/');
   }
-
-  //  buttonClicked() {
-  //    this.props.history.push('/utstyrer');
-  //    console.log('Save clicked');
-  //  }
 }

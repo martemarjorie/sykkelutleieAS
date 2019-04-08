@@ -3,7 +3,8 @@ import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { bestillingerService } from './services';
-import { Card, Row, Column, NavBar, Button, Form } from './widgets';
+import { Card, Row, Column, NavBar, Form } from './widgets';
+import Button from 'react-bootstrap/Button';
 
 import Table from 'react-bootstrap/Table';
 
@@ -29,7 +30,11 @@ export default class BestillingsList extends Component {
               <th>Til dato</th>
               <th>Utlevering</th>
               <th>Innlevering</th>
-              <th> </th>
+              <th>
+                <NavLink to={'/nybestilling'}>
+                  <Button>Legg til ny</Button>
+                </NavLink>
+              </th>
             </tr>
           </thead>
 
