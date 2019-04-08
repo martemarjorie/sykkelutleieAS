@@ -23,9 +23,11 @@ export default class PersonList extends Component {
               <th>Etternavn</th>
               <th>Tlf</th>
               <th>Epost</th>
-              <NavLink to={'/persons/add'}>
-                <Button>Legg til ny</Button>
-              </NavLink>
+              <th>
+                <NavLink to={'/persons/add'}>
+                  <Button>Legg til ny</Button>
+                </NavLink>
+              </th>
             </tr>
           </thead>
 

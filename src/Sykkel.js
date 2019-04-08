@@ -24,7 +24,6 @@ export default class SykkelList extends Component {
               <th>Dagspris</th>
               <th>Modell</th>
               <th>Tilhørighet</th>
-
               <th>
                 <NavLink to={'/sykler/add'}>
                   <Button>Legg til ny</Button>
