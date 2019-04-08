@@ -174,7 +174,7 @@ export default class NyBestiling extends Component {
       utlev_tidspunkt > innlev_tidspunkt
     ){
 
-      alert("Utleveringstidspunktet er tidligere enn"
+      alert("Utleveringstidspunktet er tidligere enn "
       + "innleveringstidspunktet, velg på nytt.");
       return;
     } else {
