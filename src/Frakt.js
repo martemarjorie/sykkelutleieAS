@@ -3,8 +3,9 @@ import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { fraktService } from './services';
-import { Card, Row, Column, NavBar, Button, Form } from './widgets';
+import { Card, Row, Column, NavBar, Form } from './widgets';
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 
 export default class FraktList extends Component {
   frakter = [];
@@ -22,7 +23,9 @@ export default class FraktList extends Component {
               <th>Dato for frakt</th>
               <th>Status</th>
               <th>
-                <NavLink to={'/frakter/add'}>Legg til</NavLink>
+                <NavLink to={'/frakter/add'}>
+                  <Button>Legg til ny</Button>
+                </NavLink>
               </th>
             </tr>
           </thead>
@@ -44,7 +47,9 @@ export default class FraktList extends Component {
                 <td>{frakt.status}</td>
 
                 <td>
-                  <NavLink to={'/frakter/' + frakt.frakt_id + '/edit'}>Endre</NavLink>
+                  <NavLink to={'/frakter/' + frakt.frakt_id + '/edit'}>
+                    <Button>Endre</Button>
+                  </NavLink>
                 </td>
               </tr>
             </tbody>

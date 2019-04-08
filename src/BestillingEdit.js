@@ -71,6 +71,7 @@ export default class BestillingerEdit extends Component {
         history.push('/bestillinger');
       }
     );
+    this.props.history.replace('/bestillinger/');
   }
   /*
   delete() {

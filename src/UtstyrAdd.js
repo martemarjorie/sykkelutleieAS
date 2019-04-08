@@ -65,5 +65,6 @@ export default class PersonAdd extends Component {
     utstyrService.addUtstyr(this.props.match.params.utstyr_id, this.type_utstyr, this.beskrivelse, this.pris, () => {
       history.push('/utstyrer');
     });
+    this.props.history.replace('/utstyrer/');
   }
 }

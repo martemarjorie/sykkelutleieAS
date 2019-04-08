@@ -84,6 +84,7 @@ export default class FraktEdit extends Component {
         history.push('/frakter');
       }
     );
+    this.props.history.replace('/frakter/');
   }
 
   delete() {
@@ -99,5 +100,6 @@ export default class FraktEdit extends Component {
         history.push('/frakter');
       }
     );
+    this.props.history.replace('/frakter/');
   }
 }

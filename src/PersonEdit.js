@@ -89,6 +89,7 @@ export default class PersonEdit extends Component {
         history.push('/persons');
       }
     );
+    this.props.history.replace('/persons/');
   }
 
   delete() {
@@ -102,10 +103,6 @@ export default class PersonEdit extends Component {
         history.push('/persons');
       }
     );
+    this.props.history.replace('/persons/');
   }
-
-  //  buttonClicked() {
-  //    this.props.history.push('/persons');
-  //    console.log('Save clicked');
-  //  }
 }

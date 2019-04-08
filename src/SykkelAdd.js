@@ -131,5 +131,6 @@ export default class SykkelAdd extends Component {
         history.push('/sykler');
       }
     );
+    this.props.history.replace('/sykler/');
   }
 }

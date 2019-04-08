@@ -23,9 +23,9 @@ export default class PersonList extends Component {
               <th>Etternavn</th>
               <th>Tlf</th>
               <th>Epost</th>
-              <th>
-                <NavLink to={'/persons/add'}>Legg til</NavLink>
-              </th>
+              <NavLink to={'/persons/add'}>
+                <Button>Legg til ny</Button>
+              </NavLink>
             </tr>
           </thead>
 
@@ -37,8 +37,9 @@ export default class PersonList extends Component {
                 <td>{person.tlf}</td>
                 <td>{person.epost}</td>
                 <td>
-                  <Button>Endre</Button>
-                  <NavLink to={'/persons/' + person.person_id + '/edit'}>Endre</NavLink>
+                  <NavLink to={'/persons/' + person.person_id + '/edit'}>
+                    <Button>Endre</Button>
+                  </NavLink>
                 </td>
               </tr>
             </tbody>

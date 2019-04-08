@@ -82,5 +82,6 @@ export default class PersonAdd extends Component {
         history.push('/persons');
       }
     );
+    this.props.history.replace('/persons/');
   }
 }
