@@ -213,7 +213,7 @@ export default class NyBestiling extends Component {
       alert('Innleveringsdato er tidligere enn'
       + ' utleveringstidsdato, velg på nytt.');
       return;
-    } else if(this.tildato =< dagsDato){
+    } else if(this.tildato <= dagsDato){
       alert('Innleveringsdato er tidligere enn dagsdato, '
       + 'velg på nytt.');
       return;
