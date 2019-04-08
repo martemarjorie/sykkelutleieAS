@@ -2,101 +2,72 @@ import * as React from 'react';
 import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
-import { fraktService } from './services';
-import { Card, Row, Column, NavBar, Button, Form } from './widgets';
+import { fraktService, stedService } from './services';
+import { Card, Row, Column, NavBar } from './widgets';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 
 export default class FraktEdit extends Component {
-  type_sykkel = '';
-  modell = '';
+  steder = []; //Hentes fra database
   fra_sted = '';
   til_sted = '';
-  fra_dato = '';
-  status = '';
+  frakt_dato = '';
+  status = ['Klar for henting', 'Levert'];
 
   render() {
     return (
-      <div style={{ display: 'inline-block', marginLeft: '44%', marginTop: '3%' }}>
-        <form>
-          <table>
-            <tbody>
-              <tr>
-                <tr>
-                  Type: <br />
-                  <input
-                    type="text"
-                    value={this.type_sykkel}
-                    onChange={event => (this.type_sykkel = event.target.value)}
-                  />
-                </tr>
-                <p />
-                <tr>
-                  Modell: <br />
-                  <input type="text" value={this.modell} onChange={event => (this.modell = event.target.value)} />
-                </tr>
-                <p />
-                <tr>
-                  Fra sted:
-                  <br />{' '}
-                  <input type="text" value={this.fra_sted} onChange={event => (this.fra_sted = event.target.value)} />
-                </tr>
-                <p />
-                <tr>
-                  Til sted:
-                  <br />{' '}
-                  <input type="text" value={this.til_sted} onChange={event => (this.til_sted = event.target.value)} />
-                </tr>
-                <p />
+      <Container style={{ width: '50%', marginTop: '3%' }}>
+        <Card title="Endre fraktinformasjon">
+          <Form>
+            <Form.Group>
+              <Form.Label>Fra sted</Form.Label>
+              <Form.Control as="select" value={this.fra_sted} onChange={e => (this.fra_sted = e.target.value)}>
+                <option value={this.fra_sted} selected />
+                {this.steder.map(sted => <option value={sted.sted_navn}>{sted.sted_navn}</option>)}
+              </Form.Control>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Til sted</Form.Label>
+              <Form.Control as="select" value={this.til_sted} selected onChange={e => (this.til_sted = e.target.value)}>
+                <option value={this.til_sted} selected />
+                {this.steder.map(sted => <option value={sted.sted_navn}>{sted.sted_navn}</option>)}
+              </Form.Control>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Frakt dato</Form.Label>
+              <Form.Control type="date" value={this.frakt_dato} onChange={e => (this.frakt_dato = e.target.value)} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Status</Form.Label>
+              <Form.Control as="select" value={this.staus} selected onChange={e => (this.status = e.target.value)}>
+                <option value={this.status[0]}>{this.status[0]}</option>
+                <option value={this.status[1]}>{this.status[1]}</option>
+              </Form.Control>
+            </Form.Group>
+          </Form>
+          <Button type="button" variant="primary" onClick={this.save}>
+            Lagre
+          </Button>
 
-                <tr>
-                  Status:
-                  <br />{' '}
-                  <input type="text" value={this.status} onChange={event => (this.status = event.target.value)} />
-                </tr>
-                <p />
-                <tr>
-                  <Row>
-                    <Column left>
-                      <button
-                        style={{ position: 'absolute', width: '80px', backgroundColor: 'peru', color: 'cornsilk' }}
-                        type="button"
-                        onClick={this.save}
-                      >
-                        Lagre
-                      </button>
-                    </Column>
-                    <Column right>
-                      <button
-                        style={{
-                          position: 'absolute',
-                          width: '80px',
-                          backgroundColor: 'peru',
-                          color: 'cornsilk',
-                          marginLeft: '70px'
-                        }}
-                        type="button"
-                        onClick={this.delete}
-                      >
-                        Slett
-                      </button>
-                    </Column>
-                  </Row>
-                </tr>
-              </tr>
-            </tbody>
-          </table>
-        </form>
-      </div>
+          <Button type="button" variant="danger" onClick={this.delete}>
+            Slett
+          </Button>
+        </Card>
+      </Container>
     );
   }
 
   mounted() {
     fraktService.getFrakter(this.props.match.params.frakt_id, frakt => {
-      this.type_sykkel = frakt.type_sykkel;
-      this.modell = frakt.modell;
       this.fra_sted = frakt.fra_sted;
       this.til_sted = frakt.til_sted;
       this.fra_dato = frakt.fra_dato;
       this.status = frakt.status;
+    });
+
+    stedService.getSteder(steder => {
+      this.steder = steder;
     });
   }
 

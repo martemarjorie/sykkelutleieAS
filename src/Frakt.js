@@ -34,8 +34,15 @@ export default class FraktList extends Component {
                 <td>{frakt.modell}</td>
                 <td>{frakt.fra_sted}</td>
                 <td>{frakt.til_sted}</td>
-                <td>{frakt.frakt_dato.toString()}</td>
+                <td>
+                  {('0' + frakt.frakt_dato.getDate()).slice(-2) +
+                    '.' +
+                    ('0' + (frakt.frakt_dato.getMonth() + 1)).slice(-2) +
+                    '.' +
+                    frakt.frakt_dato.getFullYear()}
+                </td>
                 <td>{frakt.status}</td>
+
                 <td>
                   <NavLink to={'/frakter/' + frakt.frakt_id + '/edit'}>Endre</NavLink>
                 </td>
