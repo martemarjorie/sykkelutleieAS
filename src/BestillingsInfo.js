@@ -69,12 +69,6 @@ export default class BestillingsList extends Component {
     );
   }
 
-  mounted() {
-    bestillingerService.getBestillinger(bestillinger => {
-      this.bestillinger = bestillinger;
-    });
-  }
-
   sokBestilling() {
     if (document.getElementById('sok').value.length === 0) {
       bestillingerService.getBestillinger(bestillinger => {
@@ -85,5 +79,11 @@ export default class BestillingsList extends Component {
         this.bestillinger = bestillinger;
       });
     }
+  }
+  
+  mounted() {
+    bestillingerService.getBestillinger(bestillinger => {
+      this.bestillinger = bestillinger;
+    });
   }
 }
