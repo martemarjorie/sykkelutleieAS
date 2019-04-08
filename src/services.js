@@ -395,12 +395,13 @@ class FraktService {
     );
   }
 
-  updateFrakt(frakt, success) {
+  updateFrakt(fra_sted, til_sted, frakt_dato, status, success) {
     connection.query(
-      'update frakt set fra_sted=?, til_sted=?, frakt_dato=?, status=? where frakt_id=?',
-      [frakt.fra_sted, frakt.til_sted, frakt.frakt_dato, frakt.status],
+      'update frakt set fra_sted='?', til_sted='?', frakt_dato='?', status='?' where frakt_id='?'',
+      [fra_sted, til_sted, frakt_dato, status],
       (error, results) => {
-        if (error) return console.error('får ikke oppdatert frakt');
+        if (error) return console.error(error);
+        console.log(results);
 
         success();
       }
