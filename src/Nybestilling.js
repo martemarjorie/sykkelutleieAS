@@ -211,11 +211,17 @@ export default class NyBestiling extends Component {
 
     if (this.fradato > this.tildato) {
       alert('Innleveringsdato er tidligere enn'
-      + ' utleveringstidsdato, velg på nytt.');
+      + ' utleveringstidsdato, velg på nytt.'
+      + 'fradato: ' + this.fradato + ' '
+      + 'tildato: ' + this.tildato + ' '
+      + 'dagsdato: ' + dagsDato);
       return;
-    } else if(this.tildato <= dagsDato){
+    } else if(this.tildato < dagsDato){
       alert('Innleveringsdato er tidligere enn dagsdato, '
-      + 'velg på nytt.');
+      + 'velg på nytt.'
+      + 'fradato: ' + this.fradato + ' '
+      + 'tildato: ' + this.tildato + ' '
+      + 'dagsdato: ' + dagsDato);
       return;
     } else {}
 
