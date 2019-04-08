@@ -3,8 +3,9 @@ import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { utstyrService } from './services';
-import { Card, Row, Column, NavBar, Button, Form } from './widgets';
+import { Card, Row, Column, NavBar, Form } from './widgets';
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 
 export default class UtstyrList extends Component {
   utstyrer = [];
@@ -22,7 +23,9 @@ export default class UtstyrList extends Component {
               <th>Beskrivelse</th>
               <th>Pris</th>
               <th>
-                <NavLink to={'/utstyrer/add'}>Legg til ny</NavLink>
+                <NavLink to={'/utstyrer/add'}>
+                  <Button>Legg til ny</Button>
+                </NavLink>
               </th>
             </tr>
           </thead>
@@ -33,7 +36,9 @@ export default class UtstyrList extends Component {
                 <td>{utstyr.beskrivelse}</td>
                 <td>{utstyr.pris}</td>
                 <td>
-                  <NavLink to={'/utstyrer/' + utstyr.utstyr_id + '/edit'}>Endre</NavLink>
+                  <NavLink to={'/utstyrer/' + utstyr.utstyr_id + '/edit'}>
+                    <Button>Endre</Button>
+                  </NavLink>
                 </td>
               </tr>
             ))}
