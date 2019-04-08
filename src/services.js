@@ -383,7 +383,8 @@ export let repService = new RepService();
 class FraktService {
   getFrakter(success) {
     connection.query(
-      'SELECT type_sykkel, modell, fra_sted, til_sted, frakt_dato, status FROM frakt INNER JOIN frakt_sykkel ON (frakt.frakt_id = frakt_sykkel.frakt_id) INNER JOIN sykkel ON (frakt_sykkel.sykkel_id = sykkel.sykkel_id)',
+      'select * from frakt f, frakt_sykkel fs, sykkel s where f.frakt_id = fs.frakt_id and fs.sykkel_id = s.sykkel_id',
+
       (error, results) => {
         if (error) return console.error(error);
 
@@ -394,9 +395,9 @@ class FraktService {
 
   getFrakt(frakt_id, success) {
     connection.query(
-      'SELECT type_sykkel, modell, fra_sted, til_sted, frakt_dato, status FROM frakt INNER JOIN frakt_sykkel ON (frakt.frakt_id = frakt_sykkel.frakt_id) INNER JOIN sykkel ON (frakt_sykkel.sykkel_id = sykkel.sykkel_id WHERE frakt_id=?',
-      [frakt_id],
-      (error,
+      'select * from frakt f, frakt_sykkel fs, sykkel s where f.frakt_id = fs.frakt_id and fs.sykkel_id = s.sykkel_id',
+      ([frakt_id],
+      error,
       results => {
         if (error) return console.log(error);
 
@@ -405,12 +406,12 @@ class FraktService {
     );
   }
 
-  updateFrakt(frakt_id, type_sykkel, modell, fra_sted, til_sted, frakt_dato, status, success) {
+  updateFrakt(frakt, success) {
     connection.query(
-      'update frakt set frakt_id=?, type_sykkel=?, modell=?, fra_sted=?, til_sted=?, frakt_dato=?, status=? where frakt_id=?',
-      [frakt_id, type_sykkel, modell, fra_sted, til_sted, frakt_dato, status],
+      'update frakt set fra_sted=?, til_sted=?, frakt_dato=?, status=? where frakt_id=?',
+      [frakt.fra_sted, frakt.til_sted, frakt.frakt_dato, frakt.status],
       (error, results) => {
-        if (error) return console.error(error);
+        if (error) return console.error('får ikke oppdatert frakt');
 
         success();
       }

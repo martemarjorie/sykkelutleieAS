@@ -13,7 +13,8 @@ export default class FraktEdit extends Component {
   fra_sted = '';
   til_sted = '';
   frakt_dato = '';
-  status = ['Klar for henting', 'Levert'];
+  statuser = ['Klar for henting', 'Levert'];
+  status = '';
 
   render() {
     return (
@@ -22,27 +23,36 @@ export default class FraktEdit extends Component {
           <Form>
             <Form.Group>
               <Form.Label>Fra sted</Form.Label>
-              <Form.Control as="select" value={this.fra_sted} onChange={e => (this.fra_sted = e.target.value)}>
-                <option value={this.fra_sted} selected />
+              <Form.Control as="select" selected value={this.fra_sted} onChange={e => (this.fra_sted = e.target.value)}>
+                <option defaultValue={this.fra_sted} />
                 {this.steder.map(sted => <option value={sted.sted_navn}>{sted.sted_navn}</option>)}
               </Form.Control>
             </Form.Group>
             <Form.Group>
               <Form.Label>Til sted</Form.Label>
-              <Form.Control as="select" value={this.til_sted} selected onChange={e => (this.til_sted = e.target.value)}>
+              <Form.Control
+                as="select"
+                defaultValue={this.til_sted}
+                selected
+                onChange={e => (this.til_sted = e.target.value)}
+              >
                 <option value={this.til_sted} selected />
                 {this.steder.map(sted => <option value={sted.sted_navn}>{sted.sted_navn}</option>)}
               </Form.Control>
             </Form.Group>
             <Form.Group>
               <Form.Label>Frakt dato</Form.Label>
-              <Form.Control type="date" value={this.frakt_dato} onChange={e => (this.frakt_dato = e.target.value)} />
+              <Form.Control
+                type="date"
+                defaultValue={this.frakt_dato}
+                onChange={e => (this.frakt_dato = e.target.value)}
+              />
             </Form.Group>
             <Form.Group>
               <Form.Label>Status</Form.Label>
-              <Form.Control as="select" value={this.staus} selected onChange={e => (this.status = e.target.value)}>
-                <option value={this.status[0]}>{this.status[0]}</option>
-                <option value={this.status[1]}>{this.status[1]}</option>
+              <Form.Control as="select" value={this.status} selected onChange={e => (this.status = e.target.value)}>
+                <option value={this.statuser[0]}>{this.statuser[0]}</option>
+                <option value={this.statuser[1]}>{this.statuser[1]}</option>
               </Form.Control>
             </Form.Group>
           </Form>
@@ -60,6 +70,8 @@ export default class FraktEdit extends Component {
 
   mounted() {
     fraktService.getFrakter(this.props.match.params.frakt_id, frakt => {
+      this.type_sykkel = frakt.type_sykkel;
+      this.modell = frakt.modell;
       this.fra_sted = frakt.fra_sted;
       this.til_sted = frakt.til_sted;
       this.fra_dato = frakt.fra_dato;
@@ -74,8 +86,6 @@ export default class FraktEdit extends Component {
   save() {
     fraktService.updateFrakt(
       this.props.match.params.frakt_id,
-      this.type_sykkel,
-      this.modell,
       this.fra_sted,
       this.til_sted,
       this.fra_dato,
@@ -84,7 +94,6 @@ export default class FraktEdit extends Component {
         history.push('/frakter');
       }
     );
-    this.props.history.replace('/frakter/');
   }
 
   delete() {
@@ -100,6 +109,5 @@ export default class FraktEdit extends Component {
         history.push('/frakter');
       }
     );
-    this.props.history.replace('/frakter/');
   }
 }
