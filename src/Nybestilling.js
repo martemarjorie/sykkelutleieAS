@@ -37,109 +37,148 @@ export default class NyBestiling extends Component {
 
   render() {
     return (
-      <Card title="Opprett bestilling">
-        <Form>
-          <Form.Group controlId="kunde">
-            <Form.Label>Velg kunde</Form.Label>
-            <Form.Control
-              as="select"
-              value={this.person_id}
-              onChange={e => (this.person_id = e.target.value)}
-              title="Velg kunde"
-            >
-              <option value="no-val" selected disabled hidden>
-                -Ingen valgt kunde-
-              </option>
-              {this.persons.map(person => (
-                <option value={person.person_id}>
-                  {person.fornavn} {person.etternavn}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-          <Form.Group controlId="sykkel">
-            <Form.Label>Velg sykkel</Form.Label>
-            <Form.Control
-              as="select"
-              value={this.sykkel_id}
-              onChange={e => (this.sykkel_id = e.target.value)}
-              title="Velg sykkel"
-            >
-              <option value="no-val" selected disabled hidden>
-                -Ingen valgt sykkel-
-              </option>
-              {this.sykler.map(sykkel => (
-                <option value={sykkel.sykkel_id}>
-                  {sykkel.type_sykkel}, {sykkel.modell}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-          <Form.Group controlId="sykkel">
-            <Form.Label>Velg utstyr</Form.Label>
-            <Form.Control
-              as="select"
-              value={this.utstyr_id}
-              onChange={e => (this.utstyr_id = e.target.value)}
-              title="Velg utstyr"
-            >
-              <option value="no-val" selected disabled hidden>
-                -Ingen utstyr valgt-
-              </option>
-              {this.utstyrer.map(utstyr => (
-                <option value={utstyr.utstyr_id}>
-                  {utstyr.type_utstyr}, {utstyr.beskrivelse}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-          <Form.Row>
-            <Form.Group as={Col}>
-              <Form.Label>Fra dato</Form.Label>
-              <Form.Control type="date" value={this.fradato} onChange={e => (this.fradato = e.target.value)} />
-            </Form.Group>
-            <Form.Group as={Col}>
-              <Form.Label>Til dato</Form.Label>
-              <Form.Control type="date" value={this.tildato} onChange={e => (this.tildato = e.target.value)} />
-            </Form.Group>
-          </Form.Row>
-          <Form.Group controlId="utsted">
-            <Form.Label>Velg utleveringssted</Form.Label>
-            <Form.Control
-              as="select"
-              value={this.utleveringssted}
-              onChange={e => (this.utleveringssted = e.target.value)}
-            >
-              <option value="">– Ingen utlevering valgt –</option>
-              <option value={this.utsted[0]}>{this.utsted[0]}</option>
-              <option value={this.utsted[1]}>{this.utsted[1]}</option>
-            </Form.Control>
-          </Form.Group>
-          <Form.Group controlId="innsted">
-            <Form.Label>Velg innleveringssted</Form.Label>
-            <Form.Control
-              as="select"
-              value={this.innleveringssted}
-              onChange={e => (this.innleveringssted = e.target.value)}
-            >
-              <option value="no-val" selected disabeled hidden>
-                -Ingen innlevering valgt-
-              </option>
-              {this.steder.map(sted => <option value={sted.sted_navn}>{sted.sted_navn}</option>)}
-            </Form.Control>
-          </Form.Group>
-        </Form>
-        <div>
-          {Object.keys(this.errors_to_user).map(input_key => (
-            <div style={{color: "red", fontSize:"1.2em"}}>Du har ikke valgt {input_key + this.errors_to_user[input_key]}</div>
-          ))}
-        </div>
-        <br />
-
-        <Button type="Button" onClick={this.SendBestilling}>
-          Send bestilling
-        </Button>
-      </Card>
+      <div>
+        <Row>
+          <Col>
+            <Card title="Opprett bestilling">
+              <Form>
+                <Form.Group controlId="kunde">
+                  <Form.Label>Velg kunde</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={this.person_id}
+                    onChange={e => (this.person_id = e.target.value)}
+                    title="Velg kunde"
+                  >
+                    <option value="no-val" selected disabled hidden>
+                      -Ingen valgt kunde-
+                    </option>
+                    {this.persons.map(person => (
+                      <option value={person.person_id}>
+                        {person.fornavn} {person.etternavn}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+                <NavLink to={'/persons/add'}>
+                  <Button>Opprett kunde</Button>
+                </NavLink>
+                <br />
+                <br />
+                <Form.Group controlId="sykkel">
+                  <Form.Label>Velg sykkel</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={this.sykkel_id}
+                    onChange={e => (this.sykkel_id = e.target.value)}
+                    title="Velg sykkel"
+                  >
+                    <option value="no-val" selected disabled hidden>
+                      -Ingen valgt sykkel-
+                    </option>
+                    {this.sykler.map(sykkel => (
+                      <option value={sykkel.sykkel_id}>
+                        {sykkel.type_sykkel}, {sykkel.modell}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+                <br />
+                <Form.Group controlId="utstyr">
+                  <Form.Label>Velg utstyr</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={this.utstyr_id}
+                    onChange={e => (this.utstyr_id = e.target.value)}
+                    title="Velg utstyr"
+                  >
+                    <option value="no-val" selected disabled hidden>
+                      -Ingen utstyr valgt-
+                    </option>
+                    {this.utstyrer.map(utstyr => (
+                      <option value={utstyr.utstyr_id}>
+                        {utstyr.type_utstyr}, {utstyr.beskrivelse}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+                <br />
+                <Form.Row>
+                  <Form.Group as={Col}>
+                    <Form.Label>Fra dato</Form.Label>
+                    <Form.Control type="date" value={this.fradato} onChange={e => (this.fradato = e.target.value)} />
+                  </Form.Group>
+                  <Form.Group as={Col}>
+                    <Form.Label>Til dato</Form.Label>
+                    <Form.Control type="date" value={this.tildato} onChange={e => (this.tildato = e.target.value)} />
+                  </Form.Group>
+                </Form.Row>
+                <br />
+                <Form.Group controlId="utsted">
+                  <Form.Label>Velg utleveringssted</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={this.utleveringssted}
+                    onChange={e => (this.utleveringssted = e.target.value)}
+                  >
+                    <option value="">– Ingen utlevering valgt –</option>
+                    <option value={this.utsted[0]}>{this.utsted[0]}</option>
+                    <option value={this.utsted[1]}>{this.utsted[1]}</option>
+                  </Form.Control>
+                </Form.Group>
+                <br />
+                <Form.Group controlId="innsted">
+                  <Form.Label>Velg innleveringssted</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={this.innleveringssted}
+                    onChange={e => (this.innleveringssted = e.target.value)}
+                  >
+                    <option value="no-val" selected disabeled hidden>
+                      -Ingen innlevering valgt-
+                    </option>
+                    {this.steder.map(sted => (
+                      <option value={sted.sted_navn}>{sted.sted_navn}</option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+              </Form>
+              <div>
+                {Object.keys(this.errors_to_user).map(input_key => (
+                  <div>Du har ikke valgt {input_key + this.errors_to_user[input_key]}</div>
+                ))}
+              </div>
+              <br />
+            </Card>
+          </Col>
+          <Col>
+            <Card title="Kvittering">
+              <span id="viskunde">Kunden som er valgt:</span>
+              <br />
+              <br />
+              <span id="visdato">Dato:</span>
+              <br />
+              <br />
+              <span id="vissykkel">Sykkel:</span>
+              <br />
+              <br />
+              <span id="visutstyr">Utstyr:</span>
+              <br />
+              <br />
+              <span id="visutsted">Utleveringssted:</span>
+              <br />
+              <br />
+              <span id="visinnsted">Innleveringssted:</span>
+              <br />
+              <br />
+            </Card>
+            <br />
+            <Button type="Button" onClick={this.SendBestilling}>
+              Send bestilling
+            </Button>
+          </Col>
+        </Row>
+      </div>
     );
   }
 
@@ -162,8 +201,25 @@ export default class NyBestiling extends Component {
   }
 
   SendBestilling() {
+    let idag = new Date();
+
+    let dagsDato = idag.getDate() + '-' + (idag.getMonth() + 1) + '-' + idag.getFullYear();
+
     let utlev_tidspunkt = this.fradato;
     let innlev_tidspunkt = this.tildato;
+
+    if (utlev_tidspunkt > innlev_tidspunkt) {
+      alert('Utleveringstidspunktet er tidligere enn ' + 'innleveringstidspunktet, velg på nytt.');
+      return;
+    } else {
+      if (innlev_tidspunkt < dagsDato) {
+        alert(
+          'Innleveringstidspunktet du har valgt' + ' er tidligere enn dagens dato (' + dagsDato + '), velg på nytt.'
+        );
+        return;
+      } else {
+      }
+    }
 
     // Creating an object where an identifier for each intput field is
     // assocated with the value provided by the user (if any).

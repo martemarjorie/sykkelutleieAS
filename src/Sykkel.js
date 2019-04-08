@@ -26,7 +26,9 @@ export default class SykkelList extends Component {
               <th>Tilhørighet</th>
 
               <th>
-                <NavLink to={'/sykler/add'}>Legg til ny</NavLink>
+                <NavLink to={'/sykler/add'}>
+                  <Button>Legg til ny</Button>
+                </NavLink>
               </th>
             </tr>
           </thead>
@@ -39,8 +41,9 @@ export default class SykkelList extends Component {
                 <td>{sykkel.modell}</td>
                 <td>{sykkel.tilhorer_sted}</td>
                 <td>
-                  <Button>Endre</Button>
-                  <NavLink to={'/sykler/' + sykkel.sykkel_id + '/edit'}>Endre</NavLink>
+                  <NavLink to={'/sykler/' + sykkel.sykkel_id + '/edit'}>
+                    <Button>Endre</Button>
+                  </NavLink>
                 </td>
               </tr>
             ))}

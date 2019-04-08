@@ -202,6 +202,7 @@ export default class BestillingList extends Component {
   }
 
   velgDato() {
+    console.log("velgDato kjøres, " + tildato.value + " " +  fradato.value);
     let fra = document.getElementById('fradato').value;
     let til = document.getElementById('tildato').value;
     document.getElementById('visdato').innerHTML += '<br>' + fra + ' til ' + til;
