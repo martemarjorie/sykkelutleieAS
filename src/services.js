@@ -221,7 +221,18 @@ class BestillingerService {
   searchBestilling(input, success) {
     connection.query(
       'select b.bestilling_id, fornavn, tlf, type_sykkel, modell, type_utstyr, utlev_tidspunkt, innlev_tidspunkt, utlev_sted, innlev_sted from bestilling b left join person p on p.person_id = b.person_id left join leid_sykkel ls on ls.bestilling_id = b.bestilling_id left join leid_utstyr lu on lu.bestilling_id = b.bestilling_id left join sykkel s on ls.sykkel_id = s.sykkel_id left join utstyr u on lu.utstyr_id = u.utstyr_id where b.bestilling_id like ? or fornavn like ? or tlf like ? or type_sykkel like ? or modell like ? or type_utstyr like ? or utlev_tidspunkt like ? or innlev_tidspunkt like ? or utlev_sted like ? or innlev_sted like ?',
-      [input + '%', input + '%', input + '%', input + '%', input + '%', input + '%', input + '%', input + '%', input + '%', input + '%'],
+      [
+        input + '%',
+        input + '%',
+        input + '%',
+        input + '%',
+        input + '%',
+        input + '%',
+        input + '%',
+        input + '%',
+        input + '%',
+        input + '%'
+      ],
       (error, results) => {
         if (error) return console.error(error);
 
@@ -397,7 +408,7 @@ class FraktService {
 
   updateFrakt(fra_sted, til_sted, frakt_dato, status, success) {
     connection.query(
-      'update frakt set fra_sted='?', til_sted='?', frakt_dato='?', status='?' where frakt_id='?'',
+      'update frakt set fra_sted=?, til_sted=?, frakt_dato=?, status=? where frakt_id=?',
       [fra_sted, til_sted, frakt_dato, status],
       (error, results) => {
         if (error) return console.error(error);
