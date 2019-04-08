@@ -13,43 +13,48 @@ export default class PersonAdd extends Component {
 
   render() {
     return (
-      <div style={{display:"inline-block", marginLeft:"44%",marginTop:"3%"}}>
-      <form>
-        <table>
-          <tbody>
-            <tr>
+      <div style={{ display: 'inline-block', marginLeft: '44%', marginTop: '3%' }}>
+        <form>
+          <table>
+            <tbody>
               <tr>
-                Fornavn:{' '}<br></br>
-                <input type="text" value={this.fornavn} onChange={event => (this.fornavn = event.target.value)} />
+                <tr>
+                  Fornavn: <br />
+                  <input type="text" value={this.fornavn} onChange={event => (this.fornavn = event.target.value)} />
+                </tr>
+                <br />
+                <tr>
+                  Etternavn: <br />
+                  <input type="text" value={this.etternavn} onChange={event => (this.etternavn = event.target.value)} />
+                </tr>
+                <br />
+                <tr>
+                  Tlf:<br />{' '}
+                  <input type="number" value={this.tlf} onChange={event => (this.tlf = event.target.value)} />
+                </tr>
+                <br />
+                <tr>
+                  Epost: <br />
+                  <input type="text" value={this.epost} onChange={event => (this.epost = event.target.value)} />
+                </tr>
+                <br />
+                <tr>
+                  <Row>
+                    <Column left>
+                      <button
+                        style={{ position: 'absolute', width: '182px', backgroundColor: 'peru', color: 'cornsilk' }}
+                        type="button"
+                        onClick={this.add}
+                      >
+                        Legg til
+                      </button>
+                    </Column>
+                  </Row>
+                </tr>
               </tr>
-              <br></br>
-              <tr>
-                Etternavn:{' '}<br></br>
-                <input type="text" value={this.etternavn} onChange={event => (this.etternavn = event.target.value)} />
-              </tr>
-              <br></br>
-              <tr>
-                Tlf:<br></br> <input type="number" value={this.tlf} onChange={event => (this.tlf = event.target.value)} />
-              </tr>
-              <br></br>
-              <tr>
-                Epost: <br></br>
-                <input type="text" value={this.epost} onChange={event => (this.epost = event.target.value)} />
-              </tr>
-              <br></br>
-              <tr>
-                <Row>
-                  <Column left>
-                    <button style={{position:"absolute", width:"182px", backgroundColor:"peru", color:"cornsilk"}} type="button" onClick={this.add}>
-                      Legg til
-                    </button>
-                  </Column>
-                </Row>
-              </tr>
-            </tr>
-          </tbody>
-        </table>
-      </form>
+            </tbody>
+          </table>
+        </form>
       </div>
     );
   }
@@ -65,5 +70,6 @@ export default class PersonAdd extends Component {
         history.push('/persons');
       }
     );
+    this.props.history.replace('/persons/');
   }
 }
