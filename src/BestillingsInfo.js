@@ -3,7 +3,7 @@ import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { bestillingerService } from './services';
-import { Card, Row, Column, NavBar, Form } from './widgets';
+import { Card, Col, Navbar } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 
 import Table from 'react-bootstrap/Table';
@@ -13,7 +13,8 @@ export default class BestillingsList extends Component {
 
   render() {
     return (
-      <Card title="Bestillingsoversikt">
+      <Card>
+      <Card.Title>Bestillingsoversikt</Card.Title>
         <input type="text" id="sok" onChange={this.sokBestilling} placeholder="Søk..." />
         <br />
         <br />
