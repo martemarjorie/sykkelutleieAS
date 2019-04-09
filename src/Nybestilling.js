@@ -73,7 +73,7 @@ export default class NyBestiling extends Component {
               </Form.Group>
 
               <Form.Group controlId="sykkel">
-                <Form.Label>Velg sykkel</Form.Label>
+                <Form.Label>Velg sykkel (press CTRL / CMD for flervalg)</Form.Label>
                 <Form.Control
                   as="select"
                   multiple
@@ -95,7 +95,7 @@ export default class NyBestiling extends Component {
               </Form.Group>
               <br />
               <Form.Group controlId="utstyr">
-                <Form.Label>Velg utstyr</Form.Label>
+                <Form.Label>Velg utstyr (press CTRL / CMD for flervalg)</Form.Label>
                 <Form.Control
                   as="select"
                   multiple
@@ -221,31 +221,26 @@ export default class NyBestiling extends Component {
     if (idag.getMonth() + 1 < 10) {
       dagsDato += '-0' + (idag.getMonth() + 1);
     } else {
-      dagsDato += idag.getMonth() + 1;
+      dagsDato += '-' + idag.getMonth() + 1;
     }
 
     if (idag.getDate() + 1 < 10) {
       dagsDato += '-0' + idag.getDate();
     } else {
-      dagsDato += idag.getDate();
+      dagsDato += '-' + idag.getDate();
     }
 
     let utlev_tidspunkt = this.fradato;
     let innlev_tidspunkt = this.tildato;
 
-    console.log(' FRADATO: ' + this.fradato + ' TILDATO: ' + this.tildato + ' DAGSDATO: ' + dagsDato);
+    console.log(' FRADATO: ' + this.fradato
+    +' TILDATO: ' + this.tildato
+    +' DAGSDATO: ' + dagsDato);
 
     if (this.fradato > this.tildato) {
       alert(
         'Innleveringsdato er tidligere enn' +
-          ' utleveringstidsdato, velg på nytt.' +
-          ' FRADATO: ' +
-          this.fradato +
-          ' TILDATO: ' +
-          this.tildato +
-          ' DAGSDATO: ' +
-          dagsDato
-      );
+          ' utleveringstidsdato, velg på nytt.');
       return;
     } else {
     }
@@ -253,14 +248,7 @@ export default class NyBestiling extends Component {
     if (this.tildato < dagsDato) {
       alert(
         'Innleveringsdato er tidligere enn dagsdato, ' +
-          'velg på nytt.' +
-          ' FRADATO: ' +
-          this.fradato +
-          ' TILDATO: ' +
-          this.tildato +
-          ' DAGSDATO: ' +
-          dagsDato
-      );
+          'velg på nytt.');
       return;
     } else {
     }
