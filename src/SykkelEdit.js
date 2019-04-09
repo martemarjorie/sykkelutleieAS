@@ -22,7 +22,7 @@ export default class SykkelEdit extends Component {
 
   render() {
     return (
-      <Container style={{ width: '50%', marginTop: '3%' }}>
+      <Container style={{ width: '50%', marginTop: '3%', marginBottom: '3%' }}>
         <Card title="Endre sykkel">
           <Form>
             <Form.Group>
@@ -108,11 +108,16 @@ export default class SykkelEdit extends Component {
               </Form.Control>
             </Form.Group>
           </Form>
-          <Button type="button" variant="primary" onClick={this.save}>
+          <Button style={{ width: '67%' }} type="button" variant="outline-success" onClick={this.save}>
             Lagre
           </Button>
 
-          <Button type="button" variant="danger" onClick={this.delete}>
+          <Button
+            style={{ width: '30%', marginLeft: '3%' }}
+            type="button"
+            variant="outline-danger"
+            onClick={this.delete}
+          >
             Slett
           </Button>
         </Card>
