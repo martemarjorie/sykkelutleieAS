@@ -110,8 +110,8 @@ class PersonService {
 
   searchPerson(input, success) {
     connection.query(
-      'select fornavn, etternavn, tlf, epost from person where fornavn like ? or etternavn like ? or tlf like ? or epost like ?',
-      [input + '%', input + '%', input + '%', input + '%'],
+      'select person_id, fornavn, etternavn, tlf, epost from person where person_id like ? or fornavn like ? or etternavn like ? or tlf like ? or epost like ?',
+      [input + '%', input + '%', input + '%', input + '%', input + '%'],
       (error, results) => {
         if (error) return console.error(error);
 
@@ -207,8 +207,8 @@ class SykkelService {
   }
   searchSykkel(input, success) {
     connection.query(
-      'select type_sykkel, timepris, dagspris, modell from sykkel where type_sykkel like ? or timepris like ? or dagspris like ? or modell like ?',
-      [input + '%', input + '%', input + '%', input + '%'],
+      'select sykkel_id, type_sykkel, timepris, dagspris, modell from sykkel where sykkel_id like ? or type_sykkel like ? or timepris like ? or dagspris like ? or modell like ?',
+      [input + '%', input + '%', input + '%', input + '%', input + '%'],
       (error, results) => {
         if (error) return console.error(error);
 
@@ -336,8 +336,8 @@ class UtstyrService {
   }
   searchUtstyr(input, success) {
     connection.query(
-      'select type_utstyr, beskrivelse, pris from utstyr where type_utstyr like ? or beskrivelse like ? or pris like ?',
-      [input + '%', input + '%', input + '%'],
+      'select utstyr_id, type_utstyr, beskrivelse, pris from utstyr where utstyr_id like ? or type_utstyr like ? or beskrivelse like ? or pris like ?',
+      [input + '%', input + '%', input + '%', input + '%'],
       (error, results) => {
         if (error) return console.error(error);
 
@@ -371,7 +371,7 @@ class StedService {
 
 export let stedService = new StedService();
 
-/********** REPERASJON ************/
+/********** REPARASJON ************/
 
 class RepService {
   getReps(success) {
