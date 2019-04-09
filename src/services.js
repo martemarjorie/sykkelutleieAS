@@ -375,15 +375,15 @@ export let stedService = new StedService();
 
 class RepService {
   getReps(success) {
-    connection.query('select * from reperasjon', (error, results) => {
+    connection.query('select * from reparasjon', (error, results) => {
       if (error) return console.error(error);
 
       success(results);
     });
   }
 
-  getRep(reperasjons_id, success) {
-    connection.query('select * from reperasjon where reperasjons_id=?', [reperasjons_id], (error, results) => {
+  getRep(reparasjons_id, success) {
+    connection.query('select * from reparasjon where reparasjons_id=?', [reparasjons_id], (error, results) => {
       if (error) return console.error(error);
 
       success(results[0]);
