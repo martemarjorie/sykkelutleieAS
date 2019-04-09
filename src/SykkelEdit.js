@@ -22,7 +22,7 @@ export default class SykkelEdit extends Component {
 
   render() {
     return (
-      <Container style={{ width: '50%', marginTop: '3%', marginBottom: '3%' }}>
+      <Container style={{ width: '50%', marginTop: '3%' }}>
         <Card title="Endre sykkel">
           <Form>
             <Form.Group>
@@ -102,20 +102,17 @@ export default class SykkelEdit extends Component {
                 onChange={e => (this.tilhorer_sted = e.target.value)}
               >
                 <option defaulValue={this.tilhorer_sted} />
-                {this.steder.map(sted => <option value={sted.sted_navn}>{sted.sted_navn}</option>)}
+                {this.steder.map(sted => (
+                  <option value={sted.sted_navn}>{sted.sted_navn}</option>
+                ))}
               </Form.Control>
             </Form.Group>
           </Form>
-          <Button style={{ width: '67%' }} type="button" variant="outline-success" onClick={this.save}>
+          <Button type="button" variant="primary" onClick={this.save}>
             Lagre
           </Button>
 
-          <Button
-            style={{ width: '30%', marginLeft: '3%' }}
-            type="button"
-            variant="outline-danger"
-            onClick={this.delete}
-          >
+          <Button type="button" variant="danger" onClick={this.delete}>
             Slett
           </Button>
         </Card>

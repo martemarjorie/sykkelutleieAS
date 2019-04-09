@@ -224,7 +224,7 @@ export let sykkelService = new SykkelService();
 class BestillingerService {
   getBestillinger(success) {
     connection.query(
-      'select b.bestilling_id, b.person_id, fornavn, tlf, type_sykkel, modell, type_utstyr, utlev_tidspunkt, innlev_tidspunkt, utlev_sted, innlev_sted from bestilling b left join person p on p.person_id = b.person_id left join leid_sykkel ls on ls.bestilling_id = b.bestilling_id left join leid_utstyr lu on lu.bestilling_id = b.bestilling_id left join sykkel s on ls.sykkel_id = s.sykkel_id left join utstyr u on lu.utstyr_id = u.utstyr_id order by utlev_tidspunkt',
+      'select b.bestilling_id, b.person_id, fornavn, tlf, type_sykkel, modell, type_utstyr, beskrivelse, utlev_tidspunkt, innlev_tidspunkt, utlev_sted, innlev_sted from bestilling b left join person p on p.person_id = b.person_id left join leid_sykkel ls on ls.bestilling_id = b.bestilling_id left join leid_utstyr lu on lu.bestilling_id = b.bestilling_id left join sykkel s on ls.sykkel_id = s.sykkel_id left join utstyr u on lu.utstyr_id = u.utstyr_id order by utlev_tidspunkt',
       (error, results) => {
         if (error) return console.error(error);
 

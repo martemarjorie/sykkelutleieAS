@@ -63,7 +63,7 @@ export default class PersonAdd extends Component {
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
           </Form>
-          <Button variant="primary" onClick={this.add}>
+          <Button type="button" variant="primary" onClick={this.add}>
             Legg til
           </Button>
         </Card>
