@@ -371,19 +371,19 @@ class StedService {
 
 export let stedService = new StedService();
 
-/********** REPERASJON ************/
+/********** REPARASJON ************/
 
 class RepService {
   getReps(success) {
-    connection.query('select * from reperasjon', (error, results) => {
+    connection.query('select * from reparasjon', (error, results) => {
       if (error) return console.error(error);
 
       success(results);
     });
   }
 
-  getRep(reperasjons_id, success) {
-    connection.query('select * from reperasjon where reperasjons_id=?', [reperasjons_id], (error, results) => {
+  getRep(reparasjons_id, success) {
+    connection.query('select * from reparasjon where reparasjons_id=?', [reparasjons_id], (error, results) => {
       if (error) return console.error(error);
 
       success(results[0]);
@@ -398,7 +398,7 @@ export let repService = new RepService();
 class FraktService {
   getFrakter(success) {
     connection.query(
-      'select * from frakt f, frakt_sykkel fs, sykkel s where f.frakt_id = fs.frakt_id and fs.sykkel_id = s.sykkel_id',
+      'SELECT type_sykkel, modell, fra_sted, til_sted, frakt_dato, status FROM frakt f, frakt_sykkel fs, sykkel s WHERE f.frakt_id = fs.frakt_id and fs.sykkel_id = s.sykkel_id',
 
       (error, results) => {
         if (error) return console.error(error);
