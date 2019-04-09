@@ -372,7 +372,6 @@ class StedService {
 export let stedService = new StedService();
 
 /********** REPARASJON ************/
-
 class RepService {
   getReps(success) {
     connection.query('select * from reparasjon', (error, results) => {

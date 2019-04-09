@@ -101,7 +101,7 @@ export default class SykkelEdit extends Component {
                 value={this.tilhorer_sted}
                 onChange={e => (this.tilhorer_sted = e.target.value)}
               >
-                <option defaulValue={this.tilhorer_sted} />
+                <option defaultValue={this.tilhorer_sted} />
                 {this.steder.map(sted => (
                   <option value={sted.sted_navn}>{sted.sted_navn}</option>
                 ))}

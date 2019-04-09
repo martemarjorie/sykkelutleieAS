@@ -15,6 +15,8 @@ export default class FraktEdit extends Component {
   frakt_dato = '';
   statuser = ['Klar for henting', 'Levert'];
   status = '';
+  type_sykkel = '';
+  modell = '';
 
   render() {
     return (
@@ -32,18 +34,14 @@ export default class FraktEdit extends Component {
             </Form.Group>
             <Form.Group>
               <Form.Label>Til sted</Form.Label>
-              <Form.Control
-                as="select"
-                defaultValue={this.til_sted}
-                selected
-                onChange={e => (this.til_sted = e.target.value)}
-              >
-                <option value={this.til_sted} selected />
+              <Form.Control as="select" selected value={this.til_sted} onChange={e => (this.til_sted = e.target.value)}>
+                <option defaultValue={this.til_sted} />
                 {this.steder.map(sted => (
                   <option value={sted.sted_navn}>{sted.sted_navn}</option>
                 ))}
               </Form.Control>
             </Form.Group>
+
             <Form.Group>
               <Form.Label>Frakt dato</Form.Label>
               <Form.Control
@@ -55,7 +53,6 @@ export default class FraktEdit extends Component {
             <Form.Group>
               <Form.Label>Status</Form.Label>
               <Form.Control as="select" value={this.status} onChange={e => (this.status = e.target.value)}>
-                <option value="" />
                 <option value={this.statuser[0]}>{this.statuser[0]}</option>
                 <option value={this.statuser[1]}>{this.statuser[1]}</option>
               </Form.Control>
@@ -79,12 +76,11 @@ export default class FraktEdit extends Component {
 
   mounted() {
     fraktService.getFrakt(this.props.match.params.frakt_id, frakt => {
-      this.type_sykkel = frakt.type_sykkel;
-      this.modell = frakt.modell;
       this.fra_sted = frakt.fra_sted;
       this.til_sted = frakt.til_sted;
       this.frakt_dato = frakt.frakt_dato;
       this.status = frakt.status;
+      console.log(this.til_sted);
     });
 
     stedService.getSteder(steder => {
