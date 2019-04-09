@@ -15,11 +15,11 @@ export default class RepList extends Component {
     return (
       <Row style={{ marginLeft: '2%', marginTop: '2%', marginRight: '2%', marginBottom: '2%' }}>
         <Col>
-          <Card title="Reperasjoner">
+          <Card title="reparasjoner">
             <Table responsive hover>
               <thead>
                 <tr>
-                  <th>Reperasjon id</th>
+                  <th>reparasjon id</th>
                   <th>Sykkel id</th>
                   <th>Innlevering</th>
                   <th>Utlevering</th>
@@ -28,8 +28,8 @@ export default class RepList extends Component {
               </thead>
               {this.reps.map(rep => (
                 <tbody>
-                  <tr key={rep.reperasjons_id}>
-                    <td>{rep.reperasjons_id}</td>
+                  <tr key={rep.reparasjons_id}>
+                    <td>{rep.reparasjons_id}</td>
                     <td>{rep.sykkel_id}</td>
                     <td>
                       {('0' + rep.repinnlev_dato.getDate()).slice(-2) +

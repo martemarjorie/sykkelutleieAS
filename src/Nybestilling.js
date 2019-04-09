@@ -150,7 +150,9 @@ export default class NyBestiling extends Component {
                   <option value="no-val" selected disabeled hidden>
                     -Ingen innlevering valgt-
                   </option>
-                  {this.steder.map(sted => <option value={sted.sted_navn}>{sted.sted_navn}</option>)}
+                  {this.steder.map(sted => (
+                    <option value={sted.sted_navn}>{sted.sted_navn}</option>
+                  ))}
                 </Form.Control>
               </Form.Group>
             </Form>
@@ -238,17 +240,13 @@ export default class NyBestiling extends Component {
     +' DAGSDATO: ' + dagsDato);
 
     if (this.fradato > this.tildato) {
-      alert(
-        'Innleveringsdato er tidligere enn' +
-          ' utleveringstidsdato, velg på nytt.');
+      alert('Innleveringsdato er tidligere enn' + ' utleveringstidsdato, velg på nytt.');
       return;
     } else {
     }
 
     if (this.tildato < dagsDato) {
-      alert(
-        'Innleveringsdato er tidligere enn dagsdato, ' +
-          'velg på nytt.');
+      alert('Innleveringsdato er tidligere enn dagsdato, ' + 'velg på nytt.');
       return;
     } else {
     }
