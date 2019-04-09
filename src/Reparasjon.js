@@ -19,7 +19,7 @@ export default class RepList extends Component {
             <Table responsive hover>
               <thead>
                 <tr>
-                  <th>reparasjon id</th>
+                  <th>Reparasjon id</th>
                   <th>Sykkel id</th>
                   <th>Innlevering</th>
                   <th>Utlevering</th>

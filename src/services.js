@@ -398,14 +398,21 @@ export let repService = new RepService();
 class FraktService {
   getFrakter(success) {
     connection.query(
-      'select * from frakt f, frakt_sykkel fs, sykkel s where f.frakt_id = fs.frakt_id and fs.sykkel_id = s.sykkel_id',
-
+      'select type_sykkel, modell, fra_sted, til_sted, frakt_dato, status from frakt f, frakt_sykkel fs, sykkel s where f.frakt_id = fs.frakt_id and fs.sykkel_id = s.sykkel_id',
       (error, results) => {
         if (error) return console.error(error);
 
         success(results);
       }
     );
+  }
+
+  getFrakt(frakt_id, success) {
+    connection.query('select * from frakt where frakt_id=?', [frakt_id], (error, results) => {
+      if (error) return console.error(error);
+
+      success(results[0]);
+    });
   }
 
   updateFrakt(frakt_id, fra_sted, til_sted, frakt_dato, status, success) {

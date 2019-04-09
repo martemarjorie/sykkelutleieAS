@@ -25,7 +25,9 @@ export default class FraktEdit extends Component {
               <Form.Label>Fra sted</Form.Label>
               <Form.Control as="select" selected value={this.fra_sted} onChange={e => (this.fra_sted = e.target.value)}>
                 <option defaultValue={this.fra_sted} />
-                {this.steder.map(sted => <option value={sted.sted_navn}>{sted.sted_navn}</option>)}
+                {this.steder.map(sted => (
+                  <option value={sted.sted_navn}>{sted.sted_navn}</option>
+                ))}
               </Form.Control>
             </Form.Group>
             <Form.Group>
@@ -37,7 +39,9 @@ export default class FraktEdit extends Component {
                 onChange={e => (this.til_sted = e.target.value)}
               >
                 <option value={this.til_sted} selected />
-                {this.steder.map(sted => <option value={sted.sted_navn}>{sted.sted_navn}</option>)}
+                {this.steder.map(sted => (
+                  <option value={sted.sted_navn}>{sted.sted_navn}</option>
+                ))}
               </Form.Control>
             </Form.Group>
             <Form.Group>
@@ -74,7 +78,7 @@ export default class FraktEdit extends Component {
   }
 
   mounted() {
-    fraktService.getFrakter(this.props.match.params.frakt_id, frakt => {
+    fraktService.getFrakt(this.props.match.params.frakt_id, frakt => {
       this.type_sykkel = frakt.type_sykkel;
       this.modell = frakt.modell;
       this.fra_sted = frakt.fra_sted;
@@ -99,6 +103,7 @@ export default class FraktEdit extends Component {
         history.push('/frakter');
       }
     );
+    this.props.history.replace('/frakter/');
   }
 
   delete() {
@@ -114,5 +119,6 @@ export default class FraktEdit extends Component {
         history.push('/frakter');
       }
     );
+    this.props.history.replace('/frakter/');
   }
 }
