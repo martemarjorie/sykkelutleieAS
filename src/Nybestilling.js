@@ -235,7 +235,9 @@ export default class NyBestiling extends Component {
     let utlev_tidspunkt = this.fradato;
     let innlev_tidspunkt = this.tildato;
 
-    console.log(' FRADATO: ' + this.fradato + ' TILDATO: ' + this.tildato + ' DAGSDATO: ' + dagsDato);
+    console.log(' FRADATO: ' + this.fradato
+    +' TILDATO: ' + this.tildato
+    +' DAGSDATO: ' + dagsDato);
 
     if (this.fradato > this.tildato) {
       alert('Innleveringsdato er tidligere enn' + ' utleveringstidsdato, velg på nytt.');
