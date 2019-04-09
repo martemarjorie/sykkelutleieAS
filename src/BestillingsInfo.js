@@ -3,7 +3,7 @@ import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { bestillingerService } from './services';
-import { Card, Row, Column, NavBar, Form } from './widgets';
+import { Card, Row, Column, NavBar } from './widgets';
 import { Col, Navbar } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 
