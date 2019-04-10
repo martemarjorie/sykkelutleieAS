@@ -397,7 +397,7 @@ export let repService = new RepService();
 class FraktService {
   getFrakter(success) {
     connection.query(
-      'select type_sykkel, modell, fra_sted, til_sted, frakt_dato, status from frakt f, frakt_sykkel fs, sykkel s where f.frakt_id = fs.frakt_id and fs.sykkel_id = s.sykkel_id',
+      'select * from frakt f, frakt_sykkel fs, sykkel s, sted where f.frakt_id = fs.frakt_id and fs.sykkel_id = s.sykkel_id and f.fra_sted = sted.sted_id',
       (error, results) => {
         if (error) return console.error(error);
 
@@ -414,24 +414,16 @@ class FraktService {
     });
   }
 
-  updateFrakt(frakt_id, fra_sted, til_sted, frakt_dato, status, success) {
+  updateFrakt(frakt_id, frakt_dato, status, success) {
     connection.query(
-      'update frakt set fra_sted=?, til_sted=?, frakt_dato=?, status=? where frakt_id=?',
-      [fra_sted, til_sted, frakt_dato, status, frakt_id],
+      'update frakt set frakt_dato=?, status=? where frakt_id=?',
+      [frakt_dato, status, frakt_id],
       (error, results) => {
         if (error) return console.error(error);
 
         success();
       }
     );
-  }
-
-  deleteFrakt(frakt_id, type_sykkel, modell, fra_sted, til_sted, frakt_dato, status, success) {
-    connection.query('delete * from frakt where frakt_id=?', [frakt_id], (error, results) => {
-      if (error) return console.error(error);
-
-      success();
-    });
   }
 }
 export let fraktService = new FraktService();

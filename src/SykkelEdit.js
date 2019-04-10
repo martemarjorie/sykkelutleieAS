@@ -103,7 +103,7 @@ export default class SykkelEdit extends Component {
               >
                 <option defaultValue={this.tilhorer_sted} />
                 {this.steder.map(sted => (
-                  <option value={sted.sted_navn}>{sted.sted_navn}</option>
+                  <option value={sted.sted_id}>{sted.sted_navn}</option>
                 ))}
               </Form.Control>
             </Form.Group>
@@ -164,7 +164,7 @@ export default class SykkelEdit extends Component {
   delete() {
     sykkelService.deleteSykkel(
       this.props.match.params.sykkel_id,
-      this.t,
+      this.type_sykkel,
       this.ramme,
       this.hjul_storrelse,
       this.girsystem,
