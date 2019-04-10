@@ -44,7 +44,7 @@ export default class SykkelList extends Component {
                     <td>{sykkel.timepris}</td>
                     <td>{sykkel.dagspris}</td>
                     <td>{sykkel.modell}</td>
-                    <td>{sykkel.tilhorer_sted}</td>
+                    <td>{sykkel.sted_navn}</td>
                     <td>
                       <NavLink to={'/sykler/' + sykkel.sykkel_id + '/edit'}>
                         <Button variant="outline-primary">Endre</Button>

@@ -397,7 +397,7 @@ export let repService = new RepService();
 class FraktService {
   getFrakter(success) {
     connection.query(
-      'select type_sykkel, modell, fra_sted, til_sted, frakt_dato, status from frakt f, frakt_sykkel fs, sykkel s where f.frakt_id = fs.frakt_id and fs.sykkel_id = s.sykkel_id',
+      'select type_sykkel, modell, fra_sted, til_sted, frakt_dato, status, sted_navn from frakt f, frakt_sykkel fs, sykkel s, sted where f.frakt_id = fs.frakt_id and fs.sykkel_id = s.sykkel_id and f.fra_sted = sted.sted_id',
       (error, results) => {
         if (error) return console.error(error);
 
