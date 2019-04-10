@@ -412,6 +412,18 @@ class RepService {
       success(results[0]);
     });
   }
+
+  updateRep(reparasjons_id, repinnlev_dato, reputlev_dato, rep_beskrivelse, success) {
+    connection.query(
+      'update reparasjon set repinnlev_dato=?, reputlev_dato=?, rep_beskrivelse=? where reparasjons_id=?',
+      [repinnlev_dato, reputlev_dato, rep_beskrivelse, reparasjons_id],
+      (error, results) => {
+        if (error) return console.error(error);
+
+        success();
+      }
+    );
+  }
 }
 
 export let repService = new RepService();
