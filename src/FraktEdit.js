@@ -18,32 +18,18 @@ export default class FraktEdit extends Component {
   type_sykkel = '';
   modell = '';
 
+
+
+
   render() {
     return (
-      <Container style={{ width: '50%', marginTop: '3%' }}>
+      <Container style={{ width: '50%', marginTop: '3%', marginBottom: '3%' }}>
         <Card title="Endre fraktinformasjon">
           <Form>
             <Form.Group>
-              <Form.Label>Fra sted</Form.Label>
-              <Form.Control as="select" value={this.fra_sted} onChange={e => (this.fra_sted = e.target.value)}>
-                <option value="Finse">Finse</option>
-                <option value="Flåm">Flåm</option>
-                <option value="Hallingskeid">Hallingskeid</option>
-                <option value="Haugastøl">Haugastøl</option>
-                <option value="Myrdal">Myrdal</option>
-              </Form.Control>
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Til sted</Form.Label>
-              <Form.Control as="select" value={this.til_sted} onChange={e => (this.til_sted = e.target.value)}>
-                <option value="Haugastøl">Haugastøl</option>
-                <option value="Finse">Finse</option>
-              </Form.Control>
-            </Form.Group>
-
-            <Form.Group>
-              <Form.Label>Frakt dato</Form.Label>
+              <Form.Label>Dato</Form.Label>
               <Form.Control
+              id="fraktdato"
                 type="date"
                 defaultValue={this.frakt_dato}
                 onChange={e => (this.frakt_dato = e.target.value)}
@@ -51,49 +37,69 @@ export default class FraktEdit extends Component {
             </Form.Group>
             <Form.Group>
               <Form.Label>Status</Form.Label>
-              <Form.Control as="select" value={this.status} onChange={e => (this.status = e.target.value)}>
+              <Form.Control as="select" value={this.status} selected onChange={e => (this.status = e.target.value)}>
                 <option value={this.statuser[0]}>{this.statuser[0]}</option>
                 <option value={this.statuser[1]}>{this.statuser[1]}</option>
               </Form.Control>
             </Form.Group>
           </Form>
-          <Button type="button" variant="primary" onClick={this.save}>
+          <Button style={{ width: '67%' }} type="button" variant="outline-success" onClick={this.save}>
             Lagre
           </Button>
 
-          <Button type="button" variant="danger" onClick={this.delete}>
+          <Button
+            style={{ width: '30%', marginLeft: '3%' }}
+            type="button"
+            variant="outline-danger"
+            onClick={this.delete}
+          >
             Slett
           </Button>
         </Card>
       </Container>
-
-      /*<Form.Control as="select" value={this.status} selected onChange={e => (this.status = e.target.value)}>
-        <option value={this.statuser[0]}>{this.statuser[0]}</option>
-        <option value={this.statuser[1]}>{this.statuser[1]}</option>*/
     );
   }
 
+  /*<Form.Control as="select" value={this.status} selected onChange={e => (this.status = e.target.value)}>
+        <option value={this.statuser[0]}>{this.statuser[0]}</option>
+        <option value={this.statuser[1]}>{this.statuser[1]}</option>*/
+
   mounted() {
+    let mnd = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    let dato = 0;
+
+
     fraktService.getFrakt(this.props.match.params.frakt_id, frakt => {
-      this.fra_sted = frakt.fra_sted;
-      this.til_sted = frakt.til_sted;
-      this.frakt_dato = frakt.frakt_dato;
+      console.log(frakt.frakt_dato)
+      this.frakt_dato = frakt.frakt_dato.toString().substr(4, 11).split(' ');;
+      console.log(this.frakt_dato)
+
       this.status = frakt.status;
-      console.log(this.til_sted);
     });
 
     stedService.getSteder(steder => {
       this.steder = steder;
     });
+    setTimeout( () => {
+      // Funksjonen som formaterer datoen fra databasen slik at den matcher sidens formatering.
+
+      dato = `0${1 + mnd.indexOf(this.frakt_dato[0])}`;
+      this.frakt_dato = `${this.frakt_dato[2]}-${dato}-${this.frakt_dato[1]}`;
+
+      console.log(this.frakt_dato)
+
+      document.getElementById('fraktdato').value = this.frakt_dato;
+
+
+    }, 500);
   }
 
   save() {
     fraktService.updateFrakt(
       this.props.match.params.frakt_id,
-      this.fra_sted,
-      this.til_sted,
       this.frakt_dato,
       this.status,
+
       () => {
         history.push('/frakter');
       }
@@ -101,19 +107,4 @@ export default class FraktEdit extends Component {
     this.props.history.replace('/frakter/');
   }
 
-  delete() {
-    fraktService.deleteFrakt(
-      this.props.match.params.frakt_id,
-      this.type_sykkel,
-      this.modell,
-      this.fra_sted,
-      this.til_sted,
-      this.frakt_dato,
-      this.status,
-      () => {
-        history.push('/frakter');
-      }
-    );
-    this.props.history.replace('/frakter/');
-  }
 }

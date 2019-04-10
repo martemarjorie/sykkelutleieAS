@@ -10,7 +10,7 @@ export default class Menu extends Component {
   render() {
     return (
       <Navbar bg="light" variant="light">
-        <Navbar.Brand href="#">Sykkelutleie</Navbar.Brand>
+        <Navbar.Brand href="#">Crank Arm</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link>
             <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/">
