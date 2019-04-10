@@ -20,29 +20,11 @@ export default class FraktEdit extends Component {
 
   render() {
     return (
-      <Container style={{ width: '50%', marginTop: '3%' }}>
+      <Container style={{ width: '50%', marginTop: '3%', marginBottom: '3%' }}>
         <Card title="Endre fraktinformasjon">
           <Form>
             <Form.Group>
-              <Form.Label>Fra sted</Form.Label>
-              <Form.Control as="select" value={this.fra_sted} onChange={e => (this.fra_sted = e.target.value)}>
-                <option value="Finse">Finse</option>
-                <option value="Flåm">Flåm</option>
-                <option value="Hallingskeid">Hallingskeid</option>
-                <option value="Haugastøl">Haugastøl</option>
-                <option value="Myrdal">Myrdal</option>
-              </Form.Control>
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Til sted</Form.Label>
-              <Form.Control as="select" value={this.til_sted} onChange={e => (this.til_sted = e.target.value)}>
-                <option value="Haugastøl">Haugastøl</option>
-                <option value="Finse">Finse</option>
-              </Form.Control>
-            </Form.Group>
-
-            <Form.Group>
-              <Form.Label>Frakt dato</Form.Label>
+              <Form.Label>Dato</Form.Label>
               <Form.Control
                 type="date"
                 defaultValue={this.frakt_dato}
@@ -51,35 +33,37 @@ export default class FraktEdit extends Component {
             </Form.Group>
             <Form.Group>
               <Form.Label>Status</Form.Label>
-              <Form.Control as="select" value={this.status} onChange={e => (this.status = e.target.value)}>
+              <Form.Control as="select" value={this.status} selected onChange={e => (this.status = e.target.value)}>
                 <option value={this.statuser[0]}>{this.statuser[0]}</option>
                 <option value={this.statuser[1]}>{this.statuser[1]}</option>
               </Form.Control>
             </Form.Group>
           </Form>
-          <Button type="button" variant="primary" onClick={this.save}>
+          <Button style={{ width: '67%' }} type="button" variant="outline-success" onClick={this.save}>
             Lagre
           </Button>
 
-          <Button type="button" variant="danger" onClick={this.delete}>
+          <Button
+            style={{ width: '30%', marginLeft: '3%' }}
+            type="button"
+            variant="outline-danger"
+            onClick={this.delete}
+          >
             Slett
           </Button>
         </Card>
       </Container>
-
-      /*<Form.Control as="select" value={this.status} selected onChange={e => (this.status = e.target.value)}>
-        <option value={this.statuser[0]}>{this.statuser[0]}</option>
-        <option value={this.statuser[1]}>{this.statuser[1]}</option>*/
     );
   }
 
+  /*<Form.Control as="select" value={this.status} selected onChange={e => (this.status = e.target.value)}>
+        <option value={this.statuser[0]}>{this.statuser[0]}</option>
+        <option value={this.statuser[1]}>{this.statuser[1]}</option>*/
+
   mounted() {
     fraktService.getFrakt(this.props.match.params.frakt_id, frakt => {
-      this.fra_sted = frakt.fra_sted;
-      this.til_sted = frakt.til_sted;
       this.frakt_dato = frakt.frakt_dato;
       this.status = frakt.status;
-      console.log(this.til_sted);
     });
 
     stedService.getSteder(steder => {
@@ -90,26 +74,9 @@ export default class FraktEdit extends Component {
   save() {
     fraktService.updateFrakt(
       this.props.match.params.frakt_id,
-      this.fra_sted,
-      this.til_sted,
       this.frakt_dato,
       this.status,
-      () => {
-        history.push('/frakter');
-      }
-    );
-    this.props.history.replace('/frakter/');
-  }
 
-  delete() {
-    fraktService.deleteFrakt(
-      this.props.match.params.frakt_id,
-      this.type_sykkel,
-      this.modell,
-      this.fra_sted,
-      this.til_sted,
-      this.frakt_dato,
-      this.status,
       () => {
         history.push('/frakter');
       }
