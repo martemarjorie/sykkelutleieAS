@@ -17,7 +17,7 @@ export default class UtstyrEdit extends Component {
   render() {
     return (
       <Container style={{ width: '50%', marginTop: '3%' }}>
-        <Card title="Endre sykkel">
+        <Card title="Endre utstyr">
           <Form>
             <Form.Group>
               <Form.Label>Type</Form.Label>

@@ -164,10 +164,21 @@ class SykkelService {
     modell,
     success
   ) {
-    connection.query('delete from sykkel where sykkel_id=?', [sykkel_id], (error, results) => {
+    connection.query('delete from leid_sykkel where sykkel_id=?', [sykkel_id], (error, results) => {
       if (error) return console.error(error);
 
-      success();
+      connection.query('delete from frakt_sykkel where sykkel_id=?', [sykkel_id], (error, results) => {
+        if (error) return console.error(error);
+
+        connection.query('delete from reparasjon where sykkel_id=?', [sykkel_id], (error, results) => {
+          if (error) return console.error(error);
+
+          connection.query('delete from sykkel where sykkel_id=?', [sykkel_id], (error, results) => {
+            if (error) return console.error(error);
+            success();
+          });
+        });
+      });
     });
   }
 
@@ -315,10 +326,12 @@ class UtstyrService {
   }
 
   deleteUtstyr(utstyr_id, type_utstyr, beskrivelse, pris, success) {
-    connection.query('delete from utstyr where utstyr_id=?', [utstyr_id], (error, results) => {
+    connection.query('delete from leid_utstyr where utstyr_id=?', [utstyr_id], (error, results) => {
       if (error) return console.error(error);
 
-      success();
+      connection.query('delete from utstyr where utstyr_id=?', [utstyr_id], (error, results) => {
+        if (error) return console.error(error);
+      });
     });
   }
 
