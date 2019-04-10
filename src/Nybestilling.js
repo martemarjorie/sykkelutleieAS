@@ -11,22 +11,22 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
 export default class NyBestiling extends Component {
-  // Values from the database
+  // Verdier fra databasen
   sykler = [];
   persons = [];
   bestillinger = [];
   steder = [];
   utstyrer = [];
 
+  // Arrays som holder på flere verdier
   sykkel_ids = [];
   utstyr_ids = [];
   person_id = null;
 
-  //valgt_person = 'TESTING';
+  //Begrenser utleveringsstedene til kun Haugastøl og Finse
   utsteder = ['1', '2'];
 
-  // Form values
-
+  // Skjemaverdier
   fradato = '';
   tildato = '';
 
@@ -75,7 +75,18 @@ export default class NyBestiling extends Component {
                   ))}
                 </Form.Control>
               </Form.Group>
-
+              <br />
+              <Form.Row>
+                <Form.Group as={Col}>
+                  <Form.Label>Fra dato</Form.Label>
+                  <Form.Control type="date" value={this.fradato} onChange={e => (this.fradato = e.target.value)} />
+                </Form.Group>
+                <Form.Group as={Col}>
+                  <Form.Label>Til dato</Form.Label>
+                  <Form.Control type="date" value={this.tildato} onChange={e => (this.tildato = e.target.value)} />
+                </Form.Group>
+              </Form.Row>
+              <br />
               <Form.Group controlId="sykkel">
                 <Form.Label>Velg sykkel (press CTRL / CMD for flervalg)</Form.Label>
                 <Form.Control
@@ -119,18 +130,6 @@ export default class NyBestiling extends Component {
                   ))}
                 </Form.Control>
               </Form.Group>
-              <br />
-              <Form.Row>
-                <Form.Group as={Col}>
-                  <Form.Label>Fra dato</Form.Label>
-                  <Form.Control type="date" value={this.fradato} onChange={e => (this.fradato = e.target.value)} />
-                </Form.Group>
-                <Form.Group as={Col}>
-                  <Form.Label>Til dato</Form.Label>
-                  <Form.Control type="date" value={this.tildato} onChange={e => (this.tildato = e.target.value)} />
-                </Form.Group>
-              </Form.Row>
-              <br />
               <Form.Group controlId="utsted">
                 <Form.Label>Velg utleveringssted</Form.Label>
                 <Form.Control
@@ -171,7 +170,7 @@ export default class NyBestiling extends Component {
               ))}
             </div>
             <br />
-            <span id="viskunde">Kunden som er valgt:</span>
+            <span id="viskunde">Kunde:</span>
             <div>{this.valgt_person()}</div>
             <br />
             <br />
@@ -185,19 +184,19 @@ export default class NyBestiling extends Component {
             {this.tildato}
             <br />
             <br />
-            <span id="vissykkel">Sykkel:</span>
+            <span id="vissykkel">Valgte sykler:</span>
             <div>{this.valgt_sykler()}</div>
             <br />
             <br />
-            <span id="visutstyr">Utstyr:</span>
+            <span id="visutstyr">Valgt utstyr:</span>
             <div>{this.valgt_utstyr()}</div>
             <br />
             <br />
-            <span id="visutsted">Utleveringssted:</span>
+            <span id="visutsted">Valgt utleveringssted:</span>
             <div>{this.valgt_utlevsted()}</div>
             <br />
             <br />
-            <span id="visinnsted">Innleveringssted:</span>
+            <span id="visinnsted">Valgt innleveringssted:</span>
             <div>{this.valgt_innlevsted()}</div>
             <br />
             <br />
@@ -247,7 +246,7 @@ export default class NyBestiling extends Component {
       });
       jsx.push(
         <div>
-          {utstyr.type_utstyr} - {utstyr.beskrivelse}
+          {utstyr.type_utstyr} - {utstyr.beskrivelse} ({utstyr.pris} kr)
         </div>
       );
     });
@@ -261,7 +260,7 @@ export default class NyBestiling extends Component {
       });
       vs.push(
         <div>
-          {sykkel.type_sykkel} - {sykkel.modell}
+          {sykkel.type_sykkel} - {sykkel.modell} ({sykkel.dagspris} kr)
         </div>
       );
     });

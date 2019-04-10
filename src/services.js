@@ -133,6 +133,17 @@ class SykkelService {
     });
   }
 
+  getBikes(success) {
+    connection.query(
+      'select sykkel_id, type_sykkel, modell, ramme, hjul_storrelse, girsystem, timepris, dagspris, tilhorer_sted, sted_navn from sykkel, sted where sykkel.tilhorer_sted = sted.sted_id',
+      (error, results) => {
+        if (error) return console.error(error);
+
+        success(results);
+      }
+    );
+  }
+
   getSykkel(sykkel_id, success) {
     connection.query('select * from sykkel where sykkel_id=?', [sykkel_id], (error, results) => {
       if (error) return console.error(error);

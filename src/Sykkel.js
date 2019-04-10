@@ -73,7 +73,7 @@ export default class SykkelList extends Component {
     }
   }
   mounted() {
-    sykkelService.getSykler(sykler => {
+    sykkelService.getBikes(sykler => {
       this.sykler = sykler;
     });
   }
