@@ -424,6 +424,26 @@ class RepService {
       }
     );
   }
+
+  addRep(reparasjons_id, sykkel_id, repinnlev_dato, reputlev_dato, rep_beskrivelse, success) {
+    connection.query(
+      'insert into reparasjon (reparasjons_id, sykkel_id, repinnlev_dato, reputlev_dato, rep_beskrivelse) values (?, ?, ?, ?, ?)',
+      [reparasjons_id, sykkel_id, repinnlev_dato, reputlev_dato, rep_beskrivelse],
+      (error, results) => {
+        if (error) return console.error(error);
+
+        success();
+      }
+    );
+  }
+
+  deleteRep(reparasjons_id, sykkel_id, repinnlev_dato, reputlev_dato, rep_beskrivelse, success) {
+    connection.query('delete from reparasjon where reparasjons_id=?', [reparasjons_id], (error, results) => {
+      if (error) return console.error(error);
+
+      success();
+    });
+  }
 }
 
 export let repService = new RepService();
@@ -461,5 +481,26 @@ class FraktService {
       }
     );
   }
+
+  addFrakt(frakt_id, sykkel_id, fra_sted, til_sted, frakt_dato, status, success) {
+    connection.query(
+      'insert into frakt (frakt_id, fra_sted, til_sted, frakt_dato, status) values (?, ?, ?, ?, ?)',
+      [frakt_id, fra_sted, til_sted, frakt_dato, status],
+      (error, results) => {
+        if (error) return console.error(error);
+
+        connection.query(
+          'insert into frakt_sykkel (frakt_id, sykkel_id) values (?, ?)',
+          [results.insertId, sykkel_id],
+          (error, results) => {
+            if (error) return console.error(error);
+
+            success();
+          }
+        );
+      }
+    );
+  }
 }
+
 export let fraktService = new FraktService();

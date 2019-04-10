@@ -123,4 +123,18 @@ export default class FraktEdit extends Component {
     );
     this.props.history.replace('/reps/');
   }
+
+  delete() {
+    repService.deleteRep(
+      this.props.match.params.reparasjons_id,
+      this.sykkel_id,
+      this.repinnlev_dato,
+      this.reputlev_dato,
+      this.rep_beskrivelse,
+      () => {
+        history.push('/reps');
+      }
+    );
+    this.props.history.replace('/reps/');
+  }
 }

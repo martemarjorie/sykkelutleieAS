@@ -70,7 +70,7 @@ export default class NyBestiling extends Component {
                   </option>
                   {this.persons.map(person => (
                     <option value={person.person_id}>
-                      {person.fornavn} {person.etternavn}
+                      {person.tlf} - {person.fornavn} {person.etternavn}
                     </option>
                   ))}
                 </Form.Control>
@@ -153,7 +153,9 @@ export default class NyBestiling extends Component {
                   <option value="no-val" selected disabeled hidden>
                     -Ingen innlevering valgt-
                   </option>
-                  {this.steder.map(sted => <option value={sted.sted_id}>{sted.sted_navn}</option>)}
+                  {this.steder.map(sted => (
+                    <option value={sted.sted_id}>{sted.sted_navn}</option>
+                  ))}
                 </Form.Control>
               </Form.Group>
             </Form>
