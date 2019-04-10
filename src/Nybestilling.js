@@ -22,13 +22,10 @@ export default class NyBestiling extends Component {
   utstyr_ids = [];
   person_id = null;
 
-  //chosen_person = 'TESTING';
-  utsted = ['2', '1'];
+  //valgt_person = 'TESTING';
+  utsteder = ['1', '2'];
 
   // Form values
-  valgt_kunde = '';
-  valgt_sykkel = '';
-  valgt_utstyr = '';
 
   fradato = '';
   tildato = '';
@@ -64,7 +61,7 @@ export default class NyBestiling extends Component {
                     console.log('person_id: ', this.person_id);
                     this.person_id = e.target.value;
 
-                    // this.set_chosen_person();
+                    // this.set_valgt_person();
                   }}
                   title="Velg kunde"
                 >
@@ -142,8 +139,8 @@ export default class NyBestiling extends Component {
                   onChange={e => (this.utleveringssted = e.target.value)}
                 >
                   <option value="">– Ingen utlevering valgt –</option>
-                  <option value={this.utsted[0]}>Haugastøl</option>
-                  <option value={this.utsted[1]}>Finse</option>
+                  <option value={this.utsteder[0]}>Finse</option>
+                  <option value={this.utsteder[1]}>Haugastøl</option>
                 </Form.Control>
               </Form.Group>
               <br />
@@ -175,24 +172,33 @@ export default class NyBestiling extends Component {
             </div>
             <br />
             <span id="viskunde">Kunden som er valgt:</span>
-            <div>Valgt person {this.chosen_person()}</div>
+            <div>{this.valgt_person()}</div>
             <br />
             <br />
-            <span id="visdato">Dato:</span>
-            {this.fradato} - {this.tildato}
+            <span id="visdato">Fra dato: </span>
+
+            {this.fradato}
+
+            <br />
+
+            <span id="visdato">Til dato: </span>
+            {this.tildato}
             <br />
             <br />
             <span id="vissykkel">Sykkel:</span>
+            <div>{this.valgt_sykler()}</div>
             <br />
             <br />
             <span id="visutstyr">Utstyr:</span>
-            <div>{this.chosen_utstyr()}</div>
+            <div>{this.valgt_utstyr()}</div>
             <br />
             <br />
             <span id="visutsted">Utleveringssted:</span>
+            <div>{this.valgt_utlevsted()}</div>
             <br />
             <br />
             <span id="visinnsted">Innleveringssted:</span>
+            <div>{this.valgt_innlevsted()}</div>
             <br />
             <br />
           </Card>
@@ -223,17 +229,17 @@ export default class NyBestiling extends Component {
     });
   }
 
-  chosen_person() {
-    let chosen_person = '';
+  valgt_person() {
+    let valgt_person = '';
     this.persons.forEach(person => {
       if (person.person_id == this.person_id) {
-        chosen_person = person.fornavn + ' ' + person.etternavn;
+        valgt_person = person.fornavn + ' ' + person.etternavn;
       }
     });
-    return chosen_person;
+    return valgt_person;
   }
 
-  chosen_utstyr() {
+  valgt_utstyr() {
     let jsx = [];
     this.utstyr_ids.forEach(utstyr_id => {
       let utstyr = this.utstyrer.find(utstyr => {
@@ -246,6 +252,44 @@ export default class NyBestiling extends Component {
       );
     });
     return <div>{jsx}</div>;
+  }
+  valgt_sykler() {
+    let vs = [];
+    this.sykkel_ids.forEach(sykkel_id => {
+      let sykkel = this.sykler.find(sykkel => {
+        return sykkel.sykkel_id == sykkel_id;
+      });
+      vs.push(
+        <div>
+          {sykkel.type_sykkel} - {sykkel.modell}
+        </div>
+      );
+    });
+    return <div>{vs}</div>;
+  }
+
+  valgt_utlevsted() {
+    let valgt_utlevsted = '';
+    this.utsteder.forEach(utsted => {
+      if ((utsted == this.utleveringssted) == 0) {
+        valgt_utlevsted = 'Finse';
+      } else if ((utsted == this.utleveringssted) == 1) {
+        valgt_utlevsted = 'Haugastøl';
+      } else {
+        valgt_utlevsted = '';
+      }
+    });
+    return valgt_utlevsted;
+  }
+
+  valgt_innlevsted() {
+    let valgt_innlevsted = '';
+    this.steder.forEach(sted => {
+      if (sted.sted_id == this.innleveringssted) {
+        valgt_innlevsted = sted.sted_navn;
+      }
+    });
+    return valgt_innlevsted;
   }
 
   SendBestilling() {
