@@ -18,6 +18,9 @@ export default class FraktEdit extends Component {
   type_sykkel = '';
   modell = '';
 
+
+
+
   render() {
     return (
       <Container style={{ width: '50%', marginTop: '3%', marginBottom: '3%' }}>
@@ -26,6 +29,7 @@ export default class FraktEdit extends Component {
             <Form.Group>
               <Form.Label>Dato</Form.Label>
               <Form.Control
+              id="fraktdato"
                 type="date"
                 defaultValue={this.frakt_dato}
                 onChange={e => (this.frakt_dato = e.target.value)}
@@ -61,14 +65,33 @@ export default class FraktEdit extends Component {
         <option value={this.statuser[1]}>{this.statuser[1]}</option>*/
 
   mounted() {
+    let mnd = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    let dato = 0;
+
+
     fraktService.getFrakt(this.props.match.params.frakt_id, frakt => {
-      this.frakt_dato = frakt.frakt_dato;
+      console.log(frakt.frakt_dato)
+      this.frakt_dato = frakt.frakt_dato.toString().substr(4, 11).split(' ');;
+      console.log(this.frakt_dato)
+
       this.status = frakt.status;
     });
 
     stedService.getSteder(steder => {
       this.steder = steder;
     });
+    setTimeout( () => {
+      // Funksjonen som formaterer datoen fra databasen slik at den matcher sidens formatering.
+
+      dato = `0${1 + mnd.indexOf(this.frakt_dato[0])}`;
+      this.frakt_dato = `${this.frakt_dato[2]}-${dato}-${this.frakt_dato[1]}`;
+
+      console.log(this.frakt_dato)
+
+      document.getElementById('fraktdato').value = this.frakt_dato;
+
+
+    }, 500);
   }
 
   save() {
@@ -83,4 +106,5 @@ export default class FraktEdit extends Component {
     );
     this.props.history.replace('/frakter/');
   }
+
 }
