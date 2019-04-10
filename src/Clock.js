@@ -24,9 +24,9 @@ class Clock extends React.Component {
   }
   render() {
     return (
-      <Card>
-        {this.state.time}.
-      </Card>
+      <p>
+        {this.state.time}
+      </p>
     );
   }
 }
