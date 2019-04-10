@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card';
 
 class Clock extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class Clock extends React.Component {
   render() {
     return (
       <p>
-        {this.state.time}.
+        {this.state.time}
       </p>
     );
   }

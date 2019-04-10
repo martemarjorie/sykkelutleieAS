@@ -15,7 +15,7 @@ export default class RepList extends Component {
     return (
       <Row style={{ marginLeft: '2%', marginTop: '2%', marginRight: '2%', marginBottom: '2%' }}>
         <Col>
-          <Card title="reparasjoner">
+          <Card title="Reparasjoner">
             <Table responsive hover>
               <thead>
                 <tr>
