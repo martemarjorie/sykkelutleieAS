@@ -13,7 +13,7 @@ export default class Home extends Component {
         <Card.Header>SykkelUtleie AS</Card.Header>
           <Card.Body>
             {/*Forside tittelen */}
-            <Card.Title style={{ fontSize: '4em' }}>Crank Arm</Card.Title>
+            <Card.Title style={{ fontSize: '4em' }}>CrankArm</Card.Title>
             <Card.Title style={{ fontSize: '1em', color: 'blue'}}>System for SykkelUtleie AS</Card.Title>
             {/* Klokke og dato på hjemsiden */}
             <Card.Title className="text-muted"><Clock /></Card.Title>
