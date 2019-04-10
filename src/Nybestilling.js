@@ -20,8 +20,10 @@ export default class NyBestiling extends Component {
 
   sykkel_ids = [];
   utstyr_ids = [];
+  person_id = null;
 
-  utsted = ['Haugastøl', 'Finse'];
+  //chosen_person = 'TESTING';
+  utsted = ['2', '1'];
 
   // Form values
   valgt_kunde = '';
@@ -58,7 +60,12 @@ export default class NyBestiling extends Component {
                 <Form.Control
                   as="select"
                   value={this.person_id}
-                  onChange={e => (this.person_id = e.target.value)}
+                  onChange={e => {
+                    console.log('person_id: ', this.person_id);
+                    this.person_id = e.target.value;
+
+                    // this.set_chosen_person();
+                  }}
                   title="Velg kunde"
                 >
                   <option value="no-val" selected disabled hidden>
@@ -135,8 +142,8 @@ export default class NyBestiling extends Component {
                   onChange={e => (this.utleveringssted = e.target.value)}
                 >
                   <option value="">– Ingen utlevering valgt –</option>
-                  <option value={this.utsted[0]}>{this.utsted[0]}</option>
-                  <option value={this.utsted[1]}>{this.utsted[1]}</option>
+                  <option value={this.utsted[0]}>Haugastøl</option>
+                  <option value={this.utsted[1]}>Finse</option>
                 </Form.Control>
               </Form.Group>
               <br />
@@ -150,9 +157,7 @@ export default class NyBestiling extends Component {
                   <option value="no-val" selected disabeled hidden>
                     -Ingen innlevering valgt-
                   </option>
-                  {this.steder.map(sted => (
-                    <option value={sted.sted_navn}>{sted.sted_navn}</option>
-                  ))}
+                  {this.steder.map(sted => <option value={sted.sted_id}>{sted.sted_navn}</option>)}
                 </Form.Control>
               </Form.Group>
             </Form>
@@ -170,15 +175,18 @@ export default class NyBestiling extends Component {
             </div>
             <br />
             <span id="viskunde">Kunden som er valgt:</span>
+            <div>Valgt person {this.chosen_person()}</div>
             <br />
             <br />
             <span id="visdato">Dato:</span>
+            {this.fradato} - {this.tildato}
             <br />
             <br />
             <span id="vissykkel">Sykkel:</span>
             <br />
             <br />
             <span id="visutstyr">Utstyr:</span>
+            <div>{this.chosen_utstyr()}</div>
             <br />
             <br />
             <span id="visutsted">Utleveringssted:</span>
@@ -215,6 +223,31 @@ export default class NyBestiling extends Component {
     });
   }
 
+  chosen_person() {
+    let chosen_person = '';
+    this.persons.forEach(person => {
+      if (person.person_id == this.person_id) {
+        chosen_person = person.fornavn + ' ' + person.etternavn;
+      }
+    });
+    return chosen_person;
+  }
+
+  chosen_utstyr() {
+    let jsx = [];
+    this.utstyr_ids.forEach(utstyr_id => {
+      let utstyr = this.utstyrer.find(utstyr => {
+        return utstyr.utstyr_id == utstyr_id;
+      });
+      jsx.push(
+        <div>
+          {utstyr.type_utstyr} - {utstyr.beskrivelse}
+        </div>
+      );
+    });
+    return <div>{jsx}</div>;
+  }
+
   SendBestilling() {
     let idag = new Date();
     let dagsDato = idag.getFullYear();
@@ -235,9 +268,7 @@ export default class NyBestiling extends Component {
     let utlev_tidspunkt = this.fradato;
     let innlev_tidspunkt = this.tildato;
 
-    console.log(' FRADATO: ' + this.fradato
-    +' TILDATO: ' + this.tildato
-    +' DAGSDATO: ' + dagsDato);
+    console.log(' FRADATO: ' + this.fradato + ' TILDATO: ' + this.tildato + ' DAGSDATO: ' + dagsDato);
 
     if (this.fradato > this.tildato) {
       alert('Innleveringsdato er tidligere enn' + ' utleveringstidsdato, velg på nytt.');
@@ -255,13 +286,14 @@ export default class NyBestiling extends Component {
     // assocated with the value provided by the user (if any).
     let inputs = {
       kunde: this.person_id,
-      sykkel: this.sykkel_id,
+      sykkel: this.sykkel_ids,
       'en dato for utlevering': utlev_tidspunkt,
       'en dato for innlevering': innlev_tidspunkt,
       'et utleveringssted': this.utleveringssted,
       'et innleveringssted': this.innleveringssted
     };
 
+    console.log(this.sykkel_ids);
     // Validating user inputs
     let validation_errors = this.validate_inputs(inputs);
 
