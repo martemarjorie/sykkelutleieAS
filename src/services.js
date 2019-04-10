@@ -303,6 +303,34 @@ class BestillingerService {
       success();
     });
   }
+
+  deleteBestilling(
+    bestilling_id,
+    fornavn,
+    tlf,
+    type_sykkel,
+    modell,
+    type_utstyr,
+    utlev_tidspunkt,
+    innlev_tidspunkt,
+    utlev_sted,
+    innlev_sted,
+    success
+  ) {
+    connection.query('delete from leid_sykkel where bestilling_id=?', [bestilling_id], (error, results) => {
+      if (error) return console.error(error);
+
+      connection.query('delete from leid_utstyr where bestilling_id=?', [bestilling_id], (error, results) => {
+        if (error) return console.error(error);
+
+        connection.query('delete from bestilling where bestilling_id=?', [bestilling_id], (error, results) => {
+          if (error) return console.error(error);
+
+          success(results);
+        });
+      });
+    });
+  }
 }
 export let bestillingerService = new BestillingerService();
 

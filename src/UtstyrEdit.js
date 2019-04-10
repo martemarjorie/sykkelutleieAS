@@ -83,6 +83,6 @@ export default class UtstyrEdit extends Component {
     utstyrService.deleteUtstyr(this.props.match.params.utstyr_id, this.type_utstyr, this.beskrivelse, this.pris, () => {
       history.push('/utstyrer');
     });
-    this.props.history.replace('/utstyrer/');
+    this.props.history.replace('/');
   }
 }
