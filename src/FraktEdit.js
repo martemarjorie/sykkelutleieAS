@@ -25,20 +25,19 @@ export default class FraktEdit extends Component {
           <Form>
             <Form.Group>
               <Form.Label>Fra sted</Form.Label>
-              <Form.Control as="select" selected value={this.fra_sted} onChange={e => (this.fra_sted = e.target.value)}>
-                <option defaultValue={this.fra_sted} />
-                {this.steder.map(sted => (
-                  <option value={sted.sted_navn}>{sted.sted_navn}</option>
-                ))}
+              <Form.Control as="select" value={this.fra_sted} onChange={e => (this.fra_sted = e.target.value)}>
+                <option value="Finse">Finse</option>
+                <option value="Flåm">Flåm</option>
+                <option value="Hallingskeid">Hallingskeid</option>
+                <option value="Haugastøl">Haugastøl</option>
+                <option value="Myrdal">Myrdal</option>
               </Form.Control>
             </Form.Group>
             <Form.Group>
               <Form.Label>Til sted</Form.Label>
-              <Form.Control as="select" selected value={this.til_sted} onChange={e => (this.til_sted = e.target.value)}>
-                <option defaultValue={this.til_sted} />
-                {this.steder.map(sted => (
-                  <option value={sted.sted_navn}>{sted.sted_navn}</option>
-                ))}
+              <Form.Control as="select" value={this.til_sted} onChange={e => (this.til_sted = e.target.value)}>
+                <option value="Haugastøl">Haugastøl</option>
+                <option value="Finse">Finse</option>
               </Form.Control>
             </Form.Group>
 
