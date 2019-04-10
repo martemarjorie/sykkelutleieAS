@@ -28,9 +28,11 @@ import BestillingerEdit from './BestillingEdit';
 
 import FraktList from './Frakt';
 import FraktEdit from './FraktEdit';
+import FraktAdd from './FraktAdd';
 
 import RepList from './Reparasjon';
 import RepEdit from './RepEdit';
+import RepAdd from './RepAdd';
 
 import createHashHistory from 'history/createHashHistory';
 const history = createHashHistory(); // Use history.push(...) to programmatically change path, for instance after successfully saving a student
@@ -54,8 +56,10 @@ ReactDOM.render(
       <Route path="/bestillinger/:bestilling_id/edit" component={BestillingerEdit} />
       <Route exact path="/frakter" component={FraktList} />
       <Route path="/frakter/:frakt_id/edit" component={FraktEdit} />
+      <Route path="/frakter/add" component={FraktAdd} />
       <Route exact path="/reps" component={RepList} />
       <Route path="/reps/:reparasjons_id/edit" component={RepEdit} />
+      <Route path="/reps/add" component={RepAdd} />
     </div>
   </HashRouter>,
   document.getElementById('root')
