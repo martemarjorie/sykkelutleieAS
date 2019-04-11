@@ -31,39 +31,39 @@ export default class Menu extends Component {
             </NavLink>
           </Nav.Link>
           <Nav.Link>
-            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/nybestilling">
+            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="./nybestilling">
               Ny bestilling
             </NavLink>
           </Nav.Link>
           <Nav.Link>
-            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/bestillinger">
+            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="./bestillinger">
               Bestillingsoversikt
             </NavLink>
           </Nav.Link>
           <Nav.Link>
-            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/persons">
+            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="./persons">
               Kunder
             </NavLink>
           </Nav.Link>
           <Nav.Link>
-            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/sykler">
+            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="./sykler">
               Sykler
             </NavLink>
           </Nav.Link>
           <Nav.Link>
-            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/utstyrer">
+            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="./utstyrer">
               Utstyr
             </NavLink>
           </Nav.Link>
 
           <Nav.Link>
-            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/reps">
+            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="./reps">
               Reparasjoner
             </NavLink>
           </Nav.Link>
 
           <Nav.Link>
-            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/frakter">
+            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="./frakter">
               Frakt
             </NavLink>
           </Nav.Link>
