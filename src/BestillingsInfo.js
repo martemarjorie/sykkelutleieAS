@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Component } from 'react-simplified';
 import { NavLink } from 'react-router-dom';
-import { bestillingerService } from './services';
+import { bestillingerService, bestillingService } from './services';
 import { Card } from './widgets';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
@@ -28,6 +28,7 @@ export default class BestillingsList extends Component {
               <th>Til dato</th>
               <th>Utlevering</th>
               <th>Innlevering</th>
+              <th />
               <th>
                 <NavLink to={'/nybestilling'}>
                   <Button>Legg til ny</Button>
@@ -62,6 +63,11 @@ export default class BestillingsList extends Component {
                 <td>{bestilling.utlev_sted}</td>
                 <td>{bestilling.innlev_sted}</td>
                 <td>
+                  <Button type="button" variant="danger" onClick={this.delete}>
+                    Slett
+                  </Button>
+                </td>
+                <td>
                   <NavLink to={'/bestillinger/' + bestilling.bestilling_id + '/edit'}>Endre</NavLink>
                 </td>
               </tr>
@@ -88,5 +94,9 @@ export default class BestillingsList extends Component {
     bestillingerService.getBestillinger(bestillinger => {
       this.bestillinger = bestillinger;
     });
+  }
+
+  delete() {
+    bestillingService.deleteBestilling();
   }
 }
