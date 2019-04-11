@@ -12,7 +12,7 @@ import Col from 'react-bootstrap/Col';
 export default class FraktList extends Component {
   frakter = [];
 
-  render() {
+    render() {
     return (
       <Row style={{ marginLeft: '2%', marginTop: '2%', marginRight: '2%', marginBottom: '2%' }}>
         <Col>
@@ -39,8 +39,8 @@ export default class FraktList extends Component {
                   <tr key={frakt.frakt_id}>
                     <td>{frakt.type_sykkel}</td>
                     <td>{frakt.modell}</td>
-                    <td>{frakt.fra_sted}</td>
-                    <td>{frakt.til_sted}</td>
+                    <td>{frakt.sted_navn, frakt.fra_sted}</td>
+                    <td>{frakt.sted_id, frakt.til_sted}</td>
                     <td>
                       {('0' + frakt.frakt_dato.getDate()).slice(-2) +
                         '.' +
