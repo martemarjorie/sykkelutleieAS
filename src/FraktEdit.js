@@ -92,6 +92,6 @@ export default class FraktEdit extends Component {
         history.push('/frakter');
       }
     );
-    this.props.history.replace('/frakter/');
+    this.props.history.replace('/');
   }
 }
