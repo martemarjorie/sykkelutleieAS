@@ -1,5 +1,6 @@
 import React from 'react';
 
+/* Lager klokke med state time, som er dagens dato til streng */
 class Clock extends React.Component {
   constructor(props) {
     super(props);
@@ -7,6 +8,7 @@ class Clock extends React.Component {
       time: new Date().toLocaleString()
     };
   }
+  /* etter den er ferdig rendra, oppdater klokka hvert sekund */
   componentDidMount() {
     this.intervalID = setInterval(() => this.updateClock(), 1000);
   }

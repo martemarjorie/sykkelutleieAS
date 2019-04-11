@@ -9,16 +9,13 @@ import Nav from 'react-bootstrap/Nav';
 export default class Menu extends Component {
   render() {
     return (
+      /* legger til forskjellige linker i menyen til de forskjellige sidene,
+       styler de og velger egen farge for å vise hvilken man er på (aktiv) */
       <Navbar bg="dark" variant="light">
         <Navbar.Brand href="#" style={{ color: 'DeepSkyBlue' }}>
           Crank Arm
         </Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link>
-            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/">
-              Hjem
-            </NavLink>
-          </Nav.Link>
           <Nav.Link>
             <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/nybestilling">
               Ny bestilling
@@ -44,13 +41,11 @@ export default class Menu extends Component {
               Utstyr
             </NavLink>
           </Nav.Link>
-
           <Nav.Link>
             <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/reps">
               Reparasjoner
             </NavLink>
           </Nav.Link>
-
           <Nav.Link>
             <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/frakter">
               Frakt
