@@ -3,8 +3,11 @@ import { Component } from 'react-simplified';
 import ReactDOM from 'react-dom';
 import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { repService } from './services';
-import { Card, NavBar, Button, Form } from './widgets';
+import { Card, Column, NavBar } from './widgets';
 import Table from 'react-bootstrap/Table';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -24,6 +27,11 @@ export default class RepList extends Component {
                   <th>Innlevering</th>
                   <th>Utlevering</th>
                   <th>Beskrivelse</th>
+                  <th>
+                    <NavLink to={'/reps/add'}>
+                      <Button>Legg til ny</Button>
+                    </NavLink>
+                  </th>
                 </tr>
               </thead>
               {this.reps.map(rep => (
@@ -46,6 +54,11 @@ export default class RepList extends Component {
                         rep.reputlev_dato.getFullYear()}
                     </td>
                     <td>{rep.rep_beskrivelse}</td>
+                    <td>
+                      <NavLink to={'/reps/' + rep.reparasjons_id + '/edit'}>
+                        <Button variant="outline-primary">Endre</Button>
+                      </NavLink>
+                    </td>
                   </tr>
                 </tbody>
               ))}
