@@ -5,19 +5,8 @@ import { NavLink, HashRouter, Route } from 'react-router-dom';
 import { Container, Col, Row } from 'react-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { fraktService } from './services';
 
 export default class Menu extends Component {
-
-  // const steder = ['Finse', 'Haugastøl', 'Myrdal', 'Flåm', 'Hallingskeid'];
-  //
-  // oppdaterSted(){
-  //   const steder = ['Finse', 'Haugastøl', 'Myrdal', 'Flåm', 'Hallingskeid'];
-  //   const visSteder = steder.map((steder) =>
-  //   <li>{steder}</li>
-  //   );
-  // };
-
   render() {
     return (
       <Navbar bg="dark" variant="light">
@@ -69,7 +58,6 @@ export default class Menu extends Component {
           </Nav.Link>
         </Nav>
       </Navbar>
-      </div>
     );
   }
 }
