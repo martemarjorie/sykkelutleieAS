@@ -115,5 +115,6 @@ export default class BestillingsList extends Component {
       }
     );
     this.props.history.replace('/');
+    console.log('slette-func kjørt');
   }
 }

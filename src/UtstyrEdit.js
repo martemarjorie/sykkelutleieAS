@@ -84,5 +84,6 @@ export default class UtstyrEdit extends Component {
       history.push('/utstyrer');
     });
     this.props.history.replace('/');
+    console.log(this.utstyr_id);
   }
 }

@@ -318,13 +318,13 @@ class BestillingerService {
     success
   ) {
     connection.query('delete from leid_sykkel where bestilling_id=?', [bestilling_id], (error, results) => {
-      if (error) return console.error(error);
+      if (error) return console.error('Feil');
 
       connection.query('delete from leid_utstyr where bestilling_id=?', [bestilling_id], (error, results) => {
-        if (error) return console.error(error);
+        if (error) return console.error('Feil2');
 
         connection.query('delete from bestilling where bestilling_id=?', [bestilling_id], (error, results) => {
-          if (error) return console.error(error);
+          if (error) return console.error('Feil3');
 
           success(results);
         });
