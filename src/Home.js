@@ -13,13 +13,12 @@ export default class Home extends Component {
           <Card.ImgOverlay>
             {/*Forside tittelen */}
             <Card.Title style={{ fontSize: '2em', color: 'DeepSkyBlue' }}>System for SykkelUtleie AS</Card.Title>
-            {/* Klokke og dato på hjemsiden */}
             <Card.Title className="text-muted">
+            {/* Klokke og dato på hjemsiden */}
               <Clock />
             </Card.Title>
           </Card.ImgOverlay>
 
-          {/*Fargen og størrelsen på footeren på hjem*/}
         </Card>
       </div>
     );

@@ -34,8 +34,9 @@ import RepEdit from './RepEdit';
 import RepAdd from './RepAdd';
 
 import createHashHistory from 'history/createHashHistory';
-const history = createHashHistory(); // Use history.push(...) to programmatically change path, for instance after successfully saving a student
+const history = createHashHistory();
 
+/* legger inn route for å navigere gjennom sidene i menybaren */
 ReactDOM.render(
   <HashRouter>
     <div>

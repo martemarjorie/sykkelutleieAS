@@ -1,5 +1,6 @@
 import React from 'react';
 
+/* Lager klokke med state time, som er dagens dato til streng */
 class Clock extends React.Component {
   constructor(props) {
     super(props);
