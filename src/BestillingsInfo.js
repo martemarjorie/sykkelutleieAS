@@ -48,7 +48,9 @@ export default class BestillingsList extends Component {
                     <td>{bestilling.tlf}</td>
                     <td>{bestilling.type_sykkel}</td>
                     <td>{bestilling.modell}</td>
-                    <td>{bestilling.type_utstyr}</td>
+                    <td>
+                      {bestilling.type_utstyr} {bestilling.beskrivelse}
+                    </td>
                     <td>
                       {('0' + bestilling.utlev_tidspunkt.getDate()).slice(-2) +
                         '.' +

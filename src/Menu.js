@@ -9,48 +9,50 @@ import Nav from 'react-bootstrap/Nav';
 export default class Menu extends Component {
   render() {
     return (
-      <Navbar bg="light" variant="light">
-        <Navbar.Brand href="#">Crank Arm</Navbar.Brand>
+      <Navbar bg="dark" variant="light">
+        <Navbar.Brand href="#" style={{ color: 'DeepSkyBlue' }}>
+          Crank Arm
+        </Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link>
-            <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/">
+            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/">
               Hjem
             </NavLink>
           </Nav.Link>
           <Nav.Link>
-            <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/nybestilling">
+            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/nybestilling">
               Ny bestilling
             </NavLink>
           </Nav.Link>
           <Nav.Link>
-            <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/bestillinger">
+            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/bestillinger">
               Bestillingsoversikt
             </NavLink>
           </Nav.Link>
           <Nav.Link>
-            <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/persons">
+            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/persons">
               Kunder
             </NavLink>
           </Nav.Link>
           <Nav.Link>
-            <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/sykler">
+            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/sykler">
               Sykler
             </NavLink>
           </Nav.Link>
           <Nav.Link>
-            <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/utstyrer">
+            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/utstyrer">
               Utstyr
             </NavLink>
           </Nav.Link>
 
           <Nav.Link>
-            <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/reps">
+            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/reps">
               Reparasjoner
             </NavLink>
           </Nav.Link>
 
           <Nav.Link>
-            <NavLink style={{ color: 'grey' }} exact activeStyle={{ color: 'black' }} to="/frakter">
+            <NavLink style={{ color: 'silver' }} exact activeStyle={{ color: 'DeepSkyBlue' }} to="/frakter">
               Frakt
             </NavLink>
           </Nav.Link>
