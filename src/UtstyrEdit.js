@@ -52,11 +52,16 @@ export default class UtstyrEdit extends Component {
               />
             </Form.Group>
           </Form>
-          <Button type="button" variant="primary" onClick={this.save}>
+          <Button style={{ width: '67%' }} type="button" variant="outline-success" onClick={this.save}>
             Lagre
           </Button>
 
-          <Button type="button" variant="danger" onClick={this.delete}>
+          <Button
+            style={{ width: '30%', marginLeft: '3%' }}
+            type="button"
+            variant="outline-danger"
+            onClick={this.delete}
+          >
             Slett
           </Button>
         </Card>

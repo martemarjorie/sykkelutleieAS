@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Component } from 'react-simplified';
 import { NavLink } from 'react-router-dom';
-import { bestillingerService } from './services';
+import { bestillingerService, bestillingService } from './services';
 import { Card } from './widgets';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
@@ -116,5 +116,9 @@ export default class BestillingsList extends Component {
     );
     this.props.history.replace('/');
     console.log('slette-func kjørt');
+  }
+
+  delete() {
+    bestillingService.deleteBestilling();
   }
 }
