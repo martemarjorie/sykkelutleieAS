@@ -1,5 +1,4 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card';
 
 class Clock extends React.Component {
   constructor(props) {
@@ -9,10 +8,7 @@ class Clock extends React.Component {
     };
   }
   componentDidMount() {
-    this.intervalID = setInterval(
-      () => this.updateClock(),
-      1000
-    );
+    this.intervalID = setInterval(() => this.updateClock(), 1000);
   }
   componentWillUnmount() {
     clearInterval(this.intervalID);
@@ -23,11 +19,7 @@ class Clock extends React.Component {
     });
   }
   render() {
-    return (
-      <p>
-        {this.state.time}
-      </p>
-    );
+    return <p>{this.state.time}</p>;
   }
 }
 

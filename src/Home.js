@@ -8,19 +8,19 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-
-        <Card className="text-center">
-          <Card.Body>
+        <Card bg="black" className="text-center">
+          <Card.Img src="bakgrunn6.png" alt="Crank Arm" />
+          <Card.ImgOverlay>
             {/*Forside tittelen */}
-            <Card.Title style={{ fontSize: '4em' }}>Crank Arm</Card.Title>
-            <Card.Title style={{ fontSize: '1em', color: 'green'}}>System for SykkelUtleie AS</Card.Title>
+            <Card.Title style={{ fontSize: '2em', color: 'DeepSkyBlue' }}>System for SykkelUtleie AS</Card.Title>
             {/* Klokke og dato på hjemsiden */}
-            <Card.Title className="text-muted"><Clock /></Card.Title>
-          </Card.Body>
-          {/*Fargen og størrelsen på footeren på hjem*/}
-          <Card.Footer style={{ backgroundColor: 'lightblue', position: 'fixed', bottom: '0', width: '100%' }}></Card.Footer>
-        </Card>
+            <Card.Title className="text-muted">
+              <Clock />
+            </Card.Title>
+          </Card.ImgOverlay>
 
+          {/*Fargen og størrelsen på footeren på hjem*/}
+        </Card>
       </div>
     );
   }

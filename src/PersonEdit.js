@@ -57,11 +57,16 @@ export default class PersonEdit extends Component {
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
           </Form>
-          <Button type="submit" variant="primary" onClick={this.save}>
+          <Button style={{ width: '67%' }} type="button" variant="outline-success" onClick={this.save}>
             Lagre
           </Button>
 
-          <Button type="submit" variant="danger" onClick={this.delete}>
+          <Button
+            style={{ width: '30%', marginLeft: '3%' }}
+            type="button"
+            variant="outline-danger"
+            onClick={this.delete}
+          >
             Slett
           </Button>
         </Card>
@@ -103,6 +108,6 @@ export default class PersonEdit extends Component {
         history.push('/persons');
       }
     );
-    this.props.history.replace('/persons/');
+    this.props.history.replace('/');
   }
 }

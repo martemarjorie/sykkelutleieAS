@@ -234,7 +234,10 @@ export default class NyBestiling extends Component {
     let valgt_person = '';
     this.persons.forEach(person => {
       if (person.person_id == this.person_id) {
-        valgt_person = person.fornavn + ' ' + person.etternavn;
+        document.getElementById('viskunde').innerHTML = `Kunde: <br>${person.fornavn}
+        ${person.etternavn} <br>
+        ${person.tlf} <br>
+        ${person.epost} <br>`;
       }
     });
     return valgt_person;
@@ -363,6 +366,9 @@ export default class NyBestiling extends Component {
         window.history.push('/bestillinger');
       }
     );
+    alert('Bestilling foretatt!');
+    this.props.history.replace('/nybestilling');
+    location.reload();
   }
   validate_inputs(inputs) {
     /*
