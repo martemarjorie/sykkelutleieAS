@@ -8,13 +8,15 @@ class Clock extends React.Component {
       time: new Date().toLocaleString()
     };
   }
-  /* etter den er ferdig rendra, oppdater klokka hvert sekund */
+  // Begynner klokken når man går inn på meny
   componentDidMount() {
     this.intervalID = setInterval(() => this.updateClock(), 1000);
   }
+  // Avslutter funksjonen når man forlater hjem siden for å spare minne
   componentWillUnmount() {
     clearInterval(this.intervalID);
   }
+  // Oppdaterer klokken
   updateClock() {
     this.setState({
       time: new Date().toLocaleString()
