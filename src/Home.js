@@ -19,7 +19,6 @@ export default class Home extends Component {
             </Card.Title>
           </Card.Body>
           {/*Fargen og størrelsen på footeren på hjem*/}
-          <Card.Footer style={{ backgroundColor: 'lightblue', position: 'fixed', bottom: '0', width: '100%' }} />
         </Card>
       </div>
     );

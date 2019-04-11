@@ -99,7 +99,7 @@ export default class BestillingsList extends Component {
   }
 
   delete() {
-    bestillingerService.deleteBestilling(
+    bestillingService.deleteBestilling(
       this.props.match.params.bestilling_id,
       this.fornavn,
       this.tlf,
@@ -116,9 +116,5 @@ export default class BestillingsList extends Component {
     );
     this.props.history.replace('/');
     console.log('slette-func kjørt');
-  }
-
-  delete() {
-    bestillingService.deleteBestilling();
   }
 }

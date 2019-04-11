@@ -55,17 +55,31 @@ class BestillingService {
     );
   }
 
-  deleteBestilling(bestilling_id, person_id, utlev_tidspunkt, innlev_tidspunkt, utlev_sted, innlev_sted, success) {
+  deleteBestilling(
+    bestilling_id,
+    fornavn,
+    tlf,
+    type_sykkel,
+    modell,
+    type_utstyr,
+    utlev_tidspunkt,
+    innlev_tidspunkt,
+    utlev_sted,
+    innlev_sted,
+    success
+  ) {
     connection.query('delete from leid_sykkel where bestilling_id=?', [bestilling_id], (error, results) => {
-      if (error) return console.error(error);
+      if (error) return console.error(error1);
+    });
 
-      connection.query('delete from leid_utstyr where bestilling_id=?', [bestilling_id], (error, results) => {
-        if (error) return console.error(error);
+    connection.query('delete from leid_utstyr where bestilling_id=?', [bestilling_id], (error, results) => {
+      if (error) return console.error(error2);
+    });
 
-        connection.query('delete from bestilling where bestilling_id=?', [bestilling_id], (error, results) => {
-          if (error) return console.error(error);
-        });
-      });
+    connection.query('delete from bestilling where bestilling_id=?', [bestilling_id], (error, results) => {
+      if (error) return console.error(error3);
+
+      success();
     });
   }
 }
@@ -317,35 +331,8 @@ class BestillingerService {
       success();
     });
   }
-
-  deleteBestilling(
-    bestilling_id,
-    fornavn,
-    tlf,
-    type_sykkel,
-    modell,
-    type_utstyr,
-    utlev_tidspunkt,
-    innlev_tidspunkt,
-    utlev_sted,
-    innlev_sted,
-    success
-  ) {
-    connection.query('delete from leid_sykkel where bestilling_id=?', [bestilling_id], (error, results) => {
-      if (error) return console.error('Feil');
-
-      connection.query('delete from leid_utstyr where bestilling_id=?', [bestilling_id], (error, results) => {
-        if (error) return console.error('Feil2');
-
-        connection.query('delete from bestilling where bestilling_id=?', [bestilling_id], (error, results) => {
-          if (error) return console.error('Feil3');
-
-          success(results);
-        });
-      });
-    });
-  }
 }
+
 export let bestillingerService = new BestillingerService();
 
 /********** UTSTYR ************/
