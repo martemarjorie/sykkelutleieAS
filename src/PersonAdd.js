@@ -1,12 +1,14 @@
+// importerer component fra react-biblioteket. 
+// brukes for å lage en GUI-applikasjon med React 
 import * as React from 'react';
-import { Component } from 'react-simplified';
-import { personService } from './services';
-import { Card } from './widgets';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
+import { Component } from 'react-simplified'; // component er en klasse som brukes til å lage et nytt komponent 
+import { personService } from './services'; // importerer fraktService fra services.js - classen spørringene hentes fra 
+import { Card } from './widgets'; // card elementene hentes fra widgets.js filen, styling  
+import Button from 'react-bootstrap/Button'; // bruker elementer fra bootstrap for styling   
 
+// PersonAdd er en subklasse av Component 
 export default class PersonAdd extends Component {
+  // definerer variabler 
   fornavn = '';
   etternavn = '';
   tlf = '';
@@ -16,6 +18,7 @@ export default class PersonAdd extends Component {
     return (
       <Container style={{ width: '50%', marginTop: '3%' }}>
         <Card title="Legg til ny kunde">
+        {/* alle disse fylles ut når man oppretter en kunde */}
           <Form>
             <Form.Group>
               <Form.Label>Fornavn</Form.Label>
@@ -61,6 +64,7 @@ export default class PersonAdd extends Component {
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
           </Form>
+          {/* legg til knapp som refererer til add funksjonen */}
           <Button variant="primary" onClick={this.add}>
             Legg til
           </Button>
@@ -69,6 +73,9 @@ export default class PersonAdd extends Component {
     );
   }
 
+  // funksjonen add, som legger til de gitte opplysningene inn i kundeoversikten  
+  // personService viser til hvilken class fra Service spørringen gjøres i   
+  // addPerson refererer til hvilken spørring som skal utføres  
   add() {
     personService.addPerson(
       this.props.match.params.person_id,
@@ -77,9 +84,9 @@ export default class PersonAdd extends Component {
       this.tlf,
       this.epost,
       () => {
-        history.push('/persons');
+        history.push('/persons'); //pusher all informasjonen til kundelista
       }
     );
-    this.props.history.replace('/');
+    this.props.history.replace('/'); // brukeren kommer til hjemsiden når 'legg til' trykkes på  
   }
 }

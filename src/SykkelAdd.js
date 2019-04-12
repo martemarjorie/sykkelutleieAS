@@ -1,12 +1,16 @@
+// importerer component fra react-biblioteket. 
+// brukes for å lage en GUI-applikasjon med React 
 import * as React from 'react';
-import { Component } from 'react-simplified';
-import { sykkelService, stedService } from './services';
-import { Card } from './widgets';
-import Form from 'react-bootstrap/Form';
+import { Component } from 'react-simplified'; // component er en klasse som brukes til å lage et nytt komponent 
+import { sykkelService, stedService } from './services'; // importerer fraktService fra services.js - classen spørringene hentes fra
+import { Card } from './widgets'; // card elementene hentes fra widgets.js filen, styling  
+import Form from 'react-bootstrap/Form'; // bruker elementer fra bootstrap for styling 
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
+// SykkelAdd er en subklasse av Component
 export default class SykkelAdd extends Component {
+  //definerer variabler og arrays
   sykkeltyper = ['Tandem', 'Racer', 'Downhill', 'Barnesykkel']; //Begrenser valgene til disse
   ramme = '';
   hjul_storrelse = '';
@@ -23,11 +27,12 @@ export default class SykkelAdd extends Component {
       <Container style={{ width: '50%', marginTop: '3%' }}>
         <Card title="Legg til sykkel">
           <Form>
+            {/* alle disse fylles ut når man oppretter en sykkel */}
             <Form.Group>
               <Form.Label>Type</Form.Label>
               <Form.Control as="select" onChange={e => (this.type_sykkel = e.target.value)}>
                 <option value="" />
-                <option value={this.sykkeltyper[0]}>{this.sykkeltyper[0]}</option>
+                <option value={this.sykkeltyper[0]}>{this.sykkeltyper[0]}</option> {/* refererer til arrayet */}
                 <option value={this.sykkeltyper[1]}>{this.sykkeltyper[1]}</option>
                 <option value={this.sykkeltyper[2]}>{this.sykkeltyper[2]}</option>
                 <option value={this.sykkeltyper[3]}>{this.sykkeltyper[3]}</option>
@@ -114,6 +119,9 @@ export default class SykkelAdd extends Component {
     });
   }
 
+  // funksjonen add, som legger til de gitte opplysningene inn i kundeoversikten  
+  // sykkelService viser til hvilken class fra Service spørringen gjøres i   
+  // addSykkel refererer til hvilken spørring som skal utføres  
   add() {
     sykkelService.addSykkel(
       this.props.match.params.sykkel_id,

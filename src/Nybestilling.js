@@ -1,14 +1,17 @@
+// importerer component fra react-biblioteket. 
+// brukes for å lage en GUI-applikasjon med React 
 import * as React from 'react';
-import { Component } from 'react-simplified';
+import { Component } from 'react-simplified'; // component er en klasse som brukes til å lage et nytt komponent 
 import { NavLink } from 'react-router-dom';
-import { personService, sykkelService, stedService, utstyrService, bestillingService } from './services';
-import { Card } from './widgets';
-import Form from 'react-bootstrap/Form';
+import { personService, sykkelService, stedService, utstyrService, bestillingService } from './services'; // importerer fra services.js - classen spørringene hentes fra 
+import { Card } from './widgets'; // card elementene hentes fra widgets.js filen, styling  
+import Form from 'react-bootstrap/Form'; // elementene hentes fra bootstrap, styling  
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-export default class NyBestiling extends Component {
+// NyBestilling er en subklasse av Component 
+export default class NyBestilling extends Component {
   // Verdier fra databasen
   sykler = [];
   persons = [];
@@ -36,11 +39,13 @@ export default class NyBestiling extends Component {
 
   render() {
     return (
+      // styling av sidens oppsett  
       <Row style={{ marginLeft: '2%', marginTop: '2%', marginRight: '2%', marginBottom: '2%' }}>
         <Col>
           <Card title="Opprett bestilling">
             <Form>
               <br />
+              {/* knapp med link til 'legg til' */}
               <NavLink to={'/persons/add'}>
                 <Button variant="outline-secondary" size="sm">
                   Registrer ny kunde
@@ -51,30 +56,31 @@ export default class NyBestiling extends Component {
 
               <Form.Group controlId="kunde">
                 <Form.Label>Velg eksisterende kunde</Form.Label>
-
+                
+                {/* mulighet til å velge kunde i en select-liste */}
                 <Form.Control
                   as="select"
                   value={this.person_id}
                   onChange={e => {
                     console.log('person_id: ', this.person_id);
                     this.person_id = e.target.value;
-
-                    // this.set_valgt_person();
                   }}
                   title="Velg kunde"
                 >
                   <option value="no-val" selected disabled hidden>
                     -Ingen valgt kunde-
                   </option>
+                  {/* mapper alle registrerte personer i databasen */}
                   {this.persons.map(person => (
                     <option value={person.person_id}>
-                      {person.tlf} - {person.fornavn} {person.etternavn}
+                      {person.tlf} - {person.fornavn} {person.etternavn} {/* verdiene som kommer opp i nedtrekkslisten*/}
                     </option>
                   ))}
                 </Form.Control>
               </Form.Group>
               <br />
               <Form.Row>
+                {/* velger fra og til dato, refererer til en funksjon*/}
                 <Form.Group as={Col}>
                   <Form.Label>Fra dato</Form.Label>
                   <Form.Control type="date" value={this.fradato} onChange={e => (this.fradato = e.target.value)} />
@@ -89,7 +95,7 @@ export default class NyBestiling extends Component {
                 <Form.Label>Velg sykkel (press CTRL / CMD for flervalg)</Form.Label>
                 <Form.Control
                   as="select"
-                  multiple
+                  multiple 
                   value={this.sykkel_ids}
                   onChange={e => {
                     this.sykkel_ids = Array.from(e.target.selectedOptions).map(option => option.value);
@@ -151,6 +157,7 @@ export default class NyBestiling extends Component {
                   <option value="no-val" selected disabeled hidden>
                     -Ingen innlevering valgt-
                   </option>
+                  {/* mapper steder */}
                   {this.steder.map(sted => (
                     <option value={sted.sted_id}>{sted.sted_navn}</option>
                   ))}
@@ -161,8 +168,11 @@ export default class NyBestiling extends Component {
         </Col>
 
         <Col>
+        {/* får en oversikt over alt en har bestilt */}
+        {/* ulik info legges i <span> som referer til en funksjon og har en id */}
           <Card title="Kvittering">
             <div>
+              {/* error hvis noe ikke er valgt */}
               {Object.keys(this.errors_to_user).map(input_key => (
                 <div style={{ color: 'red', fontSize: '1.2em' }}>
                   Du har ikke valgt {input_key + this.errors_to_user[input_key]}
@@ -171,7 +181,7 @@ export default class NyBestiling extends Component {
             </div>
             <br />
             <span id="viskunde">Kunde:</span>
-            <div>{this.valgt_person()}</div>
+            <div>{this.valgt_person()}</div> {/* refererer til valgt_person funksjonen */}
             <br />
             <br />
             <span id="visdato">Fra dato: </span>
@@ -202,7 +212,7 @@ export default class NyBestiling extends Component {
             <br />
           </Card>
           <br />
-          <Button type="Button" onClick={this.SendBestilling}>
+          <Button type="Button" onClick={this.SendBestilling}> {/* knapp med funksjonen SendBestilling */}
             Send bestilling
           </Button>
         </Col>
@@ -210,6 +220,9 @@ export default class NyBestiling extends Component {
     );
   }
 
+   
+  // mounted()- funksjonen blir kalt når komponenten blir lagt til for visning 
+  // kjører spørringen som ligger i classen 
   mounted() {
     personService.getPersons(persons => {
       this.persons = persons;
@@ -228,6 +241,7 @@ export default class NyBestiling extends Component {
     });
   }
 
+   // hvis person_id stemmer skal all informasjonen printes ut i kvittering 
   valgt_person() {
     let valgt_person = '';
     this.persons.forEach(person => {
@@ -241,6 +255,7 @@ export default class NyBestiling extends Component {
     return valgt_person;
   }
 
+  // pusher valgt utstyr inn i den tomme arrayen jsx  
   valgt_utstyr() {
     let jsx = [];
     this.utstyr_ids.forEach(utstyr_id => {
@@ -255,6 +270,8 @@ export default class NyBestiling extends Component {
     });
     return <div>{jsx}</div>;
   }
+
+  // pusher valgt sykkel inn i den tomme arrayen vs 
   valgt_sykler() {
     let vs = [];
     this.sykkel_ids.forEach(sykkel_id => {
@@ -270,6 +287,9 @@ export default class NyBestiling extends Component {
     return <div>{vs}</div>;
   }
 
+  // hvis utsagn 1 stemmer skal valgt utlev-sted være Finse (0) 
+  // hvis utsagn 2 stemmer skal valgt utlev-sted være Haugastøl (1) 
+
   valgt_utlevsted() {
     let valgt_utlevsted = '';
     this.utsteder.forEach(utsted => {
@@ -284,6 +304,7 @@ export default class NyBestiling extends Component {
     return valgt_utlevsted;
   }
 
+  // hvis sted_id hører til innleveringssted skal navnet printes ut 
   valgt_innlevsted() {
     let valgt_innlevsted = '';
     this.steder.forEach(sted => {
@@ -295,10 +316,11 @@ export default class NyBestiling extends Component {
   }
 
   SendBestilling() {
+    // definerer to variabler, i dag og dagsdato 
     let idag = new Date();
     let dagsDato = idag.getFullYear();
-    // let dagsDatoRiktigFormat = idag.getDate() + '-' + (idag.getMonth() + 1) + '-' + idag.getFullYear();
 
+    // gjør om oppsettet slik at datoformatet stemmer 
     if (idag.getMonth() + 1 < 10) {
       dagsDato += '-0' + (idag.getMonth() + 1);
     } else {
@@ -311,17 +333,22 @@ export default class NyBestiling extends Component {
       dagsDato += '-' + idag.getDate();
     }
 
+    // definerer utlev_tidspunkt og innlev_tidspunkt. Setter det til fra og tildato 
     let utlev_tidspunkt = this.fradato;
     let innlev_tidspunkt = this.tildato;
 
     console.log(' FRADATO: ' + this.fradato + ' TILDATO: ' + this.tildato + ' DAGSDATO: ' + dagsDato);
 
+    // hvis fradato er større enn tildato 
+    // kjøres if setningen og alert boksen kommer opp 
     if (this.fradato > this.tildato) {
       alert('Innleveringsdato er tidligere enn' + ' utleveringstidsdato, velg på nytt.');
       return;
     } else {
     }
 
+    // hvis tildato er mindre enn dagsdato 
+    // kjøres if setningen og alert boksen kommer opp
     if (this.tildato < dagsDato) {
       alert('Innleveringsdato er tidligere enn dagsdato, ' + 'velg på nytt.');
       return;
@@ -352,21 +379,22 @@ export default class NyBestiling extends Component {
       return;
     }
 
+    // fra services og classet bestillingService kjøres addBestilling
     bestillingService.addBestilling(
       this.person_id,
-      utlev_tidspunkt,
-      innlev_tidspunkt,
+      this.utlev_tidspunkt,
+      this.innlev_tidspunkt,
       this.utleveringssted,
       this.innleveringssted,
       this.sykkel_ids,
       this.utstyr_ids,
       () => {
-        window.history.push('/bestillinger');
+        window.history.push('/bestillinger'); //pusher inn i bestillingsoversikten
       }
     );
-    alert('Bestilling foretatt!');
+    alert('Bestilling foretatt!'); //alert melding som kommer opp når en bestilling har skjedd
     this.props.history.replace('/nybestilling');
-    location.reload();
+    location.reload(); //reloader siden
   }
   validate_inputs(inputs) {
     /*

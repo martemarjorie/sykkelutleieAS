@@ -1,20 +1,26 @@
+// importerer component fra react-biblioteket. 
+// brukes for å lage en GUI-applikasjon med React 
 import * as React from 'react';
-import { Component } from 'react-simplified';
-import { repService, sykkelService } from './services';
-import { Card } from './widgets';
-import Form from 'react-bootstrap/Form';
+import { Component } from 'react-simplified'; // component er en klasse som brukes til å lage et nytt komponent 
+import { repService, sykkelService } from './services'; // importerer fraktService fra services.js - classen spørringene hentes fra 
+import { Card } from './widgets'; // card elementene hentes fra widgets.js filen, styling  
+import Form from 'react-bootstrap/Form'; // bruker elementer fra bootstrap for styling   
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
+// RepAdd er en subklasse av Component 
 export default class RepAdd extends Component {
+  // definerer variabel og et tomt array
   sykkel_id = '';
   sykler = [];
 
   render() {
     return (
+      // style
       <Container style={{ width: '50%', marginTop: '3%' }}>
         <Card title="Legg til reparasjon">
           <Form>
+            {/* alle disse fylles ut når man oppretter en reparasjon */}
             <Form.Group controlId="sykkel">
               <Form.Label>Velg sykkel</Form.Label>
               <Form.Control
@@ -65,6 +71,7 @@ export default class RepAdd extends Component {
               />
             </Form.Group>
           </Form>
+          {/* legg til knapp som refererer til add funksjonen */}
           <Button type="submit" variant="primary" onClick={this.add}>
             Legg til
           </Button>
@@ -73,12 +80,17 @@ export default class RepAdd extends Component {
     );
   }
 
+  // mounted()-funksjonen blir kalt når komponenten blir lagt til for visning 
+  // kjører spørringen som ligger i classen sykkelService med navn getSykler  
   mounted() {
     sykkelService.getSykler(sykler => {
       this.sykler = sykler;
     });
   }
 
+  // funksjonen add, som legger til de gitte opplysningene inn i kundeoversikten  
+  // repService viser til hvilken class fra Service spørringen gjøres i   
+  // addRep refererer til hvilken spørring som skal utføres  
   add() {
     repService.addRep(
       this.props.match.params.reparasjons_id,

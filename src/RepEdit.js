@@ -1,21 +1,28 @@
+// importerer component fra react-biblioteket. 
+// brukes for å lage en GUI-applikasjon med React 
 import * as React from 'react';
-import { Component } from 'react-simplified';
-import { repService } from './services';
-import { Card } from './widgets';
-import Form from 'react-bootstrap/Form';
+import { Component } from 'react-simplified'; // component er en klasse som brukes til å lage et nytt komponent 
+import { repService } from './services'; // importerer fra services.js - classen spørringene hentes fra 
+import { Card } from './widgets'; // card elementene hentes fra widgets.js filen, styling  
+import Form from 'react-bootstrap/Form'; // elementene hentes fra bootstrap, styling  
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
-export default class FraktEdit extends Component {
+// RepEdit er en subklasse av Component
+export default class RepEdit extends Component {
+  // definerer variabler
   repinnlev_dato = '';
   reputlev_dato = '';
   rep_beskrivelse = '';
 
   render() {
     return (
+      //styling
       <Container style={{ width: '50%', marginTop: '3%', marginBottom: '3%' }}>
         <Card title="Endre status på reparasjon">
           <Form>
+             {/* hva en kan endre på */}
+            {/* verdien som allerede er lagt inn vil vises */}
             <Form.Group>
               <Form.Label>Innleveringsdato</Form.Label>
               <Form.Control
@@ -63,12 +70,15 @@ export default class FraktEdit extends Component {
   }
 
   mounted() {
+    // definerer alle mnd i variabler 
     let mnd = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     let dato1 = 0;
     let dato2 = 0;
 
+    // henter spørringen og definerer hva som skal endres
     repService.getRep(this.props.match.params.reparasjons_id, rep => {
       console.log(rep.repinnlev_dato);
+      // dato oppsettet må gjøres om til riktig format
       this.repinnlev_dato = rep.repinnlev_dato
         .toString()
         .substr(4, 11)
@@ -92,12 +102,13 @@ export default class FraktEdit extends Component {
       this.repinnlev_dato = `${this.repinnlev_dato[2]}-${dato1}-${this.repinnlev_dato[1]}`;
 
       console.log(this.repinnlev_dato);
-
+      
+      // henter id repinnlevDato og gir den ny verdi
       document.getElementById('repinnlevDato').value = this.repinnlev_dato;
     }, 500);
 
     setTimeout(() => {
-      // Funksjonen som formaterer datoen fra databasen slik at den matcher sidens formatering.
+      // funksjonen som formaterer datoen fra databasen slik at den matcher sidens formatering.
 
       dato2 = `0${1 + mnd.indexOf(this.reputlev_dato[0])}`;
       this.reputlev_dato = `${this.reputlev_dato[2]}-${dato2}-${this.reputlev_dato[1]}`;
@@ -108,6 +119,7 @@ export default class FraktEdit extends Component {
     }, 500);
   }
 
+  // lagre funksjon, henter updateRep
   save() {
     repService.updateRep(
       this.props.match.params.reparasjons_id,
@@ -122,6 +134,7 @@ export default class FraktEdit extends Component {
     this.props.history.replace('/reps/');
   }
 
+  // slett funksjon
   delete() {
     repService.deleteRep(
       this.props.match.params.reparasjons_id,

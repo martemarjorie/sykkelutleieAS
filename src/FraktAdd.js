@@ -1,12 +1,16 @@
+// importerer component fra react-biblioteket 
+// brukes for å lage en GUI-applikasjon med React
 import * as React from 'react';
-import { Component } from 'react-simplified';
-import { fraktService, sykkelService, stedService } from './services';
+import { Component } from 'react-simplified'; // component er en klasse som brukes til å lage et nytt komponent 
+import { fraktService, sykkelService, stedService } from './services'; // importerer fraktService, sykkelService og stedService 
 import { Card } from './widgets';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
+// FraktAdd er en subklasse av Component 
 export default class FraktAdd extends Component {
+ // definerer variabler *
   sykkel_id = '';
   sykler = [];
   frakter = [];
@@ -31,9 +35,11 @@ export default class FraktAdd extends Component {
                 <option value="no-val" selected disabled hidden>
                   -Ingen valgt sykkel-
                 </option>
+                {/* går gjennom alle syklene */}
+                {/* .map() funksjonen går gjennom alle elementene i en array i rekkefølge */}
                 {this.sykler.map(sykkel => (
                   <option value={sykkel.sykkel_id}>
-                    {sykkel.type_sykkel} {sykkel.modell}
+                    {sykkel.type_sykkel} {sykkel.modell} {/* viser sykkeltype og modell fra 'sykkel'-arrayet */}
                   </option>
                 ))}
               </Form.Control>
@@ -52,6 +58,7 @@ export default class FraktAdd extends Component {
                 <option value="no-val" selected disabled hidden>
                   -Ikke valgt sted-
                 </option>
+                {/* går gjennom alle stedene */}
                 {this.steder.map(sted => (
                   <option value={sted.sted_id}>{sted.sted_navn}</option>
                 ))}
@@ -68,9 +75,11 @@ export default class FraktAdd extends Component {
                 }}
                 title="Velg til sted"
               >
+                {/* et forhåndsvalg en ikke kan velge */}
                 <option value="no-val" selected disabled hidden>
                   -Ikke valgt sted-
                 </option>
+                {/* går gjennom alle stedene */}
                 {this.steder.map(sted => (
                   <option value={sted.sted_id}>{sted.sted_navn}</option>
                 ))}
@@ -90,8 +99,8 @@ export default class FraktAdd extends Component {
             <Form.Group>
               <Form.Label>Status</Form.Label>
               <Form.Control as="select" value={this.status} selected onChange={e => (this.status = e.target.value)}>
-                <option value={this.statuser[0]}>{this.statuser[0]}</option>
-                <option value={this.statuser[1]}>{this.statuser[1]}</option>
+                <option value={this.statuser[0]}>{this.statuser[0]}</option> {/* statuser[0] = 'klar for henting' */}
+                <option value={this.statuser[1]}>{this.statuser[1]}</option> {/* statuser[1] = 'levert' */}
               </Form.Control>
             </Form.Group>
           </Form>
@@ -103,6 +112,9 @@ export default class FraktAdd extends Component {
     );
   }
 
+  // mounted()-funksjonen blir kalt når komponenten blir lagt til for visning 
+  // kjører spørringen som ligger i classen sykkelService med navn getSykler 
+  // og stedService med getSteder 
   mounted() {
     sykkelService.getSykler(sykler => {
       this.sykler = sykler;
@@ -113,8 +125,11 @@ export default class FraktAdd extends Component {
     });
   }
 
+// funksjonen add, som legger til de gitte opplysningene inn i fraktoversikten  
+  // fraktService viser til hvilken class fra Service spørringen gjøres i   
+  // addFrakt refererer til hvilken spørring som skal utføres  
   add() {
-    fraktService.addFrakt(
+    fraktService.addFrakt( 
       this.props.match.params.frakt_id,
       this.sykkel_id,
       this.fra_sted,
@@ -122,9 +137,9 @@ export default class FraktAdd extends Component {
       this.frakt_dato,
       this.status,
       () => {
-        history.push('/frakter');
+        history.push('/frakter'); // legger (pusher) all informasjonen i fraktoversikten   
       }
     );
-    this.props.history.replace('/');
+    this.props.history.replace('/'); // brukeren kommer til hjemsiden når 'legg til' trykkes på  
   }
 }

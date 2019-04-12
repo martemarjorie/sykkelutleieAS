@@ -1,11 +1,12 @@
+// importerer component fra react-biblioteket. 
+// brukes for å lage en GUI-applikasjon med React 
 import * as React from 'react';
 import { Component } from 'react-simplified';
-import ReactDOM from 'react-dom';
-import { NavLink, HashRouter, Route } from 'react-router-dom';
-import { Container, Col, Row } from 'react-bootstrap';
-import Navbar from 'react-bootstrap/Navbar';
+import { NavLink } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar'; // elementene hentes fra bootstrap, styling  
 import Nav from 'react-bootstrap/Nav';
 
+// Menu er en subklasse av Component 
 export default class Menu extends Component {
   render() {
     return (

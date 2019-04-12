@@ -1,14 +1,18 @@
+// importerer component fra react-biblioteket. 
+// brukes for å lage en GUI-applikasjon med React 
 import * as React from 'react';
-import { Component } from 'react-simplified';
+import { Component } from 'react-simplified'; // component er en klasse som brukes til å lage et nytt komponent 
 import { NavLink } from 'react-router-dom';
-import { sykkelService } from './services';
-import { Card } from './widgets';
-import Table from 'react-bootstrap/Table';
+import { sykkelService } from './services'; // importerer fraktService fra services.js - classen spørringene hentes fra
+import { Card } from './widgets'; // card elementene hentes fra widgets.js filen, styling 
+import Table from 'react-bootstrap/Table'; // bruker elementer fra bootstrap for styling  
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+// SykkelList er en subklasse av Component
 export default class SykkelList extends Component {
+  // definerer et tomt array 'sykler'
   sykler = [];
 
   render() {
@@ -19,6 +23,7 @@ export default class SykkelList extends Component {
             <input type="text" id="sok" onChange={this.sokSykkel} placeholder="Søk..." />
             <br />
             <br />
+            {/* lager en tabell med all kundeinformasjonen */}
             <Table responsive hover>
               <thead>
                 <tr>
@@ -29,6 +34,7 @@ export default class SykkelList extends Component {
                   <th>Modell</th>
                   <th>Tilhørighet</th>
                   <th>
+                    {/* legg til ny sykkel */}
                     <NavLink to={'/sykler/add'}>
                       <Button>Legg til ny</Button>
                     </NavLink>
@@ -36,7 +42,10 @@ export default class SykkelList extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.sykler.map(sykkel => (
+                {/* går gjennom alle syklene */} 
+                {/* .map() funksjonen går gjennom alle elementene i en array i en rekkefølge */}
+                 {/* setter sykkel_id som unik nøkkel */}
+                {this.sykler.map(sykkel => (   
                   <tr key={sykkel.sykkel_id}>
                     <td>{sykkel.sykkel_id}</td>
                     <td>{sykkel.type_sykkel}</td>
@@ -60,6 +69,9 @@ export default class SykkelList extends Component {
     );
   }
 
+   /* Legger inn søk. sjekker hvis det ikke er skrevet noe i søkbaren,
+     vis alle sykler,  ellers (hvis det er noe i søkbaren), 
+      searchSykkel(fra services) med verdien fra søk.value */ 
   sokSykkel() {
     if (document.getElementById('sok').value.length === 0) {
       sykkelService.getSykkel(sykler => {
@@ -71,6 +83,9 @@ export default class SykkelList extends Component {
       });
     }
   }
+
+    // mounted()- funksjonen blir kalt når komponenten blir lagt til for visning 
+     
   mounted() {
     sykkelService.getBikes(sykler => {
       this.sykler = sykler;

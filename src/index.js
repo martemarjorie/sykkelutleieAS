@@ -1,5 +1,7 @@
+// importerer ReactDOM fra react-biblioteket. 
+// brukes for å lage en GUI-applikasjon med React
 import * as React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'; // definerer hovedvisningen for react applikasjonen. 
 import { HashRouter, Route } from 'react-router-dom';
 
 import Menu from './Menu';
@@ -33,7 +35,10 @@ import RepAdd from './RepAdd';
 import createHashHistory from 'history/createHashHistory';
 const history = createHashHistory();
 
-/* legger inn route for å navigere gjennom sidene i menybaren */
+// legger inn route for å navigere gjennom sidene i menybaren 
+
+// exact path - returnerer kun den siden hvor stien er nøyaktig hva som står 
+// path - understier av hovedsti for at det ikke skal rutes feil 
 ReactDOM.render(
   <HashRouter>
     <div>
