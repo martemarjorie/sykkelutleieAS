@@ -1,14 +1,12 @@
 import * as React from 'react';
 import { Component } from 'react-simplified';
-import ReactDOM from 'react-dom';
-import { NavLink, HashRouter, Route } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { personService, sykkelService, stedService, utstyrService, bestillingService } from './services';
 import { Card } from './widgets';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
 
 export default class NyBestiling extends Component {
   // Verdier fra databasen

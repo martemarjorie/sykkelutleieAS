@@ -1,13 +1,10 @@
 import * as React from 'react';
 import { Component } from 'react-simplified';
-import ReactDOM from 'react-dom';
-import { NavLink, HashRouter, Route } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { repService } from './services';
-import { Card, Column, NavBar } from './widgets';
+import { Card } from './widgets';
 import Table from 'react-bootstrap/Table';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';;
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 

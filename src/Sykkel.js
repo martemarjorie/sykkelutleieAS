@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { Component } from 'react-simplified';
-import ReactDOM from 'react-dom';
-import { NavLink, HashRouter, Route } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { sykkelService } from './services';
-import { Card, NavBar, Form } from './widgets';
+import { Card } from './widgets';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
