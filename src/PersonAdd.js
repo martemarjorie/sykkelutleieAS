@@ -5,6 +5,8 @@ import { Component } from 'react-simplified'; // component er en klasse som bruk
 import { personService } from './services'; // importerer fraktService fra services.js - classen spørringene hentes fra 
 import { Card } from './widgets'; // card elementene hentes fra widgets.js filen, styling  
 import Button from 'react-bootstrap/Button'; // bruker elementer fra bootstrap for styling   
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
 
 // PersonAdd er en subklasse av Component 
 export default class PersonAdd extends Component {
